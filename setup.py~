@@ -1,0 +1,35 @@
+import setuptools
+import os
+
+import pyprot
+
+setup(
+    name = "pyprot",
+    #version = pyprot.version
+    url = "http://github.com/rasbt/pyprot/",
+    license = "GPLv3",
+    author = "Sebastian Raschka"
+    #tests_require = ["unittest"]
+    #install_requires = ["abc", "def"]
+    #cmdclass = {"test":unittest},
+    author_email = "bluewoodtree@gmail.com",
+    description = "Protein file manipulation API",
+    #long_description = long_description,
+    packages = ["pyprot"],
+    include_package_data = True,
+    platforms = "any",
+    #test_suite = "pyprot.test.test_pyprot",
+    classifiers = [ 
+        "Programming Language :: Python 3.x",
+        "Development Status :: Pre-Alpha",
+        "Natural Language :: English",
+        "Environment :: Desktop Environment",
+        "Intended Audience :: Computational Biologists",
+        "License :: GPLv3",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+        ],
+    #extras_require = {
+    #    "testing": ["unittest"],
+    #}
+)
+        
