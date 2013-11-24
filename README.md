@@ -27,11 +27,11 @@ To calculate the center of mass for a protein execute the script
 `/scripts/cmd_center_of_mass.py` from the command line.  
 
 
-To calculate the center of mass of a protein, use:
+To calculate the center of mass of a protein, use:  
 `python3 path/to/cmd_center_of_mass.py path/to/PDBfile.pdb`  
 `[15.885, 7.561, 39.859]`
 
-To calculate the center of mass of a ligand molecule, use:
+To calculate the center of mass of a ligand molecule, use:  
 `python3 path/to/cmd_center_of_mass.py path/to/PDBfile.pdb lig`  
 `[16.722, 5.369, 35.945]`
 
