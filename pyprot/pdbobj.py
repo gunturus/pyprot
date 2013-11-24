@@ -2,13 +2,13 @@
 #
 import os
 
-from . import pdbmanip
-from . import pdbstats
-from . import filefunc
-from . import filter_content
+from pyprot.pdbmanip import PdbManip
+from pyprot.pdbstats import PdbStats
+import pyprot.filefunc as filefunc
+import pyprot.filter_content as filter_content
 
 
-class PdbObj(pdbmanip.PdbManip, pdbstats.PdbStats):
+class PdbObj(PdbManip, PdbStats):
     '''Object that allows operations with protein files in PDB format. '''
 
     def __init__(self, file_cont = [], pdb_code = ""):
