@@ -92,7 +92,7 @@ class PdbStats(object):
     def mean_bfactor(self, protein = True, ligand = False, calpha = False):
         """ Returns the mean b-factor (temperature factor) value """
         if calpha:
-            median = pystats.median(self.get_bfactors(calpha = True))
+            mean = pystats.mean(self.get_bfactors(calpha = True))
         else:
             if protein and not ligand:
                 mean = pystats.mean(self.get_bfactors())
