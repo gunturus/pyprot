@@ -15,3 +15,8 @@ def test_median_bfactor():
     assert new_pdb.median_bfactor() == 56.650000000000006
     assert new_pdb.median_bfactor(False, True) == 31.755
     assert new_pdb.median_bfactor(True, True) == 44.04
+
+def test_mean_bfactor():
+    assert new_pdb.mean_bfactor() == 58.278749999999995
+    assert new_pdb.mean_bfactor(False, True) == 30.5975
+    assert new_pdb.mean_bfactor(True, True) == 44.438125
