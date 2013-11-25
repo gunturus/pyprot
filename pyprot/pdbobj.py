@@ -48,4 +48,11 @@ class PdbObj(PdbManip, PdbStats):
         """ Returns lines of C-alpha atoms as list of strings."""
         return _filter_column_match(self.atom, ["CA"], 13)
 
+    def main_chain(self):
+        """ Returns lines of the entries that represent the protein's 
+        main chain.
+        """
+        return _filter_column_match(self.atom, ["O ", "CA", "C ", "N "], 13)
+
+
 

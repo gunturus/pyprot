@@ -58,24 +58,43 @@ class PdbStats(object):
         return center_rounded
         
 
-    def get_bfactors(self, protein = True, ligand = False, calpha = False):
+    def get_bfactors(self, protein = True, ligand = False, main_chain = ""): 
         """Collects b-factors (temperature factors) from ATOM
            and/or HETATM entries in a list
+           
+           Arguments:
+               protein (bool): If True gets b-factors from ATOM entries
+               ligand (bool): If True gets b-factors from HETATM entries
+               main_chain (string): 
+                        if "on" considers only main chain atoms (N, CA, O, C)
+                        if "calpha" considers only c-alpha atoms   
         """
         bfactors = []
-        if calpha:
+        if main_chain == "on":
+            bfactors += [float(line[60:66].strip()) for line in self.main_chain()] 
+        elif main_chain == "calpha":
            bfactors += [float(line[60:66].strip()) for line in self.calpha()]
-        if protein and not calpha:
-           bfactors += [float(line[60:66].strip()) for line in self.atom]
-        if ligand and not calpha:
-            bfactors += [float(line[60:66].strip()) for line in self.hetatm]
+        else:
+            if protein:
+                bfactors += [float(line[60:66].strip()) for line in self.atom]
+            if ligand:
+                bfactors += [float(line[60:66].strip()) for line in self.hetatm]
         return bfactors
      
 
-    def median_bfactor(self, protein = True, ligand = False, calpha = False):
-        """ Returns the median b-factor (temperature factor) value """
-        if calpha:
-            median = pystats.median(self.get_bfactors(calpha = True))
+    def median_bfactor(self, protein = True, ligand = False, main_chain = ""): 
+        """ Returns the median b-factor (temperature factor) value 
+        Arguments:
+               protein (bool): If True considers b-factors from ATOM entries
+               ligand (bool): If True considers b-factors from HETATM entries
+               main_chain (string): 
+                        if "on" considers only main chain atoms (N, CA, O, C)
+                        if "calpha" considers only c-alpha atoms 
+        """
+        if main_chain == "on":
+            median = pystats.median(self.get_bfactors(main_chain = "on"))
+        elif main_chain == "calpha":
+            median = pystats.median(self.get_bfactors(main_chain = "calpha"))
         else:
             if protein and not ligand:
                 median = pystats.median(self.get_bfactors())
@@ -89,10 +108,19 @@ class PdbStats(object):
         return median
 
 
-    def mean_bfactor(self, protein = True, ligand = False, calpha = False):
-        """ Returns the mean b-factor (temperature factor) value """
-        if calpha:
-            mean = pystats.mean(self.get_bfactors(calpha = True))
+    def mean_bfactor(self, protein = True, ligand = False, main_chain = ""): 
+        """ Returns the mean b-factor (temperature factor) value 
+        Arguments:
+               protein (bool): If True considers b-factors from ATOM entries
+               ligand (bool): If True considers b-factors from HETATM entries
+               main_chain (string): 
+                        if "on" considers only main chain atoms (N, CA, O, C)
+                        if "calpha" considers only c-alpha atoms 
+        """
+        if main_chain == "on":
+            mean = pystats.mean(self.get_bfactors(main_chain = "on"))
+        elif main_chain == "calpha":
+            mean = pystats.mean(self.get_bfactors(main_chain = "calpha"))
         else:
             if protein and not ligand:
                 mean = pystats.mean(self.get_bfactors())

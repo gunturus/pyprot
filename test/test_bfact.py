@@ -17,12 +17,13 @@ def test_median_bfactor():
     assert new_pdb.median_bfactor(False, True) == 31.755
     assert new_pdb.median_bfactor(True, True) == 44.04
     
-    assert new_pdb2.median_bfactor(calpha = True) == 47.00
+    assert new_pdb2.median_bfactor(main_chain = "calpha") == 47.00
+    assert new_pdb2.median_bfactor(main_chain = "on") == 47.28
 
 def test_mean_bfactor():
     assert new_pdb.mean_bfactor() == 58.278749999999995
     assert new_pdb.mean_bfactor(False, True) == 30.5975
     assert new_pdb.mean_bfactor(True, True) == 44.438125
     
-    assert new_pdb2.mean_bfactor(calpha = True) == 44.42
-
+    assert new_pdb2.mean_bfactor(main_chain = "calpha") == 44.42
+    assert new_pdb2.mean_bfactor(main_chain = "on") == 45.59333333333334
