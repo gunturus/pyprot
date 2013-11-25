@@ -44,15 +44,15 @@ if `median` is substituted by `mean` in the examples shown below.
   
 
 To return the median B-factor value of a protein, use the script
-<pre>/scripts/cmd_median_bfact.py my_pdb.pdb
+<pre>/scripts/cmd_median_bfactor.py my_pdb.pdb
 44.24</pre>
 
 To get the median B-factor value from a ligand molecule, use:
-<pre>/scripts/cmd_median_bfact.py my_pdb.pdb lig
+<pre>/scripts/cmd_median_bfactor.py my_pdb.pdb lig
 67.21</pre>
 
 To get the median B-factor value from the protein's c-alpha atoms only, use:
-<pre>/scripts/cmd_median_bfact.py my_pdb.pdb calpha
+<pre>/scripts/cmd_median_bfactor.py my_pdb.pdb calpha
 67.21</pre>
 
  
