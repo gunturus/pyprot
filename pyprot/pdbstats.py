@@ -14,20 +14,20 @@ class PdbStats(object):
         """
         bfactors = []
         if protein:
-            bfactors + [float(line[60:66].strip()) for line in self.atom]
+           bfactors += [float(line[60:66].strip()) for line in self.atom]
         if ligand:
-            bfactors + [float(line[60:66].strip()) for line in self.hetatm]
+            bfactors += [float(line[60:66].strip()) for line in self.hetatm]
         return bfactors
      
 
-    def median_bfactors(self, protein = True, ligand = False):
+    def median_bfactor(self, protein = True, ligand = False):
         """ Returns the median b-factor (temperature factor) value """
         if protein and not ligand:
-            median = pystats.median(get_bfactors())
+            median = pystats.median(self.get_bfactors())
         elif protein and ligand:
-            median = pystats.median(get_bfactors(ligand = True))
+            median = pystats.median(self.get_bfactors(ligand = True))
         elif ligand:
-            median = pystats.median(get_bfactors(protein = False, 
+            median = pystats.median(self.get_bfactors(protein = False, 
                                                 ligand = True))
         else:
             median = []
