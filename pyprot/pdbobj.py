@@ -2,13 +2,13 @@
 #
 import os
 
-from . import pdbmanip
-from . import pdbstats
-from . import filefunc
-from . import filter_content
+from pyprot.pdbmanip import PdbManip
+from pyprot.pdbstats import PdbStats
+from pyprot.filefunc import _open_type
+from pyprot.filter_content import _filter_column_match
 
 
-class PdbObj(pdbmanip.PdbManip, pdbstats.PdbStats):
+class PdbObj(PdbManip, PdbStats):
     '''Object that allows operations with protein files in PDB format. '''
 
     def __init__(self, file_cont = [], pdb_code = ""):
@@ -20,16 +20,16 @@ class PdbObj(pdbmanip.PdbManip, pdbstats.PdbStats):
         self.fileloc = ""
         if isinstance(file_cont, str):
             self.fileloc = file_cont
-            open_pdbfile = filefunc._open_type(file_cont, ["pdb", "mol2"])
+            open_pdbfile = _open_type(file_cont, ["pdb", "mol2"])
             try:
                 for line in open_pdbfile:
                     self.cont.append(line.strip())
             finally:
                 open_pdbfile.close()
         if self.cont:
-             self.atom = filter_content._filter_column_match(self.cont, ["ATOM"])
-             self.hetatm = filter_content._filter_column_match(self.cont, ["HETATM"])
-             self.conect = filter_content._filter_column_match(self.cont, ["CONECT"])
+             self.atom = _filter_column_match(self.cont, ["ATOM"])
+             self.hetatm = _filter_column_match(self.cont, ["HETATM"])
+             self.conect = _filter_column_match(self.cont, ["CONECT"])
                  
     def __del__(self):
         del self
