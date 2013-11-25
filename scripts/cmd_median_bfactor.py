@@ -19,6 +19,6 @@ else:
         if sys.argv[2] == "lig":
             print(new_pdb.median_bfactor(protein = False, ligand = True))
         else:
-            print("USAGE: python3 cmd_center_of_mass.py mypdbfile.pdb [lig]")
+            print("USAGE: python3 cmd_median_bfactor.py mypdbfile.pdb [lig]")
     else:
         print(new_pdb.median_bfactor())

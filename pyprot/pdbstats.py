@@ -80,8 +80,22 @@ class PdbStats(object):
             median = pystats.median(self.get_bfactors(protein = False, 
                                                 ligand = True))
         else:
-            median = []
+            median = None
         return median
+
+
+    def mean_bfactor(self, protein = True, ligand = False):
+        """ Returns the mean b-factor (temperature factor) value """
+        if protein and not ligand:
+            mean = pystats.mean(self.get_bfactors())
+        elif protein and ligand:
+            mean = pystats.mean(self.get_bfactors(ligand = True))
+        elif ligand:
+            mean = pystats.mean(self.get_bfactors(protein = False, 
+                                                ligand = True))
+        else:
+            mean = None
+        return mean
 
 
 
