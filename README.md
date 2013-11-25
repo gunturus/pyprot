@@ -45,5 +45,13 @@ To get the median B-factor value from a ligand molecule, use:
 <pre>/scripts/cmd_median_bfact.py my_pdb.pdb lig
 67.21</pre>
  
+## Get the Mean B-Factor Value
+To return the mean B-factor value of a protein, use the script
+<pre>/scripts/cmd_mean_bfact.py my_pdb.pdb
+44.24</pre>
+
+To get the mean B-factor value from a ligand molecule, use:
+<pre>/scripts/cmd_mean_bfact.py my_pdb.pdb lig
+67.21</pre>
 
 
