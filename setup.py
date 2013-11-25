@@ -12,6 +12,8 @@ setup(
     author_email = "se.raschka@gmail.com",
     url = "http://github.com/rasbt/pyprot/",
     keywords = "proteins PDB MOL2",
+    tests_require=['nose'],
+    install_requires=['pystats>=0.0.1'],
     include_package_data = True,
     platforms = "any",
     classifiers = [ 
