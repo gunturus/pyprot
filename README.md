@@ -51,6 +51,10 @@ To get the median B-factor value from a ligand molecule, use:
 <pre>/scripts/cmd_median_bfactor.py my_pdb.pdb lig
 67.21</pre>
 
+To get the median B-factor value from the protein's main chain atoms only, use:
+<pre>/scripts/cmd_median_bfactor.py my_pdb.pdb main_chain
+67.21</pre>
+
 To get the median B-factor value from the protein's c-alpha atoms only, use:
 <pre>/scripts/cmd_median_bfactor.py my_pdb.pdb calpha
 67.21</pre>
