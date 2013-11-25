@@ -14,7 +14,7 @@ def test_filter_column_match():
     filtered_d = pyprot.filter_content._filter_column_match\
         (test_data, ["END", "MASTER"])
     filtered_e = pyprot.filter_content._filter_column_match\
-        (test_data, ["end", "atom"], case_insensitive = True)  
+        (test_data, ["end", "atom"], case_sensitive = False)  
     filtered_f = pyprot.filter_content._filter_column_match\
         (test_data, ["POP"], col_start_pos = 17)
     assert len(filtered_a) > 0

@@ -44,4 +44,13 @@ class PdbObj(PdbManip, PdbStats):
     def __str__(self):
         return self.__repr__()
 
+    def calpha(self, protein = True, ligand = False):
+        """ Returns lines of C-alpha atoms as list of strings."""
+        calphas = []
+        if protein:
+            calphas += _filter_column_match(self.atom, ["CA"], 13)
+        if ligand:
+            calphas += _filter_column_match(self.hetatm, ["CA"], 13)
+        return calphas
+
 
