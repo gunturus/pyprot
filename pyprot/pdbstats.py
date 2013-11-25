@@ -58,43 +58,51 @@ class PdbStats(object):
         return center_rounded
         
 
-    def get_bfactors(self, protein = True, ligand = False):
+    def get_bfactors(self, protein = True, ligand = False, calpha = False):
         """Collects b-factors (temperature factors) from ATOM
            and/or HETATM entries in a list
         """
         bfactors = []
-        if protein:
+        if calpha:
+           bfactors += [float(line[60:66].strip()) for line in self.calpha()]
+        if protein and not calpha:
            bfactors += [float(line[60:66].strip()) for line in self.atom]
-        if ligand:
+        if ligand and not calpha:
             bfactors += [float(line[60:66].strip()) for line in self.hetatm]
         return bfactors
      
 
-    def median_bfactor(self, protein = True, ligand = False):
+    def median_bfactor(self, protein = True, ligand = False, calpha = False):
         """ Returns the median b-factor (temperature factor) value """
-        if protein and not ligand:
-            median = pystats.median(self.get_bfactors())
-        elif protein and ligand:
-            median = pystats.median(self.get_bfactors(ligand = True))
-        elif ligand:
-            median = pystats.median(self.get_bfactors(protein = False, 
-                                                ligand = True))
+        if calpha:
+            median = pystats.median(self.get_bfactors(calpha = True))
         else:
-            median = None
+            if protein and not ligand:
+                median = pystats.median(self.get_bfactors())
+            elif protein and ligand:
+                median = pystats.median(self.get_bfactors(ligand = True))
+            elif ligand:
+                median = pystats.median(self.get_bfactors(protein = False, 
+                                                ligand = True))
+            else:
+                median = None
         return median
 
 
-    def mean_bfactor(self, protein = True, ligand = False):
+    def mean_bfactor(self, protein = True, ligand = False, calpha = False):
         """ Returns the mean b-factor (temperature factor) value """
-        if protein and not ligand:
-            mean = pystats.mean(self.get_bfactors())
-        elif protein and ligand:
-            mean = pystats.mean(self.get_bfactors(ligand = True))
-        elif ligand:
-            mean = pystats.mean(self.get_bfactors(protein = False, 
-                                                ligand = True))
+        if calpha:
+            median = pystats.median(self.get_bfactors(calpha = True))
         else:
-            mean = None
+            if protein and not ligand:
+                mean = pystats.mean(self.get_bfactors())
+            elif protein and ligand:
+                mean = pystats.mean(self.get_bfactors(ligand = True))
+            elif ligand:
+                mean = pystats.mean(self.get_bfactors(protein = False, 
+                                                ligand = True))
+            else:
+                mean = None
         return mean
 
 
