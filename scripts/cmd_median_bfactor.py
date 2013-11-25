@@ -27,8 +27,8 @@ else:
             print(new_pdb.median_bfactor(protein = False, ligand = True))
         elif sys.argv[2] == "calpha":
             print(new_pdb.median_bfactor(main_chain = "calpha"))
-         elif sys.argv[2] == "main_chain":
-            print(new_pdb.median_bfactor(main_chain = "on")
+        elif sys.argv[2] == "main_chain":
+            print(new_pdb.median_bfactor(main_chain = "on"))
         else:
             print("USAGE: python3 cmd_median_bfactor.py mypdbfile.pdb [lig/calpha/main_chain]")
     else:
