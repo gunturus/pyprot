@@ -50,7 +50,7 @@ class PdbStats(object):
                    coords2[:], ["H"], col_start_pos = 77, exclude = True)
         elif atoms == "ca":
             if self.atom and sec_molecule.atom:
-                coords1 = self.atom.calpha() 
+                coords1 = self.calpha() 
                 coords2 = sec_molecule.calpha()
        
         if coords1 and len(coords1) == len(coords2):
@@ -60,7 +60,7 @@ class PdbStats(object):
                          ( float(i[38:46]) - float(j[38:46]) )**2 +\
                          ( float(i[46:54]) - float(j[46:54]) )**2     
             rmsd = ( total / len(coords1) )**0.5
-        return rmsd
+        return round(rmsd, 4)
 
 
 
