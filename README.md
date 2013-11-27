@@ -59,4 +59,23 @@ To get the median B-factor value from the protein's c-alpha atoms only, use:
 <pre>/scripts/cmd_median_bfactor.py my_pdb.pdb calpha
 67.21</pre>
 
+## Calculate RMSD of proteins or ligand molecules
+
+If no optional third parameter [lig/ca] is provided, the RMSD (in Angstrom)  
+between two provided protein structures in PDB format is calculated, including  
+all atoms but hydrogen.  
+
+<pre> /scripts/cmd_rmsd.py file1.pdb file2.pdb
+1.99342343 </pre>
+
+If the optional 3rd argument is 'lig', the RMSD between 2 ligand molecules is  
+calculated, also excluding hydrogens. 
+
+<pre> /scripts/cmd_rmsd.py file1.pdb file2.pdb lig
+3.22334535 </pre>
  
+If the If the optional 3rd argument is 'ca,' only C-alpha atoms of the two  
+proteins are considered for the RMSD calculation.  
+
+<pre> /scripts/cmd_rmsd.py file1.pdb file2.pdb ca 
+0.93858464 </pre>

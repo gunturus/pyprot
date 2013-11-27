@@ -4,10 +4,66 @@
 
 import pystats
 from pyprot.data.atomic_masses import *
+from pyprot.filter_content import _filter_column_match
 
 class PdbStats(object):
     def __init__(self):
         pass
+
+    def rmsd(self, sec_molecule, ligand = False, atoms = "no_h"):
+        """ Calculates the Root Mean Square Deviation (RMSD) between two
+        protein or ligand molecules in PDB format.
+        Requires that both molecules have the same number of atoms in the
+        same numerical order.
+
+        Arguments:
+            sec_molecule (PdbObj): the second molecule as PdbObj object.
+            ligand (bool): If true, calculates the RMSD between two
+                ligand molecules (based on HETATM entries), else RMSD
+                between two protein molecules (ATOM entries) is calculated.
+            hydrogen (bool): If True, hydrogen atoms will be included in the
+                    RMSD calculation.
+            atoms (string) [all/c/no_h/ca]: "all" includes all atoms in the RMSD calculation,
+                "c" only considers carbon atoms, "no_h" considers all but hydrogen atoms,
+                and "ca" compares only C-alpha protein atoms.
+        
+        Returns:
+            Calculated RMSD value as float or None if RMSD not be
+            calculated.     
+
+        """
+        rmsd = None
+
+        if not ligand:
+            coords1, coords2 = self.atom, sec_molecule.atom
+        else:
+            coords1, coords2 = self.hetatm, sec_molecule.hetatm
+        if atoms == "c":
+            coords1 = _filter_column_match(
+                     coords1[:], ["C"], col_start_pos = 77)
+            coords2 = _filter_column_match(
+                     coords2[:], ["C"], col_start_pos = 77)
+        elif atoms == "no_h":
+            coords1 = _filter_column_match(
+                   coords1[:], ["H"], col_start_pos = 77, exclude = True)
+            coords2 = _filter_column_match(
+                   coords2[:], ["H"], col_start_pos = 77, exclude = True)
+        elif atoms == "ca":
+            if self.atom and sec_molecule.atom:
+                coords1 = self.atom.calpha() 
+                coords2 = sec_molecule.calpha()
+       
+        if coords1 and len(coords1) == len(coords2):
+            total = 0
+            for (i, j) in zip(coords1, coords2):
+                total += ( float(i[30:38]) - float(j[30:38]) )**2 +\
+                         ( float(i[38:46]) - float(j[38:46]) )**2 +\
+                         ( float(i[46:54]) - float(j[46:54]) )**2     
+            rmsd = ( total / len(coords1) )**0.5
+        return rmsd
+
+
+
     def center_of_mass(self, protein = True, ligand = False):
         """
         Calculates center of mass of a protein and/or ligand structure.
