@@ -2,10 +2,10 @@
 #
 import os
 
-from pyprot.pdbmanip import PdbManip
-from pyprot.pdbstats import PdbStats
-from pyprot.filefunc import _open_type
-from pyprot.filter_content import _filter_column_match
+from pyprot.pdb.pdbmanip import PdbManip
+from pyprot.pdb.pdbstats import PdbStats
+from pyprot.pdb.filefunc import _open_type
+from pyprot.pdb.filter_content import _filter_column_match
 
 
 class PdbObj(PdbManip, PdbStats):

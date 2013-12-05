@@ -1,7 +1,7 @@
-import pyprot
+import pyprot.pdb as ppdb
 
-pdb1 = pyprot.PdbObj("./test/test_data/3EIY.pdb")
-pdb2 = pyprot.PdbObj("./test/test_data/small_3EIY.pdb")
+pdb1 = ppdb.PdbObj("./test/test_data/3EIY.pdb")
+pdb2 = ppdb.PdbObj("./test/test_data/small_3EIY.pdb")
 
 
 def test_constructor():

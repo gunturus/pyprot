@@ -4,7 +4,7 @@
 
 import pystats
 from pyprot.data.atomic_masses import *
-from pyprot.filter_content import _filter_column_match
+from pyprot.pdb.filter_content import _filter_column_match
 
 class PdbStats(object):
     def __init__(self):

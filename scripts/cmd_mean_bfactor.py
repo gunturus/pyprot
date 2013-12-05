@@ -15,13 +15,13 @@
 
 
 import sys
-import pyprot
+import pyprot.pdb
 
 if len(sys.argv) < 2 or len(sys.argv) > 3:
     print("USAGE: python3 cmd_mean_bfactor.py mypdbfile.pdb [lig/calpha/main_chain]")
 
 else:
-    new_pdb = pyprot.PdbObj(sys.argv[1])
+    new_pdb = pyprot.pdb.PdbObj(sys.argv[1])
     if len(sys.argv) == 3: 
         if sys.argv[2] == "lig":
             print(new_pdb.mean_bfactor(protein = False, ligand = True))

@@ -1,9 +1,9 @@
 # sr 11/25/2013
 
-import pyprot
+import pyprot.pdb as ppdb
 
-new_pdb = pyprot.PdbObj("./test/test_data/bfact.pdb")
-new_pdb2 = pyprot.PdbObj("./test/test_data/small_3EIY.pdb")
+new_pdb = ppdb.PdbObj("./test/test_data/bfact.pdb")
+new_pdb2 = ppdb.PdbObj("./test/test_data/small_3EIY.pdb")
 
 def test_get_bfactor():
     b_atoms = [54.68, 55.07, 54.60, 57.59, 61.87, 63.51, 63.20, 55.71]
