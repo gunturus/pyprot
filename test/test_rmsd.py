@@ -1,11 +1,11 @@
 import pyprot.pdb as ppdb
 
-lig1 = pyprot.PdbObj("./test/test_data/lig_conf_1.pdb")
-lig2 = pyprot.PdbObj("./test/test_data/lig_conf_2.pdb")
-pdb1 = pyprot.PdbObj("./test/test_data/3EIY.pdb")
-pdb2 = pyprot.PdbObj("./test/test_data/3EIY.pdb")
-pdb3 = pyprot.PdbObj("./test/test_data/1T48_995.pdb")
-pdb4 = pyprot.PdbObj("./test/test_data/1T49_995.pdb")
+lig1 = ppdb.PdbObj("./test/test_data/lig_conf_1.pdb")
+lig2 = ppdb.PdbObj("./test/test_data/lig_conf_2.pdb")
+pdb1 = ppdb.PdbObj("./test/test_data/3EIY.pdb")
+pdb2 = ppdb.PdbObj("./test/test_data/3EIY.pdb")
+pdb3 = ppdb.PdbObj("./test/test_data/1T48_995.pdb")
+pdb4 = ppdb.PdbObj("./test/test_data/1T49_995.pdb")
 
 def test_rmsd():
     assert lig1.rmsd(lig2, ligand = True) == 1.9959
