@@ -1,9 +1,17 @@
 import os
 
 def multi_mol2list (mol2file):
-    """ Reads in a mol2 file with multiple mol2 structures
-        and returns a list where each mol2 file is a string
-        representing a single mol2 file.
+    """ 
+    Reads in a mol2 file with multiple mol2 structures
+    and separates file into indivdual mol2 files.
+         
+    Arguments:
+        mol2file: the path to the multi-mol2 file
+
+    Returns:
+        A list where each list items is the individual mol2-content
+        in string format.
+    
     """
     with open(mol2file, 'r') as mol2file:
         line = ""

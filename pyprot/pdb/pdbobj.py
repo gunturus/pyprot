@@ -54,5 +54,11 @@ class PdbObj(PdbManip, PdbStats):
         """
         return _filter_column_match(self.atom, ["O ", "CA", "C ", "N "], 13)
 
+    def no_hydro(self):
+        """ Returns all atom entries of the PDB file except hydrogen atoms. """
+        iteration1 = _filter_column_match(self.atom, ["H"], 13, exclude = True)
+        return _filter_column_match(iteration1, ["H"], 12, exclude = True)
+
+
 
 
