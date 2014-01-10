@@ -17,14 +17,11 @@
 import sys
 import pyprot.pdb
 
-if len(sys.argv) < 5 or len(sys.argv) > 5:
+if len(sys.argv) < 3 or len(sys.argv) > 4:
     print("USAGE: python3 cmd_rmsd.py file1.pdb file2.pdb [lig/ca]")
 
 else:
-    pdb_in = pyprot.pdb.PdbObj(sys.argv[1])
-    radius =
-    coordinates = 
-    pdb_out
+    pdb1 = pyprot.pdb.PdbObj(sys.argv[1])
     pdb2 = pyprot.pdb.PdbObj(sys.argv[2])
 
     if len(sys.argv) == 4: 
