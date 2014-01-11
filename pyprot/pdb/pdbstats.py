@@ -1,10 +1,11 @@
-# Class with methods specialized for statistics on PDB file contents.
+# Parent class with methods specialized for statistics on PDB file contents.
 # Imported into PdbObj class.
 # Sebastian Raschka 11/18/2013
 
 import pystats
 from pyprot.data.atomic_masses import *
 from pyprot.pdb.filter_content import _filter_column_match
+
 
 class PdbStats(object):
     def __init__(self):

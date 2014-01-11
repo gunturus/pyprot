@@ -44,21 +44,6 @@ class PdbObj(PdbManip, PdbStats):
     def __str__(self):
         return self.__repr__()
 
-    def calpha(self):
-        """ Returns lines of C-alpha atoms as list of strings."""
-        return _filter_column_match(self.atom, ["CA"], 13)
-
-    def main_chain(self):
-        """ Returns lines of the entries that represent the protein's 
-        main chain.
-        """
-        return _filter_column_match(self.atom, ["O ", "CA", "C ", "N "], 13)
-
-    def no_hydro(self):
-        """ Returns all atom entries of the PDB file except hydrogen atoms. """
-        iteration1 = _filter_column_match(self.atom, ["H"], 13, exclude = True)
-        return _filter_column_match(iteration1, ["H"], 12, exclude = True)
-
 
 
 

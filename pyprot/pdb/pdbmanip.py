@@ -1,11 +1,38 @@
-# Class with methods specialized for PDB file content manipulation
+# Parent class with methods specialized for PDB file content manipulation
 # Imported into PdbObj class.
 # Sebastian Raschka 11/18/2013
+
+from pyprot.pdb.filter_content import _filter_column_match
 
 class PdbManip(object):
     def __init__():
         pass
     
+    
+    def calpha(self):
+        """ Returns lines of C-alpha atoms as list of strings."""
+        return _filter_column_match(self.atom, ["CA"], 13)
+
+
+    def main_chain(self):
+        """ Returns lines of the entries that represent the protein's 
+        main chain.
+        """
+        return _filter_column_match(self.atom, ["O ", "CA", "C ", "N "], 13)
+
+
+    def no_hydro(self):
+        """ Returns all atom entries of the PDB file except hydrogen atoms. """
+        iteration1 = _filter_column_match(self.atom, ["H"], 13, exclude = True)
+        return _filter_column_match(iteration1, ["H"], 12, exclude = True)
+
+
+    def chains(self, chain_ids):
+        """
+        """
+        
+
+
     def save_pdb(self, dest):
         """
         Writes out the contents of the PDB object (pdb.cont) as .pdb file
@@ -16,7 +43,7 @@ class PdbManip(object):
         """
         with open(dest, 'w') as out:
             for line in self.cont:
-                out.write(line)
+                out.write(line + '\n')
 
 
     def grab_radius(self, radius, coordinates):

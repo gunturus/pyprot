@@ -20,17 +20,15 @@ try:
     in_pdb = pyprot.pdb.PdbObj(sys.argv[1])
     
     if sys.argv[2] == "mc":
-        res = in_pdb.main_chain()
+        in_pdb.cont = in_pdb.main_chain()
     elif sys.argv[2] == "ca":
-        res = in_pdb.calpha()
+        in_pdb.cont = in_pdb.calpha()
     else:
-        res = in_pdb.no_hydro()
+        in_pdb.cont = in_pdb.no_hydro()
 
-    with open(sys.argv[3], 'w') as out_pdb:
-        for line in res:
-            out_pdb.write(line + '\n')
+    in_pdb.save_pdb(sys.argv[3])   
 
-except:
+except IOError:
     print("ERROR\nUSAGE: python3 cmd_reduce_protein.py in_file.pdb [mc/ca/no_h] out.pdb")
     print("\nEXAMPLE: python3 python3 cmd_reduce_protein.py mypdb.pdb mc mypdb_main_chain.pdb\n")
  
