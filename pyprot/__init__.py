@@ -4,7 +4,7 @@ It supports popular protein structure file formats such as PDB and MOL2."""
 from pyprot.pdb import pdbobj 
 from pyprot.pdb import pdbmanip 
 from pyprot.pdb import pdbstats
-from pyprot.mol2 import mol2_in 
+from pyprot.mol2 import mol2_io 
 #from pyprot.pdb import filefunc 
 #from pyprot.pdb import filter_content 
 

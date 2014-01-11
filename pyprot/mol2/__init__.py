@@ -1,1 +1,1 @@
-from pyprot.mol2.mol2_in import multi_mol2list
+from pyprot.mol2.mol2_io import split_multimol2

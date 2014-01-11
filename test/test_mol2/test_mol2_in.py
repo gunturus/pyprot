@@ -1,4 +1,9 @@
 import pyprot.mol2 as mol2
 
-def test_multi_mol2list():
-    assert len(mol2.multi_mol2list('./test/test_data/multimol2_small1.mol2')) == 3
+mol2file = "./test/test_data/mol2/confs.mol2"
+
+def test_split_multimol2():
+    res = mol2.split_multimol2(mol2file)        
+    assert len(res) == 200
+    assert res[2][0] == "ZINC00000016_3"
+    assert res[4][1].startswith("@<TRIPOS>MOLECULE") == True
