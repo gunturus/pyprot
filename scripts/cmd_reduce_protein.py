@@ -28,7 +28,7 @@ try:
 
     in_pdb.save_pdb(sys.argv[3])   
 
-except IOError:
+except:
     print("ERROR\nUSAGE: python3 cmd_reduce_protein.py in_file.pdb [mc/ca/no_h] out.pdb")
     print("\nEXAMPLE: python3 python3 cmd_reduce_protein.py mypdb.pdb mc mypdb_main_chain.pdb\n")
  

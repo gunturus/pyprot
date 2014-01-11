@@ -22,15 +22,30 @@ class PdbManip(object):
 
 
     def no_hydro(self):
-        """ Returns all atom entries of the PDB file except hydrogen atoms. """
+        """ Returns all ATOM entries of the PDB file except hydrogen atoms. """
         iteration1 = _filter_column_match(self.atom, ["H"], 13, exclude = True)
         return _filter_column_match(iteration1, ["H"], 12, exclude = True)
 
 
     def chains(self, chain_ids):
-        """
-        """
+        """ 
+        Returns all ATOM and HETATM entries of the PDB file for the 
+        specified chains
         
+        Arguments:
+            chain_ids (list): List that contains the chain IDs, e.g., ["A", "B"]
+        Returns:
+            list of the pdb contents that have specified a chain ID.
+
+        """
+        res = []
+        for line in self.cont:
+            line = line.strip()
+            if (line.startswith("ATOM") or line.startswith("HETATM") 
+                    or line.startswith("TER"))\
+                    and line[21] in chain_ids:
+                res.append(line)
+        return res 
 
 
     def save_pdb(self, dest):
