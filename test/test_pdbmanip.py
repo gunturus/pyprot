@@ -5,7 +5,7 @@ pdb1 = ppdb.PdbObj("./test/test_data/small_3EIY.pdb")
 pdb2 = ppdb.PdbObj("./test/test_data/3EIY.pdb")
 pdb3 = ppdb.PdbObj("./test/test_data/small_3EIY_h.pdb")
 pdb4 = ppdb.PdbObj("./test/test_data/pdb/short_RIV_1.pdb")
-
+pdb5 = ppdb.PdbObj("./test/test_data/pdb/short_RIV_2.pdb")
 
 def test_pdb_save():
     dest = "./test/test_data/out/test_pdb_save.pdb"
@@ -84,7 +84,7 @@ def test_main_chain():
     
     assert atom == pdb1.main_chain()
 
-def test_no_hydro():
+def test_strip_hydro():
     atom = [
     'ATOM      1  N   SER A   2       2.527  54.656  -1.667  1.00 52.73           N',
     'ATOM      2  CA  SER A   2       3.259  54.783  -0.368  1.00 52.54           C',
@@ -118,12 +118,42 @@ def test_no_hydro():
     'ATOM     30  OD1 ASN A   5       4.862  53.286  -5.312  1.00 48.48           O',
     'ATOM     31  ND2 ASN A   5       6.784  53.176  -6.513  1.00 47.35           N',
     'ATOM     32  N   VAL A   6       8.466  51.922  -1.312  1.00 35.70           N',
-    'ATOM     33  CA  VAL A   6       9.636  51.959  -0.457  1.00 32.41           C'
+    'ATOM     33  CA  VAL A   6       9.636  51.959  -0.457  1.00 32.41           C',
+    'HETATM 1332  K     K A 176      24.990  43.276   0.005  0.50 24.45           K',
+    'HETATM 1333 NA    NA A 177       1.633  34.181  11.897  1.00 26.73          NA',
+    'HETATM 1334 NA    NA A 178       6.489  35.143   8.444  1.00 30.89          NA'
     ]
-    
-    assert atom == pdb3.no_hydro() 
+    assert atom == pdb3.strip_h() 
 
 
+def test_strip_water():
+    out = [
+        'ORIGX2      0.000000  1.000000  0.000000        0.00000',
+        'ORIGX3      0.000000  0.000000  1.000000        0.00000',
+        'SCALE1      0.013187  0.007613  0.000000        0.00000',
+        'SCALE2      0.000000  0.015227  0.000000        0.00000',
+        'SCALE3      0.000000  0.000000  0.006515        0.00000',
+        'ATOM      1  N   ASP L   1      11.431   9.546  26.980  1.00 42.84           N',
+        'ATOM   3335  CB  LYS H 228      55.744  47.316  42.227  1.00 55.82           C',
+        'ATOM   3336  CG  LYS H 228      54.735  46.929  43.279  1.00 59.26           C',
+        'ATOM   3337  CD  LYS H 228      53.322  47.322  42.862  1.00 62.38           C',
+        'ATOM   3338  CE  LYS H 228      52.879  46.619  41.585  1.00 64.90           C',
+        'ATOM   3339  NZ  LYS H 228      51.517  47.052  41.158  1.00 60.26           N',
+        'ATOM   3340  OXT LYS H 228      57.902  49.285  43.398  1.00 70.44           O',
+        'TER    3341      LYS H 228',
+        'HETATM 3356  C15 OBE H 201      24.725  -3.136  27.406  1.00 27.56           C',
+        'HETATM 3363  O5  OBE H 201      31.267  -3.891  23.783  1.00 37.43           O',
+        'CONECT  157  711',
+        'CONECT  711  157',
+        'CONECT 1051 1533',
+        'CONECT 2787 3204',
+        'CONECT 2788 3205',
+        'CONECT 3362 3356',
+        'CONECT 3363 3352',
+        'MASTER      286    0    1   10   47    0    4    6 3543    2   34   35',
+        'END'
+    ]    
+    assert out == pdb5.strip_water()
 
 def test_chains():
     h_l = [

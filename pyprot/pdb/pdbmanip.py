@@ -21,10 +21,28 @@ class PdbManip(object):
         return _filter_column_match(self.atom, ["O ", "CA", "C ", "N "], 13)
 
 
-    def no_hydro(self):
-        """ Returns all ATOM entries of the PDB file except hydrogen atoms. """
-        iteration1 = _filter_column_match(self.atom, ["H"], 13, exclude = True)
-        return _filter_column_match(iteration1, ["H"], 12, exclude = True)
+    def strip_h(self):
+        """ Returns all entries of the PDB file except hydrogen atoms. """
+        res = []
+        for line in self.cont:
+            try:
+                if (line[12] != "H" and line[13] != "H") and line[77] != "H":
+                    res.append(line)
+            except:
+                pass
+        return res
+
+
+    def strip_water(self):
+        """ Returns all contents of the PDB file except water molecules. """
+        res = []
+        for line in self.cont:
+            try:
+                if not (line.startswith("HETATM") and line[17:20] == "HOH"):
+                    res.append(line)            
+            except:
+                pass
+        return res
 
 
     def chains(self, chain_ids):
