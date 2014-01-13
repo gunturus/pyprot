@@ -3,7 +3,7 @@
 # Sebastian Raschka 11/18/2013
 
 import pystats
-from pyprot.data.atomic_masses import *
+from pyprot.data.atomic_masses import ATOMIC_WEIGHTS
 from pyprot.pdb.filter_content import _filter_column_match
 
 
