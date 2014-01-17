@@ -18,7 +18,7 @@ try:
     chain_ids = [i.strip() for i in sys.argv[2].split(',')]
 
     in_pdb = pyprot.pdb.PdbObj(sys.argv[1])      
-    in_pdb.cont = in_pdb.chains(chain_ids)
+    in_pdb.cont = in_pdb.extract_chains(chain_ids)
    
     in_pdb.save_pdb(sys.argv[3])   
 

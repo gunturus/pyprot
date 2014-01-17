@@ -8,6 +8,22 @@ from pyprot.data.amino_acids import AMINO_ACIDS_3TO1
 class PdbManip(object):
     def __init__():
         pass
+
+    def _get_chains(self):
+        """
+        Splits a PDB file into individual chains.
+        Returns a dictionary with the respective chains, where
+        the Chain IDs are the keys, and the lines of the chain
+        are the dictionary values as lists:
+        {'A':[chain A lines], 'B':[...], ...}
+
+        """
+        chain_dict = dict()
+        for line in self.atom_ter + self.hetatm:
+            if line[21:22] not in chain_dict:
+                chain_dict[line[21:22]] = []
+            chain_dict[line[21:22]].append(line)
+        return chain_dict 
     
     
     def calpha(self):
@@ -46,7 +62,7 @@ class PdbManip(object):
         return res
 
 
-    def chains(self, chain_ids):
+    def extract_chains(self, chain_ids):
         """ 
         Returns all ATOM and HETATM entries of the PDB file for the 
         specified chains
@@ -65,24 +81,7 @@ class PdbManip(object):
                     and line[21] in chain_ids:
                 res.append(line)
         return res
-
-    
-    def get_atom_chains(self):
-        """
-        Splits a PDB file into individual chains.
-        Returns a dictionary with the respective chains, where
-        the Chain IDs are the keys, and the lines of the chain
-        are the dictionary values as lists:
-        {'A':[chain A lines], 'B':[...], ...}
-
-        """
-        chain_dict = dict()
-        for line in self.atom_ter + self.hetatm:
-            if line[21:22] not in chain_dict:
-                chain_dict[line[21:22]] = []
-            chain_dict[line[21:22]].append(line)
-        return chain_dict    
-
+        
 
     def save_pdb(self, dest):
         """

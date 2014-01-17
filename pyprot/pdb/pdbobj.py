@@ -18,6 +18,7 @@ class PdbObj(PdbManip, PdbStats):
         self.atom_ter = []
         self.hetatm = []
         self.conect = []
+        self.chains = []
         self.fileloc = ""
         if isinstance(file_cont, str):
             self.fileloc = file_cont
@@ -32,7 +33,8 @@ class PdbObj(PdbManip, PdbStats):
              self.atom_ter = _filter_column_match(self.cont, ["ATOM", "TER"])
              self.hetatm = _filter_column_match(self.cont, ["HETATM"])
              self.conect = _filter_column_match(self.cont, ["CONECT"])
-                 
+             self.chains = self._get_chains()                 
+
     def __del__(self):
         del self
 

@@ -157,7 +157,7 @@ def test_strip_water():
     ]    
     assert out == pdb5.strip_water()
 
-def test_chains():
+def test_extract_chains():
     h_l = [
     'ATOM      1  N   ASP L   1      11.431   9.546  26.980  1.00 42.84           N',  
     'ATOM      2  CA  ASP L   1      12.768   9.604  27.627  1.00 41.86           C',  
@@ -228,8 +228,9 @@ def test_chains():
     'HETATM 3445  O   HOH H 231      39.649  16.017  31.547  1.00 57.79           O'  
     ]
 
-    assert pdb4.chains(['L', 'H']) == h_l
-    assert pdb4.chains(['H']) == h
+    assert pdb4.extract_chains(['L', 'H']) == h_l
+    assert pdb4.extract_chains(['H']) == h
+
 
 def test_get_atom_chains():
     out = {
@@ -251,4 +252,4 @@ def test_get_atom_chains():
               'HETATM 3363  O5  OBE H 201      31.267  -3.891  23.783  1.00 37.43           O'
              ]
           }
-    assert (pdb6.get_atom_chains()) == out
+    assert (pdb6._get_chains()) == out
