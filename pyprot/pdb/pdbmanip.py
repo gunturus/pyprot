@@ -3,6 +3,7 @@
 # Sebastian Raschka 11/18/2013
 
 from pyprot.pdb.filter_content import _filter_column_match
+from pyprot.data.amino_acids import AMINO_ACIDS_3TO1
 
 class PdbManip(object):
     def __init__():
@@ -63,15 +64,33 @@ class PdbManip(object):
                     or line.startswith("TER"))\
                     and line[21] in chain_ids:
                 res.append(line)
-        return res 
+        return res
+
+    '''    def split_atom_chains(self):
+        """returns lines that contain atom entries as list
+            of format [[chaina lines], [chainb lines], ...]
+        """
+        atomentry_list = []
+        chainentry_list = []
+        for line in self.atom_ter:
+            if line.startswith("ATOM"):
+                chainentry_list.append(line)
+            if line.startswith("TER"):
+                atomentry_list.append(chainentry_list)
+                chainentry_list = []
+	    if chainentry_list:
+	    	atomentry_list.append(chainentry_list)
+        print(atomentry_list)
+        return atomentry_list
+    '''
 
 
     def save_pdb(self, dest):
         """
-        Writes out the contents of the PDB object (pdb.cont) as .pdb file
+        writes out the contents of the pdb object (pdb.cont) as .pdb file
 
-        Arguments:
-            dest = path+filename of the pdb file (e.g., /home/.../Desktop/my_pdb.pdb)
+        arguments:
+            dest = path+filename of the pdb file (e.g., /home/.../desktop/my_pdb.pdb)
 
         """
         with open(dest, 'w') as out:
@@ -80,15 +99,15 @@ class PdbManip(object):
 
 
     def grab_radius(self, radius, coordinates):
-        """ Grabs those atoms that are within a specified 
-            radius of a provided 3D-coordinate.
+        """ grabs those atoms that are within a specified 
+            radius of a provided 3d-coordinate.
 
-        Arguments:
-            radius: radius in Angstrom (float or integer)
+        arguments:
+            radius: radius in angstrom (float or integer)
             coordinates: a list of x, y, z coordinates , e.g., [1.0, 2.4, 4.0]
 
-        Returns:
-            list that contains the PDB contents that are within the specified
+        returns:
+            list that contains the pdb contents that are within the specified
             radius.
 
         """
@@ -104,3 +123,29 @@ class PdbManip(object):
         return in_radius
     
 
+'''    def to_fasta(self):
+        """ converts the pdb file contents in self.atom_ter into a fasta string. """
+        prev_seq_num = 0
+        chain_fastas = []
+        for chain in atomentry_list:
+            fasta_sequence = []
+            for line in chain:
+			    try:
+				    aa_3letter = line[17:20].strip()
+				    aa_1letter = amino_acids_3to1[aa_3letter]
+				    res_seqnumber = line[22:26].strip()
+				
+				    res_seqnumber = int(res_seqnumber)
+				    if prev_seq_num != res_seqnumber:
+					    fasta_sequence.append(aa_1letter)
+				    prev_seq_num = res_seqnumber
+
+			    except keyerror:
+				    pass
+				    print('warning: {} contains unknown residue name'.format(self.code))	
+			    except valueerror:
+				    print('warning: residue sequence numbers of {}'\
+                        'are not correctly formated'.format(self.code))		     
+        chain_fastas.append(fasta_sequence)
+	return chain_fastas
+'''

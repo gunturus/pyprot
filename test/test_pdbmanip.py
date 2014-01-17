@@ -6,6 +6,8 @@ pdb2 = ppdb.PdbObj("./test/test_data/3EIY.pdb")
 pdb3 = ppdb.PdbObj("./test/test_data/small_3EIY_h.pdb")
 pdb4 = ppdb.PdbObj("./test/test_data/pdb/short_RIV_1.pdb")
 pdb5 = ppdb.PdbObj("./test/test_data/pdb/short_RIV_2.pdb")
+pdb6 = ppdb.PdbObj("./test/test_data/pdb/short_RIV_3_mod.pdb")
+
 
 def test_pdb_save():
     dest = "./test/test_data/out/test_pdb_save.pdb"
@@ -229,3 +231,12 @@ def test_chains():
     assert pdb4.chains(['L', 'H']) == h_l
     assert pdb4.chains(['H']) == h
 
+#def test_split_atom_chains():
+#    pdb6.split_atom_chains()
+#    assert 1==2
+
+#def test_to_fasta():
+#    print(pdb2.to_fasta())
+#    assert 1==2
+
+    

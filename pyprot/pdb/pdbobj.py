@@ -15,6 +15,7 @@ class PdbObj(PdbManip, PdbStats):
         self.cont = []
         self.code = pdb_code
         self.atom = []
+        self.atom_ter = []
         self.hetatm = []
         self.conect = []
         self.fileloc = ""
@@ -28,6 +29,7 @@ class PdbObj(PdbManip, PdbStats):
                 open_pdbfile.close()
         if self.cont:
              self.atom = _filter_column_match(self.cont, ["ATOM"])
+             self.atom_ter = _filter_column_match(self.cont, ["ATOM", "TER"])
              self.hetatm = _filter_column_match(self.cont, ["HETATM"])
              self.conect = _filter_column_match(self.cont, ["CONECT"])
                  
