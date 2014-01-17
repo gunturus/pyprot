@@ -66,23 +66,22 @@ class PdbManip(object):
                 res.append(line)
         return res
 
-    '''    def split_atom_chains(self):
-        """returns lines that contain atom entries as list
-            of format [[chaina lines], [chainb lines], ...]
+    
+    def get_atom_chains(self):
         """
-        atomentry_list = []
-        chainentry_list = []
-        for line in self.atom_ter:
-            if line.startswith("ATOM"):
-                chainentry_list.append(line)
-            if line.startswith("TER"):
-                atomentry_list.append(chainentry_list)
-                chainentry_list = []
-	    if chainentry_list:
-	    	atomentry_list.append(chainentry_list)
-        print(atomentry_list)
-        return atomentry_list
-    '''
+        Splits a PDB file into individual chains.
+        Returns a dictionary with the respective chains, where
+        the Chain IDs are the keys, and the lines of the chain
+        are the dictionary values as lists:
+        {'A':[chain A lines], 'B':[...], ...}
+
+        """
+        chain_dict = dict()
+        for line in self.atom_ter + self.hetatm:
+            if line[21:22] not in chain_dict:
+                chain_dict[line[21:22]] = []
+            chain_dict[line[21:22]].append(line)
+        return chain_dict    
 
 
     def save_pdb(self, dest):
@@ -123,7 +122,7 @@ class PdbManip(object):
         return in_radius
     
 
-'''    def to_fasta(self):
+    '''    def to_fasta(self):
         """ converts the pdb file contents in self.atom_ter into a fasta string. """
         prev_seq_num = 0
         chain_fastas = []
