@@ -253,3 +253,8 @@ def test_get_atom_chains():
              ]
           }
     assert (pdb6._get_chains()) == out
+
+def test_to_fasta():
+    print(pdb4.to_fasta())
+
+    assert pdb4.to_fasta() == {'H': ['K'], 'L': ['D', 'I', 'V', 'M']}
