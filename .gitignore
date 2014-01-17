@@ -1,3 +1,4 @@
+gmon.out
 *.pyc
 *.o
 *.so
