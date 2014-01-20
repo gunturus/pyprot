@@ -95,4 +95,5 @@ def test_contains_atom():
     assert contains_atom(MOL2_CONT1, {'O.5':[-0.595, -0.315]}) == False
     assert contains_atom(MOL2_CONT1, {'O.3':[-0.001, -0.002]}) == False
     assert contains_atom(MOL2_CONT1, {'O.2':[-0.002, -0.001], 'O.3':[-0.002, -0.001]}) == False
+    assert contains_atom(MOL2_CONT1, {'O.2':[-1.120, -0.711],'O.3':[-1.120, -0.711]}) == True
 
