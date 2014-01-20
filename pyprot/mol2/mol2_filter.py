@@ -52,7 +52,7 @@ def contains_atom(mol2_cont, atom_dict):
         mol2 string and its charge is in the specified range.
 
     '''
-    return len(_filter_atoms(mol2_cont, atom_dict)) >= len(atom_dict.keys()) 
+    return len(_filter_atoms(mol2_cont, atom_dict)) >= 1 
 
 
 def distance_match(mol2_cont, atom_dict, distance):
