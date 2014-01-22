@@ -1,5 +1,11 @@
 import os
 
+def mol2_to_coords(line):
+    """ Extracts XYZ coordinates from mol2 atom entry line """
+    line = line.strip().split()
+    return [float(i) for i in line[2:5]]
+
+
 def _filter_atoms(mol2_cont, atom_dict):
     '''Searches for atom types in a mol2 file.
        Returns the mol2 lines that contains matches as a list.
