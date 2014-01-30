@@ -21,6 +21,6 @@ try:
             for line in mol2[1]:
                 out_file.write(line)
 
-except IOError:
+except:
     print("ERROR\nUSAGE: python3 multimol2.mol2 output_directory")
  
