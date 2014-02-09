@@ -38,6 +38,7 @@ try:
     single_mol2s_in = pyprot.mol2.mol2_io.split_multimol2(in_mol2file)
     single_mol2s_out = []
 
+    print(atom_dict)
     for mol2 in single_mol2s_in:
         mol2_lines = mol2[1].split('\n')
         if pyprot.mol2.mol2_filter.distance_match(mol2_lines, atom_dict, distance):
@@ -48,11 +49,6 @@ try:
             out_file.write(mol2[1])
 
 except:
-    print("""
-Takes a single- or multi-molecule MOL2 file and checks if
-2 functional groups are within a specified distance.
-Writes molecules that match the criteria to a new MOL2 file.
-""")
     print("ERROR\nUSAGE: python3 cmd_intermol_funcgroup_dist.py mol2-file.mol2 functional-groups charge-ranges distance output-mol2.mol2")
-    print("\nEXAMPLE:\npython3 cmd_intermol_funcgroup_dist.py mymol2.mol2 'O.2,O.3' '-0.8,-0.5;-0.5,-0.9' '1.0' mymol2_results.mol2\n")
+    print("\nEXAMPLE: python3 cmd_intermol_funcgroup_dist.py mymol2.mol2 'O.2,O.3' '-0.8,-0.5;-0.5,-0.9' '1.0' mymol2_results.mol2\n")
  
