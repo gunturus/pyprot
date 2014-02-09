@@ -8,4 +8,4 @@ from pyprot.mol2 import mol2_io
 #from pyprot.pdb import filefunc 
 #from pyprot.pdb import filter_content 
 
-__version__ = "0.0.1dev" 
+__version__ = "0.0.2dev" 
