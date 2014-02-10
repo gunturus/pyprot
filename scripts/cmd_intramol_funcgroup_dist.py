@@ -8,18 +8,20 @@ import sys
 import os
 import pyprot.mol2
 
-def create_atom_dict(func_groups, charge_ranges):
-    """ Creates a dictionary mapping charge ranges to functional groups. """
-    atom_dict = dict()
+def create_atom_list(func_groups, charge_ranges):
+    """ Creates a list mapping charge ranges to functional groups. 
+        E.g., [['O.2', -1.12, -0.792], ['O.2', -0.595, -0.315
+    """
+    atom_list = []
     i = 0
     for atom in func_groups:
         try:
             curr_range = charge_ranges[i].split(',')
-            atom_dict[atom] = float(curr_range[0]), float(curr_range[1])
+            atom_list.append([atom, float(curr_range[0]), float(curr_range[1])])
         except IndexError:
-            atom_dict[atom] = []
+            atom_list.append([atom])
         i += 1
-    return atom_dict
+    return atom_list
 
 try:
     assert len(sys.argv) == 6
@@ -33,7 +35,7 @@ try:
     out_mol2file = sys.argv[5]
     
 
-    atom_dict = create_atom_dict(func_groups, charge_ranges)    
+    atom_list = create_atom_dict(func_groups, charge_ranges)    
 
     single_mol2s_in = pyprot.mol2.mol2_io.split_multimol2(in_mol2file)
     single_mol2s_out = []

@@ -14,7 +14,7 @@ try:
     if not os.path.exists(out_dir):
         os.mkdir(out_dir)
     
-    single_mol2s = pyprot.mol2.mol2_io.split_multimol2(multimol2)
+    single_mol2s = pyprot.mol2.mol2_io.split_multimol2(multimol2, generator=True)
     for mol2 in single_mol2s:
         out_mol2 = os.path.join(out_dir, mol2[0]) + '.mol2'
         with open(out_mol2, 'w') as out_file:
