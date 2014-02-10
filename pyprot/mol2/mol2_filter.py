@@ -76,31 +76,33 @@ def distance_match(mol2_cont, chargetype_list, distance):
                 as 2nd and 3rd sublist items.
                 Example: [['O.2', -1.12, -0.792], ['O.2', -0.595, -0.315]]
                 Max number of sublists is 2!
+        distance (list): List of 2 numbers that specify the allowed distance
+                between the 2 atoms in Angstrom. E.g., [4, 12.5]
     Returns bool: 
         True if 2 atoms (each of one specified type) are within a 
         specified distance. 
 
     '''
     assert len(chargetype_list) == 2   # can only compare 2 atoms
-    atom_lines = _filter_atoms(mol2_cont, chargetype_list)
+    atom_lines1 = _filter_atoms(mol2_cont, [chargetype_list[0]])
+    atom_lines2 = _filter_atoms(mol2_cont, [chargetype_list[1]])
     coords_1 = []
     coords_2 = []
-    for line in atom_lines:
+    for line in atom_lines1:
         line = line.strip().split()
-        
+        coords_1.append([float(i) for i in line[2:5]])
         # expected format of a 'line':
         # ['11', 'O1', '0.0847', '-6.3706', '-0.6593', 'O.2', '1', '<0>', '-0.0409']
-        
-        coords = [float(i) for i in line[2:5]]
-        if line[5] == chargetype_list[0][0]:
-            coords_1.append(coords)
-        if line[5] == chargetype_list[1][0]:
-            coords_2.append(coords)
+    for line in atom_lines2:
+        line = line.strip().split()
+        coords_2.append([float(i) for i in line[2:5]])    
+    
     dist_match = False
     for xyz_1 in coords_1:
         for xyz_2 in coords_2:
-            if sum([(j-i)**2 for i,j in zip(xyz_1,xyz_2)])**0.5 <= distance:
+            dist = sum([(j-i)**2 for i,j in zip(xyz_1,xyz_2)])**0.5
+            if dist >= distance[0] and dist <= distance[1]:
                 dist_match = True
                 break
 
-    return dist_match      
+    return dist_match       
