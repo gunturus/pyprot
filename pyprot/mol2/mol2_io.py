@@ -1,6 +1,6 @@
 import os
 
-def split_multimol2(multimol2):
+def split_multimol2(multimol2, generator=False):
     """Splits a multi-mol2 file (a mol2 file consisting of multiple mol2 entries)
         into individual mol2-file contents.
 
@@ -9,10 +9,10 @@ def split_multimol2(multimol2):
         generator (bool): If True, returns a generator instead of a list.
 
     Returns:
-        A list consisting of a sublist for every extracted mol2-file. Sublists contain
+        A generator object for lists for every extracted mol2-file. Lists contain
         the molecule ID and the mol2 file contents.
-        e.g., [['ID1234', '@<TRIPOS>MOLECULE...'],['ID1235', '@<TRIPOS>MOLECULE...'], ...]
-        If generator=True, a generator for the list items is returned instead.
+        e.g., ['ID1234', '@<TRIPOS>MOLECULE...']
+
     
     """
     with open(multimol2, 'r') as mol2file:
@@ -34,10 +34,6 @@ def split_multimol2(multimol2):
                     if mol2file.tell() == os.fstat(mol2file.fileno()).st_size:
                         mol2cont += line
                         break
-                if not generator:
-                    single_mol2s.append([molecule_id, mol2cont])
-                else:
-                    yield [molecule_id, mol2cont]
-    if not generator:
-        return single_mol2s
+
+                yield [molecule_id, mol2cont]
 
