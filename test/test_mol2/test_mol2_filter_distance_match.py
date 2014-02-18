@@ -88,6 +88,6 @@ USER_CHARGES
 MOL2_CONT1 = MOL2_STR1.split('\n')
 
 def test_distance_match():
-    assert distance_match(MOL2_CONT1, {'O.3':[], 'O.2':[]}, 100) == True
-    assert distance_match(MOL2_CONT1, {'O.3':[], 'O.2':[]}, 2.90) == True
-    assert distance_match(MOL2_CONT1, {'O.3':[], 'O.2':[]}, 1.90) == False
+    assert distance_match(MOL2_CONT1, [['O.3'],['O.2']], [0,100]) == True
+    assert distance_match(MOL2_CONT1, [['O.3'],['O.2']], [0,2.90]) == True
+    assert distance_match(MOL2_CONT1, [['O.3'],['O.2']], [0,1.90]) == False

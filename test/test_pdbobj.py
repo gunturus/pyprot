@@ -1,6 +1,6 @@
 import pyprot.pdb as ppdb
 
-pdb1 = ppdb.PdbObj("./test/test_data/3EIY.pdb")
+pdb1 = ppdb.pdbobj.PdbObj("./test/test_data/3EIY.pdb")
 
 
 def test_constructor():

@@ -26,7 +26,7 @@ def test_filter_column_match():
     assert len(filtered_f) == 9
 
 def test_filter_col_match_exclude():
-    pdb = ppdb.PdbObj("./test/test_data/small_3EIY.pdb")
+    pdb = ppdb.pdbobj.PdbObj("./test/test_data/small_3EIY.pdb")
     data1 = ppdb.filter_content._filter_column_match(
             pdb.cont, ["ATOM"], exclude = True)
     assert len(data1) == 18     

@@ -12,7 +12,7 @@ import sys
 import pyprot.pdb
 
 try:
-    pdb_in = pyprot.pdb.PdbObj(sys.argv[1])
+    pdb_in = pyprot.pdb.pdbobj.PdbObj(sys.argv[1])
     radius = float(sys.argv[2])
     coordinates = (sys.argv[3]).split(',')
     pdb_out = sys.argv[4]

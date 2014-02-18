@@ -11,7 +11,7 @@ import pyprot.pdb
 
 try:
     assert sys.argv[2] in ["h", "h2o"]
-    in_pdb = pyprot.pdb.PdbObj(sys.argv[1])
+    in_pdb = pyprot.pdb.pdbobj.PdbObj(sys.argv[1])
     
     if sys.argv[2] == "h":
         in_pdb.cont = in_pdb.strip_hydro()

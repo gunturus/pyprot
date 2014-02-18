@@ -12,7 +12,7 @@ import pyprot.pdb
 try:
     assert len(sys.argv) == 3 
     
-    in_pdb = pyprot.pdb.PdbObj(sys.argv[1])      
+    in_pdb = pyprot.pdb.pdbobj.PdbObj(sys.argv[1])      
     fastas = sorted(in_pdb.to_fasta().items())
     
     with open(sys.argv[2], 'w') as out:

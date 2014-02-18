@@ -17,7 +17,7 @@ import pyprot.pdb
 
 try:
     assert sys.argv[2] in ["mc", "ca"]
-    in_pdb = pyprot.pdb.PdbObj(sys.argv[1])
+    in_pdb = pyprot.pdb.pdbobj.PdbObj(sys.argv[1])
     
     if sys.argv[2] == "mc":
         in_pdb.cont = in_pdb.main_chain()

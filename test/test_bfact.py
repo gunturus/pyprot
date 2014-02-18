@@ -1,6 +1,6 @@
 # sr 11/25/2013
 
-import pyprot.pdb as ppdb
+import pyprot.pdb.pdbobj as ppdb
 
 new_pdb = ppdb.PdbObj("./test/test_data/bfact.pdb")
 new_pdb2 = ppdb.PdbObj("./test/test_data/small_3EIY.pdb")

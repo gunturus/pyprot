@@ -1,12 +1,12 @@
 import os
 import pyprot.pdb as ppdb
 
-pdb1 = ppdb.PdbObj("./test/test_data/small_3EIY.pdb")
-pdb2 = ppdb.PdbObj("./test/test_data/3EIY.pdb")
-pdb3 = ppdb.PdbObj("./test/test_data/small_3EIY_h.pdb")
-pdb4 = ppdb.PdbObj("./test/test_data/pdb/short_RIV_1.pdb")
-pdb5 = ppdb.PdbObj("./test/test_data/pdb/short_RIV_2.pdb")
-pdb6 = ppdb.PdbObj("./test/test_data/pdb/short_RIV_3_mod.pdb")
+pdb1 = ppdb.pdbobj.PdbObj("./test/test_data/small_3EIY.pdb")
+pdb2 = ppdb.pdbobj.PdbObj("./test/test_data/3EIY.pdb")
+pdb3 = ppdb.pdbobj.PdbObj("./test/test_data/small_3EIY_h.pdb")
+pdb4 = ppdb.pdbobj.PdbObj("./test/test_data/pdb/short_RIV_1.pdb")
+pdb5 = ppdb.pdbobj.PdbObj("./test/test_data/pdb/short_RIV_2.pdb")
+pdb6 = ppdb.pdbobj.PdbObj("./test/test_data/pdb/short_RIV_3_mod.pdb")
 
 
 def test_pdb_save():
