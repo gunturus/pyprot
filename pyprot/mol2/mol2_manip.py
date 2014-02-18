@@ -30,7 +30,7 @@ def fix2ref_charge(ref_mol2, fix_mol2, ref_col=-1, fix_col=-1):
     out_mol2 = []
     atom_section = False
     for r,f in zip(ref_mol2, fix_mol2):
-
+        
         # check if we are in atom coordinate section
         if not atom_section and (r.startswith('@<TRIPOS>ATOM')
                 and f.startswith('@<TRIPOS>ATOM')):
