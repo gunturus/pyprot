@@ -1,0 +1,1 @@
+from pystats.norm.normal_distribution import *

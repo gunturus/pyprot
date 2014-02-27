@@ -1,4 +1,4 @@
-# sr 11/23/2013
+# Sebastian Raschka 02/26/2014
 # Center of Mass Calculation
 #
 # usage: 
