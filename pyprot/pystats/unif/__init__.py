@@ -1,1 +1,1 @@
-from pystats.unif.uniform_distribution import *
+from pyprot.pystats.unif.uniform_distribution import *

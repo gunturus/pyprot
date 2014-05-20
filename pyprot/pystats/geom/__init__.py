@@ -1,1 +1,1 @@
-from pystats.geom import distance
+from pyprot.pystats.geom import distance

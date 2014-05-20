@@ -1,4 +1,4 @@
-import pystats.basic_stats
+import pyprot.pystats.basic_stats
 
 def z_score(mean, std_dev, value):
     """ Calculates how many standard deviations a particular

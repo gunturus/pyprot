@@ -1,4 +1,4 @@
-from pystats.basic_stats import *
+from pyprot.pystats.basic_stats import *
 
 
 def _is_iqr_outlier(value, q1, q3, iqr_val):

@@ -2,13 +2,15 @@
 #
 import os
 
+
 from pyprot.pdb.pdbmanip import PdbManip
 from pyprot.pdb.pdbstats import PdbStats
+from pyprot.pdb.pdbformat import PdbFormat
 from pyprot.pdb.filefunc import _open_type
 from pyprot.pdb.filter_content import _filter_column_match
 
 
-class PdbObj(PdbManip, PdbStats):
+class PdbObj(PdbManip, PdbStats, PdbFormat):
     '''Object that allows operations with protein files in PDB format. '''
 
     def __init__(self, file_cont = [], pdb_code = ""):
@@ -33,7 +35,7 @@ class PdbObj(PdbManip, PdbStats):
              self.atom_ter = _filter_column_match(self.cont, ["ATOM", "TER"])
              self.hetatm = _filter_column_match(self.cont, ["HETATM"])
              self.conect = _filter_column_match(self.cont, ["CONECT"])
-             self.chains = self._get_chains()                 
+             self.chains = self._get_chains()
 
     def __del__(self):
         del self
@@ -47,7 +49,3 @@ class PdbObj(PdbManip, PdbStats):
 
     def __str__(self):
         return self.__repr__()
-
-
-
-

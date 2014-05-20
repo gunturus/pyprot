@@ -1,1 +1,1 @@
-from pystats.dict.dictutil import *
+from pyprot.pystats.dict.dictutil import *

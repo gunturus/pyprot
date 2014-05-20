@@ -1,1 +1,1 @@
-from pystats.norm.normal_distribution import *
+from pyprot.pystats.norm.normal_distribution import *
