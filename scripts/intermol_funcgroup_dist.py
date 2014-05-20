@@ -23,17 +23,17 @@ def create_atom_dict(func_groups, charge_ranges):
 
 try:
     assert len(sys.argv) == 6
-    
+
     in_mol2file = sys.argv[1]
     func_groups = sys.argv[2].split(',')
     charge_ranges = sys.argv[3].split(';')
     distance = float(sys.argv[4])
     assert len(func_groups) == 2, "Please provide 2 functional groups"
-    assert len(charge_ranges) <= 2, "Please provide no more than 2 charge ranges" 
+    assert len(charge_ranges) <= 2, "Please provide no more than 2 charge ranges"
     out_mol2file = sys.argv[5]
-    
 
-    atom_dict = create_atom_dict(func_groups, charge_ranges)    
+
+    atom_dict = create_atom_dict(func_groups, charge_ranges)
 
     single_mol2s_in = pyprot.mol2.mol2_io.split_multimol2(in_mol2file)
     single_mol2s_out = []
@@ -43,7 +43,7 @@ try:
         mol2_lines = mol2[1].split('\n')
         if pyprot.mol2.mol2_filter.distance_match(mol2_lines, atom_dict, distance):
             single_mol2s_out.append(mol2)
-    
+
     with open(out_mol2file, 'w') as out_file:
         for mol2 in single_mol2s_out:
             out_file.write(mol2[1])
@@ -51,4 +51,3 @@ try:
 except:
     print("ERROR\nUSAGE: python3 cmd_intermol_funcgroup_dist.py mol2-file.mol2 functional-groups charge-ranges distance output-mol2.mol2")
     print("\nEXAMPLE: python3 cmd_intermol_funcgroup_dist.py mymol2.mol2 'O.2,O.3' '-0.8,-0.5;-0.5,-0.9' '1.0' mymol2_results.mol2\n")
- 
