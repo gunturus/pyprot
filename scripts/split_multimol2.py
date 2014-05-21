@@ -22,4 +22,4 @@ try:
                 out_file.write(line)
 
 except:
-    print("ERROR\nUSAGE: python multimol2.mol2 output_directory")
+    print("ERROR\nUSAGE: python split_multimol2.py multi.mol2 output_directory")

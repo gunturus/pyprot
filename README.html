@@ -1,0 +1,656 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #737373;
+    background-color: white;
+    margin: 10px 13px 10px 13px;
+}
+table {
+	margin: 10px 0 15px 0;
+	border-collapse: collapse;
+}
+td,th {	
+	border: 1px solid #ddd;
+	padding: 3px 10px;
+}
+th {
+	padding: 5px 10px;	
+}
+
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:10px auto;
+    }
+}
+@media print {
+	body,code,pre code,h1,h2,h3,h4,h5,h6 {
+		color: black;
+	}
+	table, pre {
+		page-break-inside: avoid;
+	}
+}
+</style>
+<title>Installation</title>
+
+</head>
+<body>
+<p><img src="./images/molecule_logo.png" alt="PyProt Logo" /></p>
+
+<p>PyProt is a Python package for working with protein structure files formats. It comes with a collection of ready-to-use scripts for the most common file operations and protein analyses.</p>
+
+<p><br>
+<br></p>
+
+<h1>Installation</h1>
+
+<p><br>
+<br>
+<strong>Note that PyProt was only tested to work with Python 3.x.</strong></p>
+
+<h4>Installing the <code>pyprot</code> package</h4>
+
+<ol>
+<li>Download pyprot from this GitHub repository at <a href="https://github.com/rasbt/pyprot/archive/master.zip">https://github.com/rasbt/pyprot/archive/master.zip</a></li>
+<li>After unzipping the archive, <code>cd</code> into the <code>pyprot</code> directory</li>
+<li>Install <code>pyprot</code> it via <code>python setup.py install</code></li>
+</ol>
+
+
+<h4>Using the command line scripts</h4>
+
+<p>Python scripts based on the <code>pyprot</code> classes for common protein file operations is provided in the subdirectory <code>./scripts</code> and can be directly be executed via Python from this directory once <code>pyprot</code> is installed. For more information about the the scripts, please see the following section <a href="#scripts_and_tools">Scripts and Command Line Tools</a>.</p>
+
+<h5>Optional: adding the scripts to your PATH</h5>
+
+<p>Since the usage of those provided scripts is optional, they will not be automatically installed if you install <code>pyprot</code>. I recommend you to copy them to a different directory on your drive, e.g., <code>~/home/username/pyprot_scripts/</code> and add the script directory to your <code>PATH</code>.</p>
+
+<p><br>
+<strong>Step 1: Appending the script directory to PATH</strong></p>
+
+<p>E.g., if you are using a bash shell, you can add the line</p>
+
+<pre><code>export PATH=:$PATH:/home/username/pyprot_scripts/
+</code></pre>
+
+<p>to your <code>~/.bash_profile</code> or <code>~/.bashrc</code> file</p>
+
+<p>You can do this directly from the command line via</p>
+
+<pre><code>echo "export PATH=:$PATH:/home/username/pyprot_scripts/" &gt;&gt; .bash_profile
+</code></pre>
+
+<p><strong>Step 2: Making the scripts executable from the command line</strong></p>
+
+<p>In order to call the scripts without issuing the Python command, e.g,</p>
+
+<pre><code>rmsd.py   
+</code></pre>
+
+<p>instead of</p>
+
+<pre><code>python3 ./path/to/rmsd.py
+</code></pre>
+
+<p>you have to add a python-shebang (e.g., <code>#!/usr/bin/python</code>) on top of the scripts. To do this automatically for all python script files in the current directory, you can use the shell script <code>prepend_python_shebang.sh</code>.</p>
+
+<p>In <code>prepend_python_shebang.sh</code>, replace the string <code>/usr/bin/python</code> by the location of your Python3 executable (you can find out the location by entering <code>which python3</code> in the command line) and execute the script in pyprot-scripts directory.</p>
+
+<pre><code>sh prepend_python_shebang.sh
+</code></pre>
+
+<p><br>
+<br></p>
+
+<p><a id='scripts_and_tools'></a></p>
+
+<h1>Scripts and command line tools</h1>
+
+<p>An overview of the scripts that are using the underlying <code>pyprot</code> classes to create PDB and Mol2 objects, which can be found in the subdirectory <code>./scripts</code> after you downloaded <code>pyprot</code> from <a href="https://github.com/rasbt/pyprot">https://github.com/rasbt/pyprot</a>.</p>
+
+<p><a id='script_overview'></a></p>
+
+<hr>
+
+
+<p><br>
+- <strong><a href="#cleanup">Cleaning up PDB files</a></strong><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#trim_rows">Trim rows</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#trim_columns">Trim columns</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#strip_h">Removing hydrogen atoms</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#strip_water">Removing water atoms</a> <br/>
+- <strong><a href="#extract">Extracting Information from PDB files</a></strong><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#grab_radius">Grab atoms within a radius from a PDB file</a>  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#reduce_protein">Reducing a protein structure to main-chain or c-alpha atoms
+</a> <br/>
+- <strong><a href="#pdb_calc">Calculations based on PDB files</a></strong><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#center_of_mass">Center of Mass for proteins and ligands</a> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#bfactors">Calculate median and mean B-Factor (temperature factor) values</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#rmsd">Calculate RMSD of proteins or ligand molecules</a><br/>
+- <strong><a href="#mol2_manip">MOL2 file Manipulations</a></strong><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#mol2_charge_swap">Swap partial charges between MOL2 files</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#split_multimol2">Splitting a Multi-MOL2 file</a> <br/>
+- <strong><a href="#mol2_filtering">MOL2 file filtering</a></strong>  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#intramol_distance">Filter for intramolecular functional group distance</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#intermol_distance">Filter for intermolecular functional group distance</a><br/>
+- <strong><a href="#file_conversion">File conversion</a></strong>  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#pdb_to_fasta">Converting PDB files to FASTA format</a></p>
+
+<hr>
+
+
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<a id='cleanup'></a></p>
+
+<h2>Cleaning up PDB files</h2>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><br>
+<a id='trim_rows'></a></p>
+
+<h4>Trim rows</h4>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>trim_rows.py</code></p>
+
+<p>Removes rows from a PDB file that do not start with a specified string.
+Default lines to keep start with 'ATOM', 'HETATM', 'TER', or 'END'</p>
+
+<p><strong>USAGE:</strong></p>
+
+<pre><code>[shell]&gt;&gt; python trim_rows.py in_file.pdb out.pdb [keep]
+</code></pre>
+
+<p><strong>EXAMPLE:</strong></p>
+
+<pre><code>python trim_rows.py mypdb.pdb trimmed.pdb ATOM', 'HETATM'
+</code></pre>
+
+<p><a id='trim_columns'></a>
+<br></p>
+
+<h4>Trim columns</h4>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>trim_columns.py</code></p>
+
+<p>Trims a PDB file to a maximum column width, default width = 80.</p>
+
+<p><strong>USAGE:</strong></p>
+
+<pre><code>[shell]&gt;&gt; python trim_columns.py in_file.pdb out.pdb [width]
+</code></pre>
+
+<p><strong>EXAMPLE:</strong></p>
+
+<pre><code>python trim_columns.py mypdb.pdb trimmed.pdb 85
+</code></pre>
+
+<p><a id='strip_h'></a>
+<br></p>
+
+<h4>Removing hydrogen atoms</h4>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>strip_hydrogens.py</code></p>
+
+<p>Removes all hydrogen atoms from a protein structure</p>
+
+<p><strong>USAGE:</strong></p>
+
+<pre><code>python strip_hydrogens.py in_file.pdb out.pdb
+
+
+&lt;a id='strip_water'&gt;&lt;/a&gt;
+</code></pre>
+
+<p><br></p>
+
+<h4>Removing water molecules</h4>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>strip_water.py</code></p>
+
+<p>Removes all water molecules from a protein structure</p>
+
+<p><strong>USAGE:</strong></p>
+
+<pre><code>python strip_water.py in_file.pdb out.pdb
+</code></pre>
+
+<p><br>
+<br>
+<a id='extract'></a></p>
+
+<h2>Extracting information from PDB files</h2>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><br>
+<br>
+<a id='grab_radius'></a></p>
+
+<h3>Grab atoms within a radius from a PDB file</h3>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>grab_radius.py</code></p>
+
+<p>Grabs atoms within a specified radius (in Angstrom) around a specified set of x,y,z coordinates from a PDB file and writes those PDB contents to a new PDB file.</p>
+
+<p><strong>USAGE:</strong></p>
+
+<pre><code>[shell]&gt;&gt; python grab_radius.py in.pdb radius coordinates out.pdb
+</code></pre>
+
+<p><strong>EXAMPLE:</strong></p>
+
+<pre><code>python grab_radius.py mypdb.pdb 9 4.698,36.387,11.996 atoms_9A.pdb
+</code></pre>
+
+<p><br>
+<br>
+<a id='reduce_protein'></a></p>
+
+<h3>Reducing a protein structure to main-chain or c-alpha atoms</h3>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>reduce_protein.py</code></p>
+
+<p> Reduces a protein structure to main-chain or c-alpha atoms:
+   a) removes everything but main chain atoms
+   b) removes everything but only c-alpha atoms</p>
+
+<p><strong>USAGE:</strong></p>
+
+<pre><code>python reduce_protein.py in_file.pdb [mc/ca] out.pdb
+</code></pre>
+
+<p><strong>EXAMPLE:</strong></p>
+
+<pre><code>python reduce_protein.py mypdb.pdb mc mypdb_main_chain.pdb
+</code></pre>
+
+<p><br>
+<br>
+<a id='pdb_calc'></a></p>
+
+<h2>Calculations based on PDB files</h2>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><br>
+<br>
+<a id='center_of_mass'></a></p>
+
+<h3>Center of mass for proteins and ligands</h3>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>center_of_mass.py</code></p>
+
+<p>To calculate the center of mass for a protein with or without considering ligand atoms.</p>
+
+<p>To calculate the center of mass of a protein, use:</p>
+
+<pre><code>&gt;&gt; python center_of_mass.py path/to/PDBfile.pdb  
+[15.885, 7.561, 39.859]
+</code></pre>
+
+<p>To calculate the center of mass of a ligand molecule, use:</p>
+
+<pre><code>&gt;&gt; python center_of_mass.py path/to/PDBfile.pdb lig  
+[16.722, 5.369, 35.945]
+</code></pre>
+
+<p><br>
+<br>
+<a id='bfactors'></a></p>
+
+<h3>Calculate median and mean B-Factor (temperature factor) values</h3>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>median_bfactor.py</code> <br/>
+<code>mean_bfactor.py</code></p>
+
+<p>The examples below show how to calculate the median b-factors of a protein<br/>
+or ligand from a PDB file. The same syntax applies to calculate the 'mean'<br/>
+if <code>median</code> is substituted by <code>mean</code> in the examples shown below.</p>
+
+<p>To return the median B-factor value of a protein, use the script</p>
+
+<pre><code>&gt;&gt; python median_bfactor.py my_pdb.pdb
+44.24
+</code></pre>
+
+<p>To get the median B-factor value from a ligand molecule, use:</p>
+
+<pre><code>&gt;&gt; python median_bfactor.py my_pdb.pdb lig
+67.21
+</code></pre>
+
+<p>To get the median B-factor value from the protein's main chain atoms only, use:</p>
+
+<pre><code>&gt;&gt; python median_bfactor.py my_pdb.pdb main_chain
+67.21
+</code></pre>
+
+<p>To get the median B-factor value from the protein's c-alpha atoms only, use:</p>
+
+<pre><code>&gt;&gt; python median_bfactor.py my_pdb.pdb calpha
+67.21
+</code></pre>
+
+<p><br>
+<br>
+<a id='rmsd'></a></p>
+
+<h3>Calculate RMSD of proteins or ligand molecules</h3>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>rmsd.py</code></p>
+
+<p>If no optional third parameter [lig/ca] is provided, the RMSD (in Angstrom)<br/>
+between two provided protein structures in PDB format is calculated, including<br/>
+all atoms but hydrogen.</p>
+
+<pre><code>&gt;&gt; python rmsd.py file1.pdb file2.pdb
+1.99342343
+</code></pre>
+
+<p>If the optional 3rd argument is 'lig', the RMSD between 2 ligand molecules is<br/>
+calculated, also excluding hydrogens.</p>
+
+<pre><code>&gt;&gt; python rmsd.py file1.pdb file2.pdb lig
+</code></pre>
+
+<p>3.22334535</p>
+
+<p>If the If the optional 3rd argument is 'ca,' only C-alpha atoms of the two<br/>
+proteins are considered for the RMSD calculation.</p>
+
+<pre><code>&gt;&gt; python rmsd.py file1.pdb file2.pdb ca 
+0.93858464
+</code></pre>
+
+<p><br>
+<br>
+<a id='mol2_manip'></a></p>
+
+<h2>MOL2 file manipulation</h2>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><br>
+<br>
+<a id='mol2_charge_swap'></a></p>
+
+<h3>Swap partial charges between MOL2 files</h3>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>fix_mol2_to_refcharge.py</code></p>
+
+<p>Takes a reference mol2 file as input and applies its charges
+to a second mol2 file.</p>
+
+<p><strong>USAGE:</strong></p>
+
+<pre><code>python3 fix_mol2_to_refcharge.py ref.mol2 fix_mol2 out_mol2 ref_col fix_col
+
+
+
+- ref.mol2: name of the reference molecule
+- fix_mol2: target mol2 which gets the charges from the reference mol2
+- out_mol2: output mol2 with the new charges
+- ref_col: (optional) Position of the charge column in reference molecule. -1 by default for the last column. -2 if charge is in the second last column.
+- fix_col: (optional) Position of the charge column in the to-be-fixed molecule. -1 by  default for the last column. -2 if charge is in the second last column.
+</code></pre>
+
+<p>Note: If the charges are not in the last column of the mol2 files, arguments for both <code>ref_col</code> and <code>fix_col</code> have to be provided.</p>
+
+<p><br>
+<strong>EXAMPLE 1:</strong> (Charge in the last column in both files):</p>
+
+<pre><code>python3 cmd_fix_mol2_to_refcharge.py myref.mol2 myfix_mol2 myout_mol2 -2 -1
+</code></pre>
+
+<p><br></p>
+
+<p><strong>EXAMPLE 2:</strong> (Charge in the 2nd last column in reference mol2):</p>
+
+<pre><code>python3 cmd_fix_mol2_to_refcharge.py myref.mol2 myfix.mol2 myout.mol2 -2 -1
+</code></pre>
+
+<p><br>
+<br>
+<a id='split_multimol2'></a></p>
+
+<h3>Splitting a Multi-MOL2 file</h3>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>split_multimol2.py</code></p>
+
+<p>Splits a multi-mol2 file into individual mol2 files.</p>
+
+<p><strong>USAGE:</strong></p>
+
+<pre><code>python split_multimol2.py multi.mol2 output_directory
+</code></pre>
+
+<p><br>
+<br>
+<a id='mol2_filtering'></a></p>
+
+<h2>MOL2 file filtering</h2>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><br>
+<a id='intra_distance'></a></p>
+
+<h4>Filter for intramolecular functional group distance</h4>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>intramol_funcgroup_dist.py</code></p>
+
+<p>Takes a single- or multi-molecule MOL2 file and checks if
+2 functional groups are within a specified distance (in Angstrom).<br/>
+Writes all molecules that match the functional group distance
+criteria to a new MOL2 file.</p>
+
+<p><strong>USAGE:</strong></p>
+
+<pre><code>python intramol_funcgroup_dist.py mol2-file.mol2 functional-groups charge-ranges distance out.mol2
+</code></pre>
+
+<p><strong>EXAMPLE:</strong></p>
+
+<pre><code>python intramol_funcgroup_dist.py my.mol2 'O.2,O.3' '-0.8,-0.5;-0.5,-0.9' '1.0' filtered.mol2
+</code></pre>
+
+<p><br>
+<a id='intermol_distance'></a></p>
+
+<h4>Filter for intermolecular functional group distance</h4>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>intermol_funcgroup_dist.py</code></p>
+
+<p>Checks between a single- or multi-molecule MOL2 file (query) and a reference molecule (target) and
+if 2 functional groups (one in the query molecule(s) and one in the target molecule)
+are within a specified distance (in Angstrom).<br/>
+Writes all molecules that match the functional group distance
+criteria to a new MOL2 file.</p>
+
+<p><strong>USAGE:</strong></p>
+
+<pre><code>python intermol_funcgroup_dist.py query.mol2 target.mol2 functional-groups charge-ranges distance out.mol2
+</code></pre>
+
+<p><strong>EXAMPLE:</strong></p>
+
+<pre><code>python intermol_funcgroup_dist.py my.mol2 myother.mol2 'O.2,O.3' '-0.8,-0.5;-0.5,-0.9' '1.0' filtered.mol2
+</code></pre>
+
+<p><br>  <br/>
+<br>
+<a id='file_conversion'></a></p>
+
+<h2>File Conversion</h2>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><br>
+<a id='pdb_to_fasta'></a></p>
+
+<h4>Converting PDB files to FASTA format</h4>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>pdb_to_fasta.py</code></p>
+
+<p>Convert a PDB file into FASTA format.</p>
+
+<p><strong>USAGE:</strong></p>
+
+<pre><code>python pdb_to_fasta.py in_file.pdb out.fasta
+</code></pre>
+</body>
+</html>

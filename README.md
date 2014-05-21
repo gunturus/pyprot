@@ -5,7 +5,13 @@ PyProt is a Python package for working with protein structure files formats. It 
 <br>
 <br>
 
+
+
 # Installation
+
+<br>
+<br>
+**Note that PyProt was only tested to work with Python 3.x.**
 
 
 #### Installing the `pyprot` package
@@ -13,18 +19,42 @@ PyProt is a Python package for working with protein structure files formats. It 
 2. After unzipping the archive, `cd` into the `pyprot` directory
 3. Install `pyprot` it via `python setup.py install`
 
-#### Setting up the command line scripts
+#### Using the command line scripts
 Python scripts based on the `pyprot` classes for common protein file operations is provided in the subdirectory `./scripts` and can be directly be executed via Python from this directory once `pyprot` is installed. For more information about the the scripts, please see the following section [Scripts and Command Line Tools](#scripts_and_tools).
 
-Since the usage of those provided scripts is optional, they will not be automatically installed if you install `pyprot`. I recommend you to copy them to a different directory on your drive, e.g., `~/home/username/pyprot_scripts/` and add the script directory to your `PATH`, e.g., by adding the line
-
-`export PATH=$PATH:/home/username/pyprot_scripts/` 
-
-to your `~/.bash_profile`.
+##### Optional: adding the scripts to your PATH
+Since the usage of those provided scripts is optional, they will not be automatically installed if you install `pyprot`. I recommend you to copy them to a different directory on your drive, e.g., `~/home/username/pyprot_scripts/` and add the script directory to your `PATH`.
 
 
+<br>
+**Step 1: Appending the script directory to PATH**   
 
-Note that PyProt was only tested to work with Python 3.x.
+E.g., if you are using a bash shell, you can add the line
+
+	export PATH=:$PATH:/home/username/pyprot_scripts/
+
+to your `~/.bash_profile` or `~/.bashrc` file
+
+You can do this directly from the command line via
+
+	echo "export PATH=:$PATH:/home/username/pyprot_scripts/" >> .bash_profile
+
+
+**Step 2: Making the scripts executable from the command line**  
+
+In order to call the scripts without issuing the Python command, e.g, 
+	
+	rmsd.py   
+
+instead of 
+
+	python3 ./path/to/rmsd.py
+	
+you have to add a python-shebang (e.g., `#!/usr/bin/python`) on top of the scripts. To do this automatically for all python script files in the current directory, you can use the shell script `prepend_python_shebang.sh`.
+
+In `prepend_python_shebang.sh`, replace the string `/usr/bin/python` by the location of your Python3 executable (you can find out the location by entering `which python3` in the command line) and execute the script in pyprot-scripts directory.
+
+	sh prepend_python_shebang.sh
 
 <br>
 <br>
@@ -52,11 +82,12 @@ An overview of the scripts that are using the underlying `pyprot` classes to cre
 &nbsp;&nbsp;&nbsp;&nbsp;- [Calculate RMSD of proteins or ligand molecules](#rmsd)  
 - **[MOL2 file Manipulations](#mol2_manip)**  
 &nbsp;&nbsp;&nbsp;&nbsp;- [Swap partial charges between MOL2 files](#mol2_charge_swap)  
+&nbsp;&nbsp;&nbsp;&nbsp;- [Splitting a Multi-MOL2 file](#split_multimol2)   
 - **[MOL2 file filtering](#mol2_filtering)**    
 &nbsp;&nbsp;&nbsp;&nbsp;- [Filter for intramolecular functional group distance](#intramol_distance)  
 &nbsp;&nbsp;&nbsp;&nbsp;- [Filter for intermolecular functional group distance](#intermol_distance)  
 - **[File conversion](#file_conversion)**    
-&nbsp;&nbsp;&nbsp;&nbsp;- [Converting PDB files to FASTA format](#pdb_to_fasta)  
+&nbsp;&nbsp;&nbsp;&nbsp;- [Converting PDB files to FASTA format](#pdb_to_fasta)   
 
 <hr>
 <br>
@@ -323,7 +354,19 @@ Note: If the charges are not in the last column of the mol2 files, arguments for
 
     python3 cmd_fix_mol2_to_refcharge.py myref.mol2 myfix.mol2 myout.mol2 -2 -1
     
+<br>
+<br>
+<a id='split_multimol2'></a>
+### Splitting a Multi-MOL2 file
+[[back to overview](#script_overview)] 
 
+`split_multimol2.py`
+
+Splits a multi-mol2 file into individual mol2 files.
+
+**USAGE:**  
+
+	python split_multimol2.py multi.mol2 output_directory
 
 <br>
 <br>
