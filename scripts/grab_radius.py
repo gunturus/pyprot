@@ -2,7 +2,7 @@
 # Grab atoms within a radius from a PDB file
 #
 # usage:
-# [shell]>> python3 grab_radius.py in.pdb radius coordinates out.pdb
+# [shell]>> python grab_radius.py in.pdb radius coordinates out.pdb
 #
 # Grabs atoms within a specified radius from specified x,y,z coordinates from
 # a pdb file and writes those PDB contents to a new pdb file.
@@ -23,5 +23,5 @@ try:
             out_file.write(line + '\n')
 
 except:
-    print("ERROR\nUSAGE: python3 grab_radius.py in.pdb radius coordinates out.pdb")
-    print("\nEXAMPLE: python3 grab_radius.py mypdb.pdb 5.2 4.698,36.387,11.996 mypdb_rad9.pdb\n")
+    print("ERROR\nUSAGE: python grab_radius.py in.pdb radius coordinates out.pdb")
+    print("\nEXAMPLE: python grab_radius.py mypdb.pdb 5.2 4.698,36.387,11.996 mypdb_rad9.pdb\n")

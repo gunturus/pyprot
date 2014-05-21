@@ -37,7 +37,7 @@ try:
         out_file.write('\n'.join(out_cont))
 
 except:
-    print("ERROR\nUSAGE: python3 fix_mol2_to_refcharge.py ref.mol2 fix_mol2 out_mol2 ref_col fix_col\n")
+    print("ERROR\nUSAGE: python fix_mol2_to_refcharge.py ref.mol2 fix_mol2 out_mol2 ref_col fix_col\n")
     print("""ref.mol2: name of the reference molecule
 fix_mol2: target mol2 which gets the charges from the reference mol2
 out_mol2: output mol2 with the new charges
@@ -51,8 +51,8 @@ Note: If the charges are not in the last column of the mol2 files, arguments for
 
 EXAMPLE (Charge in the last column in both files):
 
-    python3 cmd_fix_mol2_to_refcharge.py myref.mol2 myfix_mol2 myout_mol2 -2 -1
+    python fix_mol2_to_refcharge.py myref.mol2 myfix_mol2 myout_mol2 -2 -1
 
 EXAMPLE (Charge in the 2nd last column in reference mol2):
 
-    python3 cmd_fix_mol2_to_refcharge.py myref.mol2 myfix.mol2 myout.mol2 -2 -1""")
+    python fix_mol2_to_refcharge.py myref.mol2 myfix.mol2 myout.mol2 -2 -1""")

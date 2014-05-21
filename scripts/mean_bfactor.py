@@ -1,8 +1,8 @@
 # sr 11/25/2013
 # Mean B-Factor Value from PDB files
 #
-# usage: 
-# [shell]>> python3 cmd_mean_bfactor.py mypdbfile.pdb [lig/calpha/main_chain]
+# usage:
+# [shell]>> python mean_bfactor.py mypdbfile.pdb [lig/calpha/main_chain]
 #
 # If second parameter [lig] is provided, the mean for
 # HETATM entries instead of ATOM entries will be returned.
@@ -18,11 +18,11 @@ import sys
 import pyprot.pdb
 
 if len(sys.argv) < 2 or len(sys.argv) > 3:
-    print("USAGE: python3 cmd_mean_bfactor.py mypdbfile.pdb [lig/calpha/main_chain]")
+    print("USAGE: python mean_bfactor.py mypdbfile.pdb [lig/calpha/main_chain]")
 
 else:
     new_pdb = pyprot.pdb.pdbobj.PdbObj(sys.argv[1])
-    if len(sys.argv) == 3: 
+    if len(sys.argv) == 3:
         if sys.argv[2] == "lig":
             print(new_pdb.mean_bfactor(protein = False, ligand = True))
         elif sys.argv[2] == "main_chain":
@@ -30,6 +30,6 @@ else:
         elif sys.argv[2] == "calpha":
             print(new_pdb.mean_bfactor(main_chain = "calpha"))
         else:
-            print("USAGE: python3 cmd_mean_bfactor.py mypdbfile.pdb [lig/calpha/main_chain]")
+            print("USAGE: python mean_bfactor.py mypdbfile.pdb [lig/calpha/main_chain]")
     else:
         print(new_pdb.mean_bfactor())

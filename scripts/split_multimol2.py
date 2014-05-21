@@ -10,10 +10,10 @@ try:
     assert len(sys.argv) == 3
     multimol2 = sys.argv[1]
     out_dir = sys.argv[2]
-    
+
     if not os.path.exists(out_dir):
         os.mkdir(out_dir)
-    
+
     single_mol2s = pyprot.mol2.mol2_io.split_multimol2(multimol2)
     for mol2 in single_mol2s:
         out_mol2 = os.path.join(out_dir, mol2[0]) + '.mol2'
@@ -22,5 +22,4 @@ try:
                 out_file.write(line)
 
 except:
-    print("ERROR\nUSAGE: python3 multimol2.mol2 output_directory")
- 
+    print("ERROR\nUSAGE: python multimol2.mol2 output_directory")
