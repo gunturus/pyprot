@@ -39,7 +39,7 @@ You can do this directly from the command line via
 
 	echo "export PATH=:$PATH:/home/username/pyprot_scripts/" >> .bash_profile
 
-
+<br>
 **Step 2: Making the scripts executable from the command line**  
 
 In order to call the scripts without issuing the Python command, e.g, 
@@ -51,8 +51,6 @@ instead of
 	python3 ./path/to/rmsd.py
 	
 you have to add a python-shebang (e.g., `#!/usr/bin/python`) on top of the scripts. To do this automatically for all python script files in the current directory, you can use the shell script `prepend_python_shebang.sh`.
-
-In `prepend_python_shebang.sh`, replace the string `/usr/bin/python` by the location of your Python3 executable (you can find out the location by entering `which python3` in the command line) and execute the script in pyprot-scripts directory.
 
 	sh prepend_python_shebang.sh
 
