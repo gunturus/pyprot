@@ -70,6 +70,8 @@ An overview of the scripts that are using the underlying `pyprot` classes to cre
 &nbsp;&nbsp;&nbsp;&nbsp;- [Trim columns](#trim_columns)  
 &nbsp;&nbsp;&nbsp;&nbsp;- [Removing hydrogen atoms](#strip_h)  
 &nbsp;&nbsp;&nbsp;&nbsp;- [Removing water atoms](#strip_water)   
+&nbsp;&nbsp;&nbsp;&nbsp;- [Renumbering atoms](#renumber_atoms)  
+&nbsp;&nbsp;&nbsp;&nbsp;- [Renumbering residues](#renumber_residues)  
 - **[Extracting Information from PDB files](#extract)**  
 &nbsp;&nbsp;&nbsp;&nbsp;- [Grab atoms within a radius from a PDB file](#grab_radius)    
 &nbsp;&nbsp;&nbsp;&nbsp;- [Reducing a protein structure to main-chain or c-alpha atoms
@@ -164,6 +166,31 @@ Removes all water molecules from a protein structure
 **USAGE:**
 
 	python strip_water.py in_file.pdb out.pdb
+
+
+<a id='renumber_atoms'></a>
+<br>
+#### Renumbering atoms
+[[back to overview](#script_overview)] 
+
+`renumber_atoms.py`
+
+Renumbers atoms in a PDB file. Starts at atom number 1 by default.  
+
+**USAGE:**  
+
+	python renumber_atoms.py in_file.pdb out.pdb [start]")
+    
+**EXAMPLE:**  
+
+	python renumber_atoms.py mypdb.pdb renumbered.pdb 4
+
+
+<a id='renumber_residues'></a>
+<br>
+#### Renumbering residues
+[[back to overview](#script_overview)] 
+
 
 <br>
 <br>

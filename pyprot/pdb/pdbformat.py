@@ -18,3 +18,18 @@ class PdbFormat(object):
                 if row.startswith(allow):
                     out.append(row)
         return out
+
+    def renumber_atoms(self, start=1):
+        """ Renumbers atoms in a PDB file. """
+        out = list()
+        count = start
+        for row in self.cont:
+            if len(row) > 5:
+                if row[:6].strip() in ['ATOM', 'HETATM', 'TER', 'ANISOU']:
+                    num = str(count)
+                    while len(num) < 5:
+                        num = ' ' + num
+                    row = '%s%s%s' %(row[:6], num, row[11:])
+                    count += 1
+            out.append(row)
+        return out
