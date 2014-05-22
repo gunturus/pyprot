@@ -33,3 +33,24 @@ class PdbFormat(object):
                     count += 1
             out.append(row)
         return out
+
+    def renumber_residues(self, start=1):
+            """ Renumbers residues in a PDB file. """
+            out = list()
+            count = start - 1
+            cur_res = ''
+            for row in self.cont:
+                if len(row) > 26:
+                    next_res = row[22:27].strip()
+                    if row[:6].strip() in ['ATOM', 'HETATM', 'TER', 'ANISOU']:
+                        if next_res != cur_res:
+                            count += 1
+                            cur_res = next_res
+                        num = str(count)
+                        while len(num) < 3:
+                            num = ' ' + num
+
+                        row = '%s%s%s' %(row[:23], num, row[26:])
+
+                out.append(row)
+            return out
