@@ -480,7 +480,7 @@ Convert a PDB file into FASTA format.
 #### Using the command line scripts
 Python scripts based on the `pyprot` classes for common protein file operations is provided in the subdirectory `./scripts` and can be directly be executed via Python from this directory once `pyprot` is installed. For more information about the the scripts, please see the following section [Scripts and Command Line Tools](#scripts_and_tools).
 
-##### Optional: adding the scripts to your PATH
+#### [Optional] Adding the scripts to your PATH
 Since the usage of those provided scripts is optional, they will not be automatically installed if you install `pyprot`. I recommend you to copy them to a different directory on your drive, e.g., `~/home/username/pyprot_scripts/` and add the script directory to your `PATH`.
 
 
