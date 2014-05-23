@@ -41,16 +41,20 @@ class PdbFormat(object):
             cur_res = ''
             for row in self.cont:
                 if len(row) > 26:
-                    next_res = row[22:27].strip()
                     if row[:6].strip() in ['ATOM', 'HETATM', 'TER', 'ANISOU']:
+                        next_res = row[22:27].strip() # account for letters in res., e.g., '1A'
                         if next_res != cur_res:
                             count += 1
                             cur_res = next_res
                         num = str(count)
                         while len(num) < 3:
                             num = ' ' + num
-
-                        row = '%s%s%s' %(row[:23], num, row[26:])
-
+                        new_row = '%s%s' %(row[:23], num)
+                        while len(new_row) < 29:
+                            new_row += ' '
+                        xcoord = row[30:38].strip()
+                        while len(xcoord) < 9:
+                            xcoord = ' ' + xcoord
+                        row = '%s%s%s' %(new_row, xcoord, row[38:])
                 out.append(row)
             return out

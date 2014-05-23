@@ -65,29 +65,54 @@ An overview of the scripts that are using the underlying `pyprot` classes to cre
 <a id='script_overview'></a>
 <hr>
 <br>
-- **[Cleaning up PDB files](#cleanup)**  
-&nbsp;&nbsp;&nbsp;&nbsp;- [Trim rows](#trim_rows)  
-&nbsp;&nbsp;&nbsp;&nbsp;- [Trim columns](#trim_columns)  
-&nbsp;&nbsp;&nbsp;&nbsp;- [Removing hydrogen atoms](#strip_h)  
-&nbsp;&nbsp;&nbsp;&nbsp;- [Removing water atoms](#strip_water)   
-&nbsp;&nbsp;&nbsp;&nbsp;- [Renumbering atoms](#renumber_atoms)  
-&nbsp;&nbsp;&nbsp;&nbsp;- [Renumbering residues](#renumber_residues)  
-- **[Extracting Information from PDB files](#extract)**  
-&nbsp;&nbsp;&nbsp;&nbsp;- [Grab atoms within a radius from a PDB file](#grab_radius)    
-&nbsp;&nbsp;&nbsp;&nbsp;- [Reducing a protein structure to main-chain or c-alpha atoms
-](#reduce_protein)   
-- **[Calculations based on PDB files](#pdb_calc)**  
-&nbsp;&nbsp;&nbsp;&nbsp;- [Center of Mass for proteins and ligands](#center_of_mass)   
-&nbsp;&nbsp;&nbsp;&nbsp;- [Calculate median and mean B-Factor (temperature factor) values](#bfactors)  
-&nbsp;&nbsp;&nbsp;&nbsp;- [Calculate RMSD of proteins or ligand molecules](#rmsd)  
-- **[MOL2 file Manipulations](#mol2_manip)**  
-&nbsp;&nbsp;&nbsp;&nbsp;- [Swap partial charges between MOL2 files](#mol2_charge_swap)  
-&nbsp;&nbsp;&nbsp;&nbsp;- [Splitting a Multi-MOL2 file](#split_multimol2)   
-- **[MOL2 file filtering](#mol2_filtering)**    
-&nbsp;&nbsp;&nbsp;&nbsp;- [Filter for intramolecular functional group distance](#intramol_distance)  
-&nbsp;&nbsp;&nbsp;&nbsp;- [Filter for intermolecular functional group distance](#intermol_distance)  
-- **[File conversion](#file_conversion)**    
-&nbsp;&nbsp;&nbsp;&nbsp;- [Converting PDB files to FASTA format](#pdb_to_fasta)   
+
+
+
+
+
+
+- **[Cleaning up PDB files](#cleanup)**
+
+	- [Trim rows](#trim_rows) 	
+	
+	- [Trim columns](#trim_columns)
+	
+	- [Removing hydrogen atoms](#strip_h)  
+	
+	- [Removing water atoms](#strip_water) 
+	
+	- [Renumbering atoms](#renumber_atoms) 
+	
+	- [Renumbering residues](#renumber_residues)  
+	
+- **[Extracting Information from PDB files](#extract)**
+
+	- [Grab atoms within a radius from a PDB file](#grab_radius)
+	
+	- [Reducing a protein structure to main-chain or c-alpha atoms](#reduce_protein)   
+	
+- **[Calculations based on PDB files](#pdb_calc)** 
+
+	- [Center of Mass for proteins and ligands](#center_of_mass)
+	
+	- [Calculate median and mean B-Factor (temperature factor) values](#bfactors)
+	
+	- [Calculate RMSD of proteins or ligand molecules](#rmsd)  
+	
+- **[MOL2 file Manipulations](#mol2_manip)**
+
+	- [Swap partial charges between MOL2 files](#mol2_charge_swap)
+	
+	- [Splitting a Multi-MOL2 file](#split_multimol2)   
+	
+- **[MOL2 file filtering](#mol2_filtering)**  
+	- [Filter for intramolecular functional group distance](#intramol_distance)
+	
+	- [Filter for intermolecular functional group distance](#intermol_distance)  
+	
+- **[File conversion](#file_conversion)**  
+
+	- [Converting PDB files to FASTA format](#pdb_to_fasta)   
 
 <hr>
 <br>
@@ -154,7 +179,7 @@ Removes all hydrogen atoms from a protein structure
 	python strip_hydrogens.py in_file.pdb out.pdb
 	
 	
-	<a id='strip_water'></a>
+<a id='strip_water'></a>
 <br>
 #### Removing water molecules
 [[back to overview](#script_overview)] 
@@ -179,11 +204,12 @@ Renumbers atoms in a PDB file. Starts at atom number 1 by default.
 
 **USAGE:**  
 
-	python renumber_atoms.py in_file.pdb out.pdb [start]")
+	python renumber_atoms.py in_file.pdb out.pdb [start]
     
 **EXAMPLE:**  
 
 	python renumber_atoms.py mypdb.pdb renumbered.pdb 4
+
 
 
 <a id='renumber_residues'></a>
@@ -191,6 +217,17 @@ Renumbers atoms in a PDB file. Starts at atom number 1 by default.
 #### Renumbering residues
 [[back to overview](#script_overview)] 
 
+`renumber_residues.py`
+
+Renumbers amino acid residues in a PDB file. Starts at residue number 1 by default.
+
+**USAGE:**  
+
+	python renumber_residues.py in_file.pdb out.pdb [start]
+    
+**EXAMPLE:**  
+
+	python renumber_residues.py mypdb.pdb renumbered.pdb 4
 
 <br>
 <br>
