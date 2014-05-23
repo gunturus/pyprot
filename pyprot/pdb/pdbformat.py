@@ -40,7 +40,7 @@ class PdbFormat(object):
             count = start - 1
             cur_res = ''
             for row in self.cont:
-                if len(row) > 26:
+                if len(row) > 25:
                     if row[:6].strip() in ['ATOM', 'HETATM', 'TER', 'ANISOU']:
                         next_res = row[22:27].strip() # account for letters in res., e.g., '1A'
                         if next_res != cur_res:
