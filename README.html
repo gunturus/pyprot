@@ -152,73 +152,17 @@ sup {
 	}
 }
 </style>
-<title>Installation</title>
+<title>Scripts and command line tools</title>
 
 </head>
 <body>
 <p><img src="./images/molecule_logo.png" alt="PyProt Logo" /></p>
 
-<p>PyProt is a Python package for working with protein structure files formats. It comes with a collection of ready-to-use scripts for the most common file operations and protein analyses.</p>
+<p><strong>PyProt is a Python package for working with protein structure files formats. It comes with a collection of ready-to-use scripts for the most common file operations and protein analyses.</strong></p>
 
-<p><br>
-<br></p>
+<p><a href="#installation">Skip to installation and setup section</a></p>
 
-<h1>Installation</h1>
-
-<p><br>
-<br>
-<strong>Note that PyProt was only tested to work with Python 3.x.</strong></p>
-
-<h4>Installing the <code>pyprot</code> package</h4>
-
-<ol>
-<li>Download pyprot from this GitHub repository at <a href="https://github.com/rasbt/pyprot/archive/master.zip">https://github.com/rasbt/pyprot/archive/master.zip</a></li>
-<li>After unzipping the archive, <code>cd</code> into the <code>pyprot</code> directory</li>
-<li>Install <code>pyprot</code> it via <code>python setup.py install</code></li>
-</ol>
-
-
-<h4>Using the command line scripts</h4>
-
-<p>Python scripts based on the <code>pyprot</code> classes for common protein file operations is provided in the subdirectory <code>./scripts</code> and can be directly be executed via Python from this directory once <code>pyprot</code> is installed. For more information about the the scripts, please see the following section <a href="#scripts_and_tools">Scripts and Command Line Tools</a>.</p>
-
-<h5>Optional: adding the scripts to your PATH</h5>
-
-<p>Since the usage of those provided scripts is optional, they will not be automatically installed if you install <code>pyprot</code>. I recommend you to copy them to a different directory on your drive, e.g., <code>~/home/username/pyprot_scripts/</code> and add the script directory to your <code>PATH</code>.</p>
-
-<p><br>
-<strong>Step 1: Appending the script directory to PATH</strong></p>
-
-<p>E.g., if you are using a bash shell, you can add the line</p>
-
-<pre><code>export PATH=:$PATH:/home/username/pyprot_scripts/
-</code></pre>
-
-<p>to your <code>~/.bash_profile</code> or <code>~/.bashrc</code> file</p>
-
-<p>You can do this directly from the command line via</p>
-
-<pre><code>echo "export PATH=:$PATH:/home/username/pyprot_scripts/" &gt;&gt; .bash_profile
-</code></pre>
-
-<p><strong>Step 2: Making the scripts executable from the command line</strong></p>
-
-<p>In order to call the scripts without issuing the Python command, e.g,</p>
-
-<pre><code>rmsd.py   
-</code></pre>
-
-<p>instead of</p>
-
-<pre><code>python3 ./path/to/rmsd.py
-</code></pre>
-
-<p>you have to add a python-shebang (e.g., <code>#!/usr/bin/python</code>) on top of the scripts. To do this automatically for all python script files in the current directory, you can use the shell script <code>prepend_python_shebang.sh</code>.</p>
-
-<p>In <code>prepend_python_shebang.sh</code>, replace the string <code>/usr/bin/python</code> by the location of your Python3 executable (you can find out the location by entering <code>which python3</code> in the command line) and execute the script in pyprot-scripts directory.</p>
-
-<pre><code>sh prepend_python_shebang.sh
-</code></pre>
+<p><a id='top'></a></p>
 
 <p><br>
 <br></p>
@@ -227,35 +171,64 @@ sup {
 
 <h1>Scripts and command line tools</h1>
 
-<p>An overview of the scripts that are using the underlying <code>pyprot</code> classes to create PDB and Mol2 objects, which can be found in the subdirectory <code>./scripts</code> after you downloaded <code>pyprot</code> from <a href="https://github.com/rasbt/pyprot">https://github.com/rasbt/pyprot</a>.</p>
+<p>An overview of the currently provided scripts that are using the underlying <code>pyprot</code> classes to work with PDB and Mol2 files The scripts are located in the subdirectory <code>./scripts</code> and can be used after <code>pyprot</code> was successfully <a href="#installation">installed</a>.</p>
 
 <p><a id='script_overview'></a></p>
 
 <hr>
 
 
-<p><br>
-- <strong><a href="#cleanup">Cleaning up PDB files</a></strong><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#trim_rows">Trim rows</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#trim_columns">Trim columns</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#strip_h">Removing hydrogen atoms</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#strip_water">Removing water atoms</a> <br/>
-- <strong><a href="#extract">Extracting Information from PDB files</a></strong><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#grab_radius">Grab atoms within a radius from a PDB file</a>  <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#reduce_protein">Reducing a protein structure to main-chain or c-alpha atoms
-</a> <br/>
-- <strong><a href="#pdb_calc">Calculations based on PDB files</a></strong><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#center_of_mass">Center of Mass for proteins and ligands</a> <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#bfactors">Calculate median and mean B-Factor (temperature factor) values</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#rmsd">Calculate RMSD of proteins or ligand molecules</a><br/>
-- <strong><a href="#mol2_manip">MOL2 file Manipulations</a></strong><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#mol2_charge_swap">Swap partial charges between MOL2 files</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#split_multimol2">Splitting a Multi-MOL2 file</a> <br/>
-- <strong><a href="#mol2_filtering">MOL2 file filtering</a></strong>  <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#intramol_distance">Filter for intramolecular functional group distance</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#intermol_distance">Filter for intermolecular functional group distance</a><br/>
-- <strong><a href="#file_conversion">File conversion</a></strong>  <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <a href="#pdb_to_fasta">Converting PDB files to FASTA format</a></p>
+<p><br></p>
+
+<ul>
+<li><p><strong><a href="#cleanup">Reformatting PDB files</a></strong></p>
+
+<ul>
+<li><p><a href="#trim_rows">Trimming rows</a></p></li>
+<li><p><a href="#trim_columns">Trimming columns</a></p></li>
+<li><p><a href="#strip_h">Removing hydrogen atoms</a></p></li>
+<li><p><a href="#strip_water">Removing water atoms</a></p></li>
+<li><p><a href="#renumber_atoms">Renumbering atoms</a></p></li>
+<li><p><a href="#renumber_residues">Renumbering residues</a></p></li>
+</ul>
+</li>
+<li><p><strong><a href="#extract">Extracting Information from PDB files</a></strong></p>
+
+<ul>
+<li><p><a href="#grab_radius">Grabbing atoms within a radius from a PDB file</a></p></li>
+<li><p><a href="#reduce_protein">Reducing a protein structure to its main-chain or c-alpha atoms</a></p></li>
+</ul>
+</li>
+<li><p><strong><a href="#pdb_calc">Calculations based on PDB files</a></strong></p>
+
+<ul>
+<li><p><a href="#center_of_mass">Calculating the center of mass for proteins and ligands</a></p></li>
+<li><p><a href="#bfactors">Calculating median and mean B-factor (temperature factor) values</a></p></li>
+<li><p><a href="#rmsd">Calculating RMSDs of proteins or ligand molecules</a></p></li>
+</ul>
+</li>
+<li><p><strong><a href="#mol2_manip">MOL2 file Manipulations</a></strong></p>
+
+<ul>
+<li><p><a href="#mol2_charge_swap">Swapping partial charges between MOL2 files</a></p></li>
+<li><p><a href="#split_multimol2">Splitting a multi-MOL2 file</a></p></li>
+</ul>
+</li>
+<li><p><strong><a href="#mol2_filtering">MOL2 file filtering</a></strong></p>
+
+<ul>
+<li><p><a href="#intramol_distance">Filtering for intramolecular functional group distance</a></p></li>
+<li><p><a href="#intermol_distance">Filtering for intermolecular functional group distance</a></p></li>
+</ul>
+</li>
+<li><p><strong><a href="#file_conversion">File conversion</a></strong></p>
+
+<ul>
+<li><a href="#pdb_to_fasta">Converting PDB files to FASTA format</a></li>
+</ul>
+</li>
+</ul>
+
 
 <hr>
 
@@ -267,14 +240,14 @@ sup {
 <br>
 <a id='cleanup'></a></p>
 
-<h2>Cleaning up PDB files</h2>
+<h2>Reformatting PDB files</h2>
 
 <p>[<a href="#script_overview">back to overview</a>]</p>
 
 <p><br>
 <a id='trim_rows'></a></p>
 
-<h4>Trim rows</h4>
+<h4>Trimming rows</h4>
 
 <p>[<a href="#script_overview">back to overview</a>]</p>
 
@@ -296,7 +269,7 @@ Default lines to keep start with 'ATOM', 'HETATM', 'TER', or 'END'</p>
 <p><a id='trim_columns'></a>
 <br></p>
 
-<h4>Trim columns</h4>
+<h4>Trimming columns</h4>
 
 <p>[<a href="#script_overview">back to overview</a>]</p>
 
@@ -328,12 +301,10 @@ Default lines to keep start with 'ATOM', 'HETATM', 'TER', or 'END'</p>
 <p><strong>USAGE:</strong></p>
 
 <pre><code>python strip_hydrogens.py in_file.pdb out.pdb
-
-
-&lt;a id='strip_water'&gt;&lt;/a&gt;
 </code></pre>
 
-<p><br></p>
+<p><a id='strip_water'></a>
+<br></p>
 
 <h4>Removing water molecules</h4>
 
@@ -348,6 +319,48 @@ Default lines to keep start with 'ATOM', 'HETATM', 'TER', or 'END'</p>
 <pre><code>python strip_water.py in_file.pdb out.pdb
 </code></pre>
 
+<p><a id='renumber_atoms'></a>
+<br></p>
+
+<h4>Renumbering atoms</h4>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>renumber_atoms.py</code></p>
+
+<p>Renumbers atoms in a PDB file. Starts at atom number 1 by default.</p>
+
+<p><strong>USAGE:</strong></p>
+
+<pre><code>python renumber_atoms.py in_file.pdb out.pdb [start]
+</code></pre>
+
+<p><strong>EXAMPLE:</strong></p>
+
+<pre><code>python renumber_atoms.py mypdb.pdb renumbered.pdb 4
+</code></pre>
+
+<p><a id='renumber_residues'></a>
+<br></p>
+
+<h4>Renumbering residues</h4>
+
+<p>[<a href="#script_overview">back to overview</a>]</p>
+
+<p><code>renumber_residues.py</code></p>
+
+<p>Renumbers amino acid residues in a PDB file. Starts at residue number 1 by default.</p>
+
+<p><strong>USAGE:</strong></p>
+
+<pre><code>python renumber_residues.py in_file.pdb out.pdb [start]
+</code></pre>
+
+<p><strong>EXAMPLE:</strong></p>
+
+<pre><code>python renumber_residues.py mypdb.pdb renumbered.pdb 4
+</code></pre>
+
 <p><br>
 <br>
 <a id='extract'></a></p>
@@ -360,7 +373,7 @@ Default lines to keep start with 'ATOM', 'HETATM', 'TER', or 'END'</p>
 <br>
 <a id='grab_radius'></a></p>
 
-<h3>Grab atoms within a radius from a PDB file</h3>
+<h3>Grabbing atoms within a radius from a PDB file</h3>
 
 <p>[<a href="#script_overview">back to overview</a>]</p>
 
@@ -414,7 +427,7 @@ Default lines to keep start with 'ATOM', 'HETATM', 'TER', or 'END'</p>
 <br>
 <a id='center_of_mass'></a></p>
 
-<h3>Center of mass for proteins and ligands</h3>
+<h3>Calculating the center of mass for proteins and ligands</h3>
 
 <p>[<a href="#script_overview">back to overview</a>]</p>
 
@@ -438,7 +451,7 @@ Default lines to keep start with 'ATOM', 'HETATM', 'TER', or 'END'</p>
 <br>
 <a id='bfactors'></a></p>
 
-<h3>Calculate median and mean B-Factor (temperature factor) values</h3>
+<h3>Calculating median and mean B-factor (temperature factor) values</h3>
 
 <p>[<a href="#script_overview">back to overview</a>]</p>
 
@@ -477,7 +490,7 @@ if <code>median</code> is substituted by <code>mean</code> in the examples shown
 <br>
 <a id='rmsd'></a></p>
 
-<h3>Calculate RMSD of proteins or ligand molecules</h3>
+<h3>Calculating RMSDs of proteins or ligand molecules</h3>
 
 <p>[<a href="#script_overview">back to overview</a>]</p>
 
@@ -518,7 +531,7 @@ proteins are considered for the RMSD calculation.</p>
 <br>
 <a id='mol2_charge_swap'></a></p>
 
-<h3>Swap partial charges between MOL2 files</h3>
+<h3>Swapping partial charges between MOL2 files</h3>
 
 <p>[<a href="#script_overview">back to overview</a>]</p>
 
@@ -559,7 +572,7 @@ to a second mol2 file.</p>
 <br>
 <a id='split_multimol2'></a></p>
 
-<h3>Splitting a Multi-MOL2 file</h3>
+<h3>Splitting a multi-MOL2 file</h3>
 
 <p>[<a href="#script_overview">back to overview</a>]</p>
 
@@ -583,7 +596,7 @@ to a second mol2 file.</p>
 <p><br>
 <a id='intra_distance'></a></p>
 
-<h4>Filter for intramolecular functional group distance</h4>
+<h4>Filtering for intramolecular functional group distance</h4>
 
 <p>[<a href="#script_overview">back to overview</a>]</p>
 
@@ -607,7 +620,7 @@ criteria to a new MOL2 file.</p>
 <p><br>
 <a id='intermol_distance'></a></p>
 
-<h4>Filter for intermolecular functional group distance</h4>
+<h4>Filtering for intermolecular functional group distance</h4>
 
 <p>[<a href="#script_overview">back to overview</a>]</p>
 
@@ -652,5 +665,71 @@ criteria to a new MOL2 file.</p>
 
 <pre><code>python pdb_to_fasta.py in_file.pdb out.fasta
 </code></pre>
+
+<p><a id='installation'></p>
+
+<p><br>
+<br></p>
+
+<h1>Installation</h1>
+
+<p>[<a href="#top">back to top</a>]</p>
+
+<p><br>
+<br>
+<strong>Note that PyProt was only tested to work with Python 3.x.</strong></p>
+
+<h4>Installing the <code>pyprot</code> package</h4>
+
+<ol>
+<li>Download pyprot from this GitHub repository at <a href="https://github.com/rasbt/pyprot/archive/master.zip">https://github.com/rasbt/pyprot/archive/master.zip</a></li>
+<li>After unzipping the archive, <code>cd</code> into the <code>pyprot</code> directory</li>
+<li>Install <code>pyprot</code> it via <code>python setup.py install</code></li>
+</ol>
+
+
+<h4>Using the command line scripts</h4>
+
+<p>Python scripts based on the <code>pyprot</code> classes for common protein file operations is provided in the subdirectory <code>./scripts</code> and can be directly be executed via Python from this directory once <code>pyprot</code> is installed. For more information about the the scripts, please see the following section <a href="#scripts_and_tools">Scripts and Command Line Tools</a>.</p>
+
+<h5>Optional: adding the scripts to your PATH</h5>
+
+<p>Since the usage of those provided scripts is optional, they will not be automatically installed if you install <code>pyprot</code>. I recommend you to copy them to a different directory on your drive, e.g., <code>~/home/username/pyprot_scripts/</code> and add the script directory to your <code>PATH</code>.</p>
+
+<p><br>
+<strong>Step 1: Appending the script directory to PATH</strong></p>
+
+<p>E.g., if you are using a bash shell, you can add the line</p>
+
+<pre><code>export PATH=:$PATH:/home/username/pyprot_scripts/
+</code></pre>
+
+<p>to your <code>~/.bash_profile</code> or <code>~/.bashrc</code> file</p>
+
+<p>You can do this directly from the command line via</p>
+
+<pre><code>echo "export PATH=:$PATH:/home/username/pyprot_scripts/" &gt;&gt; .bash_profile
+</code></pre>
+
+<p><br>
+<strong>Step 2: Making the scripts executable from the command line</strong></p>
+
+<p>In order to call the scripts without issuing the Python command, e.g,</p>
+
+<pre><code>rmsd.py   
+</code></pre>
+
+<p>instead of</p>
+
+<pre><code>python3 ./path/to/rmsd.py
+</code></pre>
+
+<p>you have to add a python-shebang (e.g., <code>#!/usr/bin/python</code>) on top of the scripts. To do this automatically for all python script files in the current directory, you can use the shell script <code>prepend_python_shebang.sh</code>.</p>
+
+<pre><code>sh prepend_python_shebang.sh
+</code></pre>
+
+<p><br>
+<br></p>
 </body>
 </html>

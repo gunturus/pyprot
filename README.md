@@ -1,66 +1,20 @@
 ![PyProt Logo](./images/molecule_logo.png)
 
-PyProt is a Python package for working with protein structure files formats. It comes with a collection of ready-to-use scripts for the most common file operations and protein analyses.
+**PyProt is a Python package for working with protein structure files formats. It comes with a collection of ready-to-use scripts for the most common file operations and protein analyses.**
+
+[Skip to installation and setup section](#installation)
+
+<a id='top'></a>
 
 <br>
 <br>
 
 
-
-# Installation
-
-<br>
-<br>
-**Note that PyProt was only tested to work with Python 3.x.**
-
-
-#### Installing the `pyprot` package
-1. Download pyprot from this GitHub repository at [https://github.com/rasbt/pyprot/archive/master.zip](https://github.com/rasbt/pyprot/archive/master.zip)
-2. After unzipping the archive, `cd` into the `pyprot` directory
-3. Install `pyprot` it via `python setup.py install`
-
-#### Using the command line scripts
-Python scripts based on the `pyprot` classes for common protein file operations is provided in the subdirectory `./scripts` and can be directly be executed via Python from this directory once `pyprot` is installed. For more information about the the scripts, please see the following section [Scripts and Command Line Tools](#scripts_and_tools).
-
-##### Optional: adding the scripts to your PATH
-Since the usage of those provided scripts is optional, they will not be automatically installed if you install `pyprot`. I recommend you to copy them to a different directory on your drive, e.g., `~/home/username/pyprot_scripts/` and add the script directory to your `PATH`.
-
-
-<br>
-**Step 1: Appending the script directory to PATH**   
-
-E.g., if you are using a bash shell, you can add the line
-
-	export PATH=:$PATH:/home/username/pyprot_scripts/
-
-to your `~/.bash_profile` or `~/.bashrc` file
-
-You can do this directly from the command line via
-
-	echo "export PATH=:$PATH:/home/username/pyprot_scripts/" >> .bash_profile
-
-<br>
-**Step 2: Making the scripts executable from the command line**  
-
-In order to call the scripts without issuing the Python command, e.g, 
-	
-	rmsd.py   
-
-instead of 
-
-	python3 ./path/to/rmsd.py
-	
-you have to add a python-shebang (e.g., `#!/usr/bin/python`) on top of the scripts. To do this automatically for all python script files in the current directory, you can use the shell script `prepend_python_shebang.sh`.
-
-	sh prepend_python_shebang.sh
-
-<br>
-<br>
 
 <a id='scripts_and_tools'></a>
 # Scripts and command line tools
 
-An overview of the scripts that are using the underlying `pyprot` classes to create PDB and Mol2 objects, which can be found in the subdirectory `./scripts` after you downloaded `pyprot` from [https://github.com/rasbt/pyprot](https://github.com/rasbt/pyprot).
+An overview of the currently provided scripts that are using the underlying `pyprot` classes to work with PDB and Mol2 files The scripts are located in the subdirectory `./scripts` and can be used after `pyprot` was successfully [installed](#installation).
 
 <a id='script_overview'></a>
 <hr>
@@ -71,11 +25,11 @@ An overview of the scripts that are using the underlying `pyprot` classes to cre
 
 
 
-- **[Cleaning up PDB files](#cleanup)**
+- **[Reformatting PDB files](#cleanup)**
 
-	- [Trim rows](#trim_rows) 	
+	- [Trimming rows](#trim_rows) 	
 	
-	- [Trim columns](#trim_columns)
+	- [Trimming columns](#trim_columns)
 	
 	- [Removing hydrogen atoms](#strip_h)  
 	
@@ -87,28 +41,28 @@ An overview of the scripts that are using the underlying `pyprot` classes to cre
 	
 - **[Extracting Information from PDB files](#extract)**
 
-	- [Grab atoms within a radius from a PDB file](#grab_radius)
+	- [Grabbing atoms within a radius from a PDB file](#grab_radius)
 	
-	- [Reducing a protein structure to main-chain or c-alpha atoms](#reduce_protein)   
+	- [Reducing a protein structure to its main-chain or c-alpha atoms](#reduce_protein)   
 	
 - **[Calculations based on PDB files](#pdb_calc)** 
 
-	- [Center of Mass for proteins and ligands](#center_of_mass)
+	- [Calculating the center of mass for proteins and ligands](#center_of_mass)
 	
-	- [Calculate median and mean B-Factor (temperature factor) values](#bfactors)
+	- [Calculating median and mean B-factor (temperature factor) values](#bfactors)
 	
-	- [Calculate RMSD of proteins or ligand molecules](#rmsd)  
+	- [Calculating RMSDs of proteins or ligand molecules](#rmsd)  
 	
 - **[MOL2 file Manipulations](#mol2_manip)**
 
-	- [Swap partial charges between MOL2 files](#mol2_charge_swap)
+	- [Swapping partial charges between MOL2 files](#mol2_charge_swap)
 	
-	- [Splitting a Multi-MOL2 file](#split_multimol2)   
+	- [Splitting a multi-MOL2 file](#split_multimol2)   
 	
 - **[MOL2 file filtering](#mol2_filtering)**  
-	- [Filter for intramolecular functional group distance](#intramol_distance)
+	- [Filtering for intramolecular functional group distance](#intramol_distance)
 	
-	- [Filter for intermolecular functional group distance](#intermol_distance)  
+	- [Filtering for intermolecular functional group distance](#intermol_distance)  
 	
 - **[File conversion](#file_conversion)**  
 
@@ -121,13 +75,13 @@ An overview of the scripts that are using the underlying `pyprot` classes to cre
 <br>
 <br>
 <a id='cleanup'></a>
-## Cleaning up PDB files
+## Reformatting PDB files
 
 [[back to overview](#script_overview)] 
 
 <br>
 <a id='trim_rows'></a>
-#### Trim rows
+#### Trimming rows
 [[back to overview](#script_overview)] 
 
 `trim_rows.py`
@@ -147,7 +101,7 @@ Default lines to keep start with 'ATOM', 'HETATM', 'TER', or 'END'
 
 <a id='trim_columns'></a>
 <br>
-#### Trim columns
+#### Trimming columns
 [[back to overview](#script_overview)] 
 
 `trim_columns.py`
@@ -241,7 +195,7 @@ Renumbers amino acid residues in a PDB file. Starts at residue number 1 by defau
 <br>
 <br>
 <a id='grab_radius'></a>
-### Grab atoms within a radius from a PDB file
+### Grabbing atoms within a radius from a PDB file
 [[back to overview](#script_overview)] 
 
 `grab_radius.py`
@@ -288,7 +242,7 @@ Grabs atoms within a specified radius (in Angstrom) around a specified set of x,
 <br>
 <br>
 <a id='center_of_mass'></a>
-### Center of mass for proteins and ligands
+### Calculating the center of mass for proteins and ligands
 [[back to overview](#script_overview)] 
 
 `center_of_mass.py`
@@ -310,7 +264,7 @@ To calculate the center of mass of a ligand molecule, use:
 <br>
 <br>
 <a id='bfactors'></a>
-### Calculate median and mean B-Factor (temperature factor) values
+### Calculating median and mean B-factor (temperature factor) values
 
 [[back to overview](#script_overview)] 
 
@@ -346,7 +300,7 @@ To get the median B-factor value from the protein's c-alpha atoms only, use:
 <br>
 <br>
 <a id='rmsd'></a>
-### Calculate RMSD of proteins or ligand molecules
+### Calculating RMSDs of proteins or ligand molecules
 [[back to overview](#script_overview)] 
 
 `rmsd.py`
@@ -382,7 +336,7 @@ proteins are considered for the RMSD calculation.
 <br>
 <br>
 <a id='mol2_charge_swap'></a>
-### Swap partial charges between MOL2 files
+### Swapping partial charges between MOL2 files
 [[back to overview](#script_overview)] 
 
 `fix_mol2_to_refcharge.py`
@@ -419,7 +373,7 @@ Note: If the charges are not in the last column of the mol2 files, arguments for
 <br>
 <br>
 <a id='split_multimol2'></a>
-### Splitting a Multi-MOL2 file
+### Splitting a multi-MOL2 file
 [[back to overview](#script_overview)] 
 
 `split_multimol2.py`
@@ -439,7 +393,7 @@ Splits a multi-mol2 file into individual mol2 files.
 
 <br>
 <a id='intra_distance'></a>
-#### Filter for intramolecular functional group distance
+#### Filtering for intramolecular functional group distance
 [[back to overview](#script_overview)] 
 
 `intramol_funcgroup_dist.py`
@@ -461,7 +415,7 @@ criteria to a new MOL2 file.
 
 <br>
 <a id='intermol_distance'></a>
-#### Filter for intermolecular functional group distance
+#### Filtering for intermolecular functional group distance
 [[back to overview](#script_overview)] 
 
 `intermol_funcgroup_dist.py`
@@ -500,3 +454,63 @@ Convert a PDB file into FASTA format.
 **USAGE:**  
 	
 	python pdb_to_fasta.py in_file.pdb out.fasta
+	
+	
+	
+	
+	
+	
+<a id='installation'>
+
+<br>
+<br>
+# Installation
+[[back to top](#top)] 
+
+<br>
+<br>
+**Note that PyProt was only tested to work with Python 3.x.**
+
+
+#### Installing the `pyprot` package
+1. Download pyprot from this GitHub repository at [https://github.com/rasbt/pyprot/archive/master.zip](https://github.com/rasbt/pyprot/archive/master.zip)
+2. After unzipping the archive, `cd` into the `pyprot` directory
+3. Install `pyprot` it via `python setup.py install`
+
+#### Using the command line scripts
+Python scripts based on the `pyprot` classes for common protein file operations is provided in the subdirectory `./scripts` and can be directly be executed via Python from this directory once `pyprot` is installed. For more information about the the scripts, please see the following section [Scripts and Command Line Tools](#scripts_and_tools).
+
+##### Optional: adding the scripts to your PATH
+Since the usage of those provided scripts is optional, they will not be automatically installed if you install `pyprot`. I recommend you to copy them to a different directory on your drive, e.g., `~/home/username/pyprot_scripts/` and add the script directory to your `PATH`.
+
+
+<br>
+**Step 1: Appending the script directory to PATH**   
+
+E.g., if you are using a bash shell, you can add the line
+
+	export PATH=:$PATH:/home/username/pyprot_scripts/
+
+to your `~/.bash_profile` or `~/.bashrc` file
+
+You can do this directly from the command line via
+
+	echo "export PATH=:$PATH:/home/username/pyprot_scripts/" >> .bash_profile
+
+<br>
+**Step 2: Making the scripts executable from the command line**  
+
+In order to call the scripts without issuing the Python command, e.g, 
+	
+	rmsd.py   
+
+instead of 
+
+	python3 ./path/to/rmsd.py
+	
+you have to add a python-shebang (e.g., `#!/usr/bin/python`) on top of the scripts. To do this automatically for all python script files in the current directory, you can use the shell script `prepend_python_shebang.sh`.
+
+	sh prepend_python_shebang.sh
+
+<br>
+<br>
