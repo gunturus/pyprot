@@ -2,7 +2,9 @@
 
 **PyProt is a Python package for working with protein structure files formats. It comes with a collection of ready-to-use scripts for the most common file operations and protein analyses.**
 
-[Skip to installation and setup section](#installation)
+
+
+[[view HTML version](http://htmlpreview.github.io/?https://github.com/rasbt/pyprot/blob/master/README.html)]	[[download pyprot.zip](https://github.com/rasbt/pyprot/archive/master.zip)] [[link to pyprot on GitHub](http://htmlpreview.github.io/?https://github.com/rasbt/pyprot/blob/master/README.html)]
 
 <a id='top'></a>
 
@@ -12,9 +14,13 @@
 
 
 <a id='scripts_and_tools'></a>
-# Scripts and command line tools
+## Scripts and command line tools
 
-An overview of the currently provided scripts that are using the underlying `pyprot` classes to work with PDB and Mol2 files The scripts are located in the subdirectory `./scripts` and can be used after `pyprot` was successfully [installed](#installation).
+<br>
+
+Below, you can find the overview of the currently provided scripts that are using the underlying `pyprot` classes to work with PDB and Mol2 files. The scripts are located in the subdirectory `./scripts` and can be used after `pyprot` was successfully installed.   
+(**[Click here to jump to the installation and setup section](#installation)**).  
+
 
 <a id='script_overview'></a>
 <hr>
