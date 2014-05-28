@@ -35,18 +35,38 @@ ATOMIC_WEIGHTS = {'H':1.008, 'HE':4.002602, 'LI':6.94, 'BE':9.012182,
 
 # Amino acid abbreviations
 
+
+# Note about unusual/modified amino acids
+#
+# ASH (protonated ASP) = D
+# CYX (disulfide-bonded CYS) = C
+# GLH (protonated GLU) = E
+# HID/HIE/HIP (different protonation states of HIS) = H
+# HYP (hydroxyproline) = P
+# MSE (selenomethionine) = M
+# CSE (selenocysteine) = U
+# LNT (N-((2S)-2-amino-1,1-dihydroxy-4-methylpentyl)-L-threonine)
+
+
+
 AMINO_ACIDS_3TO1 = {'CYS': 'C', 'ASP': 'D', 'GLN': 'Q', 'ILE': 'I',\
                      'ALA': 'A', 'TYR': 'Y', 'TRP': 'W', 'HIS': 'H',\
                      'LEU': 'L', 'ARG': 'R', 'VAL': 'V', 'GLU': 'E',\
                      'PHE': 'F', 'GLY': 'G', 'MET': 'M', 'ASN': 'N',\
                      'PRO': 'P', 'SER': 'S', 'LYS': 'K', 'THR': 'T',\
                      # extended set of amino acids:
-                     'MSE': 'M', 'CSE': 'C', 'LNT': 'T'
+                     'MSE': 'M', 'CSE': 'U', 'LNT': 'X', 'GLH': 'E',\
+                     'HID': 'H', 'HIE': 'H', 'HIP': 'H', 'HYP': 'P'\
                     }
+
+
 
 AMINO_ACIDS_1TO3 = {'A': 'ALA', 'C': 'CYS', 'D': 'ASP', 'E': 'GLU',\
                      'F': 'PHE', 'G': 'GLY', 'H': 'HIS', 'I': 'ILE',\
                      'K': 'LYS', 'L': 'LEU', 'M': 'MET', 'N': 'ASN',\
                      'P': 'PRO', 'Q': 'GLN', 'R': 'ARG', 'S': 'SER',\
-                     'T': 'THR', 'V': 'VAL', 'W': 'TRP', 'Y': 'TYR'\
+                     'T': 'THR', 'V': 'VAL', 'W': 'TRP', 'Y': 'TYR',\
+                     # extended set of amino acids:
+                     'U': 'CSE', 'X': 'LNT'
                     }
+
