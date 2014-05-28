@@ -129,7 +129,7 @@ class PdbManip(object):
         return in_radius
 
 
-    def to_fasta(self):
+    def to_fasta(self, hetatm=False):
         """
         Converts the PDB protein atoms into a fasta string and
         returns the results as a dictionary, where the keys are
@@ -137,13 +137,26 @@ class PdbManip(object):
         codes.
         E.g., {'H': ['K'], 'L': ['D', 'I', 'V', 'M']}
 
+        Keyword arguments:
+            hetatm (bool): If True, also HETATM lines are considered.
+
+        Returns a dictionary with the protein chain letters A-Z as keys
+            and the FASTA sequence as values (as list of characters).
+            E.g.,
+
+            {'A': ['P', 'Q', 'I', ...], 'B': ['P', 'Q', 'I', ...], ...}
+
         """
         prev_seq_num = 0
         fasta_dict = dict()
+        if hetatm:
+            hetatm = "HETATM"
+        else:
+            hetatm = "ATOM"
         for chain in self.chains.items():
             fasta_sequence = []
             for line in chain[1]:
-                if line.startswith("ATOM"):
+                if line.startswith("ATOM") or line.startswith(hetatm):
                     try:
                         aa_3letter = line[17:20].strip()
                         aa_1letter = AMINO_ACIDS_3TO1[aa_3letter]
@@ -154,11 +167,9 @@ class PdbManip(object):
                             fasta_sequence.append(aa_1letter)
                         prev_seq_num = res_seqnumber
 
-                    except keyerror:
+                    except KeyError:
                         pass
-                        print('warning: {} contains unknown residue name'.format(self.code))
-                    except valueerror:
-                        print('warning: residue sequence numbers of {}'\
-                            'are not correctly formated'.format(self.code))
+                        if line.startswith("ATOM"):
+                            print('Warning: Residue {} unknown.'.format(line))
             fasta_dict[chain[0]] = fasta_sequence
         return fasta_dict

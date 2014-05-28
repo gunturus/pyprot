@@ -3,17 +3,23 @@
 # Converts a PDB file into FASTA format.
 #
 # usage:
-# [shell]>> USAGE: python pdb_to_fasta.py in_file.pdb out.fasta"
+# [shell]>> USAGE: python pdb_to_fasta.py in_file.pdb out.fasta [hetatm]"
 #
 
 import sys
 import pyprot
 
 try:
-    assert len(sys.argv) == 3
+    assert len(sys.argv) >= 3
 
     in_pdb = pyprot.Pdb(sys.argv[1])
-    fastas = sorted(in_pdb.to_fasta().items())
+
+    
+    if len(sys.argv) == 4:
+        fastas = sorted(in_pdb.to_fasta(hetatm=True).items())
+
+    else:
+        fastas = sorted(in_pdb.to_fasta().items())
 
     with open(sys.argv[2], 'w') as out:
         for chain in fastas:
@@ -22,5 +28,5 @@ try:
                 out.write(amino_code)
             out.write('\n\n')
 
-except:
-    print("ERROR\nUSAGE: python pdb_to_fasta.py in_file.pdb out.fasta")
+except KeyboardInterrupt:
+    print("ERROR\nUSAGE: python pdb_to_fasta.py in_file.pdb out.fasta [hetatm]")
