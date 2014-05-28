@@ -7,7 +7,8 @@
 
 import sys
 import os
-import pyprot.mol2
+import pyprot.mol2io
+import pyprot.mol2filter
 
 def create_atom_list(func_groups, charge_ranges):
     """ Creates a list mapping charge ranges to functional groups.
@@ -37,21 +38,22 @@ try:
     out_mol2file = sys.argv[5]
 
 
-    atom_list = create_atom_dict(func_groups, charge_ranges)
+    atom_list = create_atom_list(func_groups, charge_ranges)
+    #chargetype_list = [[k]+list(atom_dict[k]) for k in atom_dict]
 
-    single_mol2s_in = pyprot.mol2.mol2_io.split_multimol2(in_mol2file)
+    single_mol2s_in = pyprot.mol2io.split_multimol2(in_mol2file)
     single_mol2s_out = []
 
     for mol2 in single_mol2s_in:
         mol2_lines = mol2[1].split('\n')
-        if pyprot.mol2.mol2_filter.distance_match(mol2_lines, atom_dict, distance):
+        if pyprot.mol2filter.distance_match(mol2_lines, atom_list, distance):
             single_mol2s_out.append(mol2)
 
     with open(out_mol2file, 'w') as out_file:
         for mol2 in single_mol2s_out:
             out_file.write(mol2[1])
 
-except:
+except KeyboardInterrupt:
     print("""
 Takes a single- or multi-molecule MOL2 file and checks if
 2 functional groups are within a specified distance.

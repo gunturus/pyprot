@@ -4,7 +4,7 @@
 
 import sys
 import os
-import pyprot.mol2
+import pyprot.mol2io
 
 try:
     assert len(sys.argv) == 3
@@ -14,7 +14,7 @@ try:
     if not os.path.exists(out_dir):
         os.mkdir(out_dir)
 
-    single_mol2s = pyprot.mol2.mol2_io.split_multimol2(multimol2)
+    single_mol2s = pyprot.mol2io.split_multimol2(multimol2)
     for mol2 in single_mol2s:
         out_mol2 = os.path.join(out_dir, mol2[0]) + '.mol2'
         with open(out_mol2, 'w') as out_file:

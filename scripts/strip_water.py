@@ -6,15 +6,15 @@
 #
 
 import sys
-import pyprot.pdb
+import pyprot
 
 try:
     assert len(sys.argv) == 3
 
-    in_pdb = pyprot.pdb.pdbobj.PdbObj(sys.argv[1])
-    out_pdb = pyprot.pdb.pdbobj.PdbObj(in_pdb.strip_water())
+    in_pdb = pyprot.Pdb(sys.argv[1])
+    out_pdb = pyprot.Pdb(in_pdb.strip_water())
 
-    in_pdb.save(sys.argv[2])
+    in_pdb.save_pdb(sys.argv[2])
 
 
 except:

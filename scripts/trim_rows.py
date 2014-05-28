@@ -8,7 +8,7 @@
 #
 
 import sys
-import pyprot.pdb
+import pyprot
 
 try:
     keep = sys.argv[3].split(',')
@@ -16,7 +16,7 @@ except IndexError:
     keep = ['ATOM', 'HETATM', 'TER', 'END']
 
 try:
-    in_pdb = pyprot.pdb.pdbobj.PdbObj(sys.argv[1])
+    in_pdb = pyprot.Pdb(sys.argv[1])
     in_pdb.cont = in_pdb.trim_rows(keep)
     in_pdb.save_pdb(sys.argv[2])
 

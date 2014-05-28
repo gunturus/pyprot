@@ -15,13 +15,13 @@
 
 
 import sys
-import pyprot.pdb
+import pyprot
 
 if len(sys.argv) < 2 or len(sys.argv) > 3:
     print("USAGE: python3 cmd_median_bfactor.py mypdbfile.pdb [lig/calpha/main_chain]")
 
 else:
-    new_pdb = pyprot.pdb.pdbobj.PdbObj(sys.argv[1])
+    new_pdb = pyprot.Pdb(sys.argv[1])
     if len(sys.argv) == 3:
         if sys.argv[2] == "lig":
             print(new_pdb.median_bfactor(protein = False, ligand = True))

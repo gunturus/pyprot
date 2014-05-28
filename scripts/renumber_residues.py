@@ -7,7 +7,7 @@
 #
 
 import sys
-import pyprot.pdb
+import pyprot
 
 try:
     start = int(sys.argv[3])
@@ -17,7 +17,7 @@ except ValueError:
     print(sys.argv[3], 'is not an integer.')
 
 try:
-    in_pdb = pyprot.pdb.pdbobj.PdbObj(sys.argv[1])
+    in_pdb = pyprot.Pdb(sys.argv[1])
     in_pdb.cont = in_pdb.renumber_residues(start)
     in_pdb.save_pdb(sys.argv[2])
 

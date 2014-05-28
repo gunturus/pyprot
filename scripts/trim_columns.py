@@ -7,7 +7,7 @@
 #
 
 import sys
-import pyprot.pdb
+import pyprot
 
 try:
     width = int(sys.argv[3])
@@ -15,7 +15,7 @@ except IndexError:
     width = 80
 
 try:
-    in_pdb = pyprot.pdb.pdbobj.PdbObj(sys.argv[1])
+    in_pdb = pyprot.Pdb(sys.argv[1])
     in_pdb.cont = in_pdb.trim_columns(width)
     in_pdb.save_pdb(sys.argv[2])
 

@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name = 'PyProt',
     description = 'Tools for Protein structure file manipulation',
-    version = '1.0.0',
+    version = '1.1.0',
     author='Sebastian Raschka',
     author_email='se.raschka@gmail.com',
     url='https://github.com/rasbt/pyprot',
@@ -36,9 +36,6 @@ Typical applications include the processing of large data sets to provide an int
 at runtime about the progress of the computation.
 
 For more details and examples please see the package documentation.
-
-A short video demonstration of the progress tracking can be found on YouTube:
-http://youtu.be/iWjSGe89Pvs
 
 
  Contact

@@ -7,8 +7,8 @@
 # criteria to a new MOL2 file.
 
 import sys
-import os
-import pyprot.mol2
+import pyprot.mol2io
+import pyprot.mol2filter
 
 def create_atom_dict(func_groups, charge_ranges):
     """ Creates a list mapping charge ranges to functional groups.
@@ -40,16 +40,16 @@ try:
 
 
     atom_dict = create_atom_dict(func_groups, charge_ranges)
+    chargetype_list = [[k]+list(atom_dict[k]) for k in atom_dict]
 
-    single_mol2s_in1 = pyprot.mol2.mol2_io.split_multimol2(in_mol2file1)
-    single_mol2s_in2 = pyprot.mol2.mol2_io.split_multimol2(in_mol2file2)
+    single_mol2s_in1 = pyprot.mol2io.split_multimol2(in_mol2file1)
+    single_mol2s_in2 = pyprot.mol2io.split_multimol2(in_mol2file2)
     single_mol2s_out = []
 
-    mol2_lines2 = single_mol2s_in2[1].split('\n')
-    for mol2 in single_mol2s_in:
-        mol2_lines1 = mol2[1].split('\n')
-        if pyprot.mol2.mol2_filter.distance_match(mol2_lines1, atom_dict, distance, mol2_lines2):
-            single_mol2s_out.append(mol2)
+    for query in single_mol2s_in1:
+        for target in single_mol2s_in2:
+            if pyprot.mol2filter.distance_match(query[1], chargetype_list, distance, target[1]):
+                single_mol2s_out.append(query[1])
 
     with open(out_mol2file, 'w') as out_file:
         for mol2 in single_mol2s_out:

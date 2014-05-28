@@ -4,8 +4,9 @@
 # to a second mol2 file.
 
 import sys
-import os
-import pyprot.mol2
+import pyprot.mol2manip
+import pyprot.mol2io
+
 
 try:
     assert len(sys.argv) == 4 or len(sys.argv) == 6
@@ -13,31 +14,31 @@ try:
     fix_mol2 = sys.argv[2]
     out_mol2 = sys.argv[3]
     if len(sys.argv) == 6:
-        ref_col = float(sys.argv[4])
-        fix_col = float(sys.argv[5])
+        ref_col = int(sys.argv[4])
+        fix_col = int(sys.argv[5])
     else:
         ref_col = -1
         fix_col = -1
 
     # get mol2 in line list format
-    ref_mol2 = pyprot.mol2.mol2_io.split_multimol2(ref_mol2)
+    ref_mol2 = pyprot.mol2io.split_multimol2(ref_mol2)
     ref_mol2 = next(ref_mol2)[1].split('\n')
-    fix_mol2 = pyprot.mol2.mol2_io.split_multimol2(fix_mol2)
+    fix_mol2 = pyprot.mol2io.split_multimol2(fix_mol2)
     fix_mol2 = next(fix_mol2)[1].split('\n')
 
 
     # apply the charge fix
-    out_cont = pyprot.mol2.mol2_manip.fix2ref_charge(
-            ref_mol2 = ref_mol2,
-            fix_mol2 = fix_mol2,
-            ref_col = ref_col,
-            fix_col = fix_col
+    out_cont = pyprot.mol2manip.swap_charge(
+            template_mol2=ref_mol2,
+            target_mol2=fix_mol2,
+            template_col=ref_col,
+            target_col=fix_col
             )
     with open(out_mol2, 'w') as out_file:
         out_file.write('\n'.join(out_cont))
 
 except:
-    print("ERROR\nUSAGE: python fix_mol2_to_refcharge.py ref.mol2 fix_mol2 out_mol2 ref_col fix_col\n")
+    print("ERROR\nUSAGE: python fix_mol2_to_refcharge.py ref.mol2 fix.mol2 out.mol2 ref_col fix_col\n")
     print("""ref.mol2: name of the reference molecule
 fix_mol2: target mol2 which gets the charges from the reference mol2
 out_mol2: output mol2 with the new charges
@@ -51,8 +52,8 @@ Note: If the charges are not in the last column of the mol2 files, arguments for
 
 EXAMPLE (Charge in the last column in both files):
 
-    python fix_mol2_to_refcharge.py myref.mol2 myfix_mol2 myout_mol2 -2 -1
+    python fix_mol2_to_refcharge.py ref.mol2 fix.mol2 out.mol2 -2 -1
 
 EXAMPLE (Charge in the 2nd last column in reference mol2):
 
-    python fix_mol2_to_refcharge.py myref.mol2 myfix.mol2 myout.mol2 -2 -1""")
+    python fix_mol2_to_refcharge.py ref.mol2 fix.mol2 out.mol2 -2 -1""")
