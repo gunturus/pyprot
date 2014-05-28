@@ -39,8 +39,9 @@ AMINO_ACIDS_3TO1 = {'CYS': 'C', 'ASP': 'D', 'GLN': 'Q', 'ILE': 'I',\
                      'ALA': 'A', 'TYR': 'Y', 'TRP': 'W', 'HIS': 'H',\
                      'LEU': 'L', 'ARG': 'R', 'VAL': 'V', 'GLU': 'E',\
                      'PHE': 'F', 'GLY': 'G', 'MET': 'M', 'ASN': 'N',\
-                     'CSE': 'C', 'PRO': 'P', 'SER': 'S', 'LYS': 'K',\
-                     'MSE': 'M', 'THR': 'T'\
+                     'PRO': 'P', 'SER': 'S', 'LYS': 'K', 'THR': 'T',\
+                     # extended set of amino acids:
+                     'MSE': 'M', 'CSE': 'C', 'LNT': 'T'
                     }
 
 AMINO_ACIDS_1TO3 = {'A': 'ALA', 'C': 'CYS', 'D': 'ASP', 'E': 'GLU',\

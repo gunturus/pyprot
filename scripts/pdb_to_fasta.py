@@ -17,7 +17,7 @@ try:
 
     with open(sys.argv[2], 'w') as out:
         for chain in fastas:
-            out.write('Chain {}:\n'.format(chain[0]))
+            out.write('>Chain {}:\n'.format(chain[0]))
             for amino_code in chain[1]:
                 out.write(amino_code)
             out.write('\n\n')
