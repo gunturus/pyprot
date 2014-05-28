@@ -31,4 +31,10 @@ def test_get_atom_chains():
               'HETATM 3363  O5  OBE H 201      31.267  -3.891  23.783  1.00 37.43           O'
              ]
           }
-    assert(pdb1._get_chains() == out)
+
+
+    chain_dict = pdb1._get_chains() 
+
+    assert(len(chain_dict['L']) == 6)    
+    assert(len(chain_dict['H']) == 9)
+    assert(chain_dict == out)

@@ -24,10 +24,11 @@ class PdbManip(object):
 
         """
         chain_dict = dict()
-        for line in self.atom_ter + self.hetatm:
-            if line[21:22] not in chain_dict:
-                chain_dict[line[21:22]] = []
-            chain_dict[line[21:22]].append(line)
+        for line in self.cont:
+            if line.startswith("ATOM") or line.startswith("HETATM") or line.startswith("TER"):
+                if line[21:22] not in chain_dict:
+                    chain_dict[line[21:22]] = []
+                chain_dict[line[21:22]].append(line)
         return chain_dict
 
 
