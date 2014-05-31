@@ -13,13 +13,12 @@ class PdbFormat(object):
         """ Trims the PDB contents to a max. column width. """
         return [row[:width] for row in self.cont]
 
-    def trim_rows(self, allowed=['ATOM', 'HETATM', 'TER', 'END']):
+    def trim_rows(self, allowed=('ATOM', 'HETATM', 'TER', 'END')):
         """ Removes all rows that do not begin with a str in 'allowed'. """
         out = list()
         for row in self.cont:
-            for allow in allowed:
-                if row.startswith(allow):
-                    out.append(row)
+            if row.startswith(allowed):
+                out.append(row)
         return out
 
     def renumber_atoms(self, start=1):
@@ -28,7 +27,7 @@ class PdbFormat(object):
         count = start
         for row in self.cont:
             if len(row) > 5:
-                if row[:6].strip() in ['ATOM', 'HETATM', 'TER', 'ANISOU']:
+                if row.startswith(('ATOM', 'HETATM', 'TER', 'ANISOU')):
                     num = str(count)
                     while len(num) < 5:
                         num = ' ' + num
@@ -44,7 +43,7 @@ class PdbFormat(object):
             cur_res = ''
             for row in self.cont:
                 if len(row) > 25:
-                    if row[:6].strip() in ['ATOM', 'HETATM', 'TER', 'ANISOU']:
+                    if row.startswith(('ATOM', 'HETATM', 'TER', 'ANISOU')):
                         next_res = row[22:27].strip() # account for letters in res., e.g., '1A'
                         if next_res != cur_res:
                             count += 1

@@ -25,7 +25,7 @@ class PdbManip(object):
         """
         chain_dict = dict()
         for line in self.cont:
-            if line.startswith("ATOM") or line.startswith("HETATM") or line.startswith("TER"):
+            if line.startswith(('ATOM', 'HETATM', 'TER')):
                 if line[21:22] not in chain_dict:
                     chain_dict[line[21:22]] = []
                 chain_dict[line[21:22]].append(line)
@@ -33,8 +33,8 @@ class PdbManip(object):
 
 
     def calpha(self):
-        """ Returns lines of C-alpha atoms as list of strings."""
-        return _filter_column_match(self.atom, ["CA"], 13)
+        """ Returns row of C-alpha atoms from PDB contents as list of strings."""
+        return [row for row in self.atom if row[13:].startswith('CA')]
 
 
     def main_chain(self):
@@ -43,18 +43,19 @@ class PdbManip(object):
         main chain.
 
         """
-        return _filter_column_match(self.atom, ["O ", "CA", "C ", "N "], 13)
+        return [row for row in self.atom if row[13:].startswith(("O ", "CA", "C ", "N "))]
 
 
     def strip_h(self):
         """ Returns all entries of the PDB file except hydrogen atoms. """
         res = []
         for line in self.cont:
-            try:
-                if (line[12] != "H" and line[13] != "H") and line[77] != "H":
+            line_len = len(line)
+            if line_len > 13 and line[12] != "H" and line[13] != "H":
+                if line_len < 78:
                     res.append(line)
-            except:
-                pass
+                elif line[77] != "H":
+                    res.append(line)
         return res
 
 
@@ -82,13 +83,11 @@ class PdbManip(object):
 
         """
         res = []
-        for line in self.cont:
-            line = line.strip()
-            if (line.startswith("ATOM") or line.startswith("HETATM")
-                    or line.startswith("TER"))\
-                    and line[21] in chain_ids:
-                res.append(line)
+        for row in self.cont:
+            if row.startswith(('ATOM', 'HETATM', 'TER')) and row[21:22].strip() in chain_ids:
+                res.append(row)
         return res
+
 
 
     def save_pdb(self, dest):
@@ -120,7 +119,7 @@ class PdbManip(object):
         """
         in_radius = []
         for line in self.cont:
-            if line.startswith("ATOM") or line.startswith("HETATM"):
+            if line.startswith(('ATOM', 'HETATM')):
                 xyz_coords = [float(line[30:38]),\
                              float(line[38:46]),\
                               float(line[46:54])]
@@ -157,7 +156,7 @@ class PdbManip(object):
         for chain in self.chains.items():
             fasta_sequence = []
             for line in chain[1]:
-                if line.startswith("ATOM") or line.startswith(hetatm):
+                if line.startswith(("ATOM", hetatm)):
                     try:
                         aa_3letter = line[17:20].strip()
                         aa_1letter = AMINO_ACIDS_3TO1[aa_3letter]

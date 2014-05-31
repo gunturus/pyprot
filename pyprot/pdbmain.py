@@ -23,19 +23,20 @@ class Pdb(PdbStats, PdbManip, PdbFormat):
         self.conect = []
         self.chains = []
         self.fileloc = ""
-        if isinstance(file_cont, str):
-            self.fileloc = file_cont
-            open_pdbfile = _open_type(file_cont, ["pdb", "mol2"])
+        if isinstance(file_cont, list):
+            self.cont = file_cont[:]
+        elif isinstance(file_cont, str):
             try:
-                for line in open_pdbfile:
-                    self.cont.append(line.strip())
-            finally:
-                open_pdbfile.close()
+                with open(file_cont, 'r') as pdb_file:
+                    self.cont = [row.strip() for row in pdb_file.read().split('\n') if row.strip()]
+            except FileNotFoundError as err:
+                print(err)
+
         if self.cont:
-             self.atom = _filter_column_match(self.cont, ["ATOM"])
-             self.atom_ter = _filter_column_match(self.cont, ["ATOM", "TER"])
-             self.hetatm = _filter_column_match(self.cont, ["HETATM"])
-             self.conect = _filter_column_match(self.cont, ["CONECT"])
+             self.atom = [row for row in self.cont if row.startswith('ATOM')]
+             self.atom_ter = [row for row in self.cont if row.startswith(('ATOM', 'TER'))]
+             self.hetatm = [row for row in self.cont if row.startswith('HETATM')]
+             self.conect = [row for row in self.cont if row.startswith('CONECT')]
              self.chains = self._get_chains()
 
     def __del__(self):
