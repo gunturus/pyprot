@@ -8,8 +8,9 @@ Main class for PDB file operations.
 from .pdbstats import PdbStats
 from .pdbmanip import PdbManip
 from .pdbformat import PdbFormat
+from .pdbconvert import PdbConvert
 
-class Pdb(PdbStats, PdbManip, PdbFormat):
+class Pdb(PdbStats, PdbManip, PdbFormat, PdbConvert):
     """ Object that allows operations with protein files in PDB format. """
 
     def __init__(self, file_cont = [], pdb_code = ""):

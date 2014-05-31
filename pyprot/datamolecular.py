@@ -59,8 +59,6 @@ AMINO_ACIDS_3TO1 = {'CYS': 'C', 'ASP': 'D', 'GLN': 'Q', 'ILE': 'I',\
                      'HID': 'H', 'HIE': 'H', 'HIP': 'H', 'HYP': 'P'\
                     }
 
-
-
 AMINO_ACIDS_1TO3 = {'A': 'ALA', 'C': 'CYS', 'D': 'ASP', 'E': 'GLU',\
                      'F': 'PHE', 'G': 'GLY', 'H': 'HIS', 'I': 'ILE',\
                      'K': 'LYS', 'L': 'LEU', 'M': 'MET', 'N': 'ASN',\
