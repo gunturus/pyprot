@@ -8,8 +8,6 @@ Main class for PDB file operations.
 from .pdbstats import PdbStats
 from .pdbmanip import PdbManip
 from .pdbformat import PdbFormat
-from .fileio import _open_type
-from .pdbfilter import _filter_column_match
 
 class Pdb(PdbStats, PdbManip, PdbFormat):
     """ Object that allows operations with protein files in PDB format. """

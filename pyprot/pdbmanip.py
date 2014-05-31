@@ -6,7 +6,6 @@ Contains methods specialized for PDB file content manipulation
 
 """
 
-from pyprot.pdbfilter import _filter_column_match
 from pyprot.datamolecular import AMINO_ACIDS_3TO1
 
 

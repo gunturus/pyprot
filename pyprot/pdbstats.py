@@ -10,7 +10,6 @@ Imported into PdbObj class.
 
 from . import statsbasic
 from .datamolecular import ATOMIC_WEIGHTS
-from .pdbfilter import _filter_column_match
 
 
 class PdbStats(object):
@@ -47,15 +46,11 @@ class PdbStats(object):
         else:
             coords1, coords2 = self.hetatm, sec_molecule.hetatm
         if atoms == "c":
-            coords1 = _filter_column_match(
-                     coords1[:], ["C"], col_start_pos = 77)
-            coords2 = _filter_column_match(
-                     coords2[:], ["C"], col_start_pos = 77)
+            coords1 = [row for row in coords1 if row[77:].startswith('C')]
+            coords2 = [row for row in coords2 if row[77:].startswith('C')]
         elif atoms == "no_h":
-            coords1 = _filter_column_match(
-                   coords1[:], ["H"], col_start_pos = 77, exclude = True)
-            coords2 = _filter_column_match(
-                   coords2[:], ["H"], col_start_pos = 77, exclude = True)
+            coords1 = [row for row in coords1 if not row[77:].startswith('H')]
+            coords2 = [row for row in coords2 if not row[77:].startswith('H')]
         elif atoms == "ca":
             if self.atom and sec_molecule.atom:
                 coords1 = self.calpha()
@@ -79,7 +74,7 @@ class PdbStats(object):
         Keyword arguments:
             protein (bool): If true, includes ATOM entries in calculation
             ligand (bool): If true, includes HETATM entries in calculation
-            
+
         Returns:
             center (list): List of float coordinates [x,y,z] that represent the
             center of mass (precision 3).
