@@ -1,25 +1,18 @@
 from distutils.core import setup
 
 setup(
-    name = 'PyProt',
-    description = 'Tools for Protein structure file manipulation',
-    version = '1.0',
+    name='PyProt',
+    description='Tools for Protein structure file manipulation',
+    version='1.0.0',
     author='Sebastian Raschka',
     author_email='se.raschka@gmail.com',
     url='https://github.com/rasbt/pyprot',
     packages=['pyprot'],
-
-    license = 'GPLv3',
-    keywords = 'proteins PDB MOL2',
-    tests_require=['nose'],
-    data_files = [('', ['LICENSE.txt']),
-                    ('', ['README.md']),
-                    ('', ['README.html']),
-                    ('', ['CHANGELOG.txt']),
-                   ],
-    include_package_data = True,
+    package_dir={'pyprot': 'pyprot'},
+    license='GPLv3',
+    keywords='proteins PDB MOL2',
     platforms='any',
-    classifiers = [
+    classifiers=[
         'Programming Language :: Python 3.x',
         'Development Status :: Stable',
         'Natural Language :: English',
@@ -30,20 +23,20 @@ setup(
         ],
     long_description="""
 
-The PyPrind (Python Progress Indicator) module provides a progress bar and a percentage indicator
-object that let you track the progress of a loop structure or other iterative computation.
-Typical applications include the processing of large data sets to provide an intuitive estimate
-at runtime about the progress of the computation.
+PyProt is a Python package for working with protein structure files formats. 
+It comes with a collection of ready-to-use scripts for the most common file 
+operations and protein analyses.
 
 For more details and examples please see the package documentation.
 
+The original project is hosted and developed at: https://github.com/rasbt/pyprot
 
  Contact
 =============
 
 If you have any questions or comments about PyPrind, please feel free to contact me via
-eMail: se.raschka@gmail.com
-or Twitter: https://twitter.com/rasbt
+email: se.raschka@gmail.com
+or twitter: https://twitter.com/rasbt
 
-""",
-    )
+"""
+)

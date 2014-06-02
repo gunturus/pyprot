@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # sr 01/11/2013
 #
 # Extracts ATOM and HETATM lines from a PDB file that match a specified chain ID.

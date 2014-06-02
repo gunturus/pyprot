@@ -1,0 +1,5 @@
+include *.txt *.html *.md *.py
+recursive-include scripts *.py
+recursive-include docs *.txt *.html *.md
+recursive-include tests *.txt *.mol2 *.pdb *.py
+recursive-include images *.png
