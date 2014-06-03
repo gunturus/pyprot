@@ -33,10 +33,12 @@ ATOMIC_WEIGHTS = {'H':1.008, 'HE':4.002602, 'LI':6.94, 'BE':9.012182,
        'HS':269, 'MT':278, 'DS':281, 'RG':281, 'CN':285, 'UUT':286, 'FL':289,
        'UUP':288, 'LV':293, 'UUS':294}
 
+
+#############################
 # Amino acid abbreviations
-
-
-# Note about unusual/modified amino acids
+#############################
+#
+# Unusual/modified amino acids
 #
 # ASH (protonated ASP) = D
 # CYX (disulfide-bonded CYS) = C
@@ -47,24 +49,33 @@ ATOMIC_WEIGHTS = {'H':1.008, 'HE':4.002602, 'LI':6.94, 'BE':9.012182,
 # CSE (selenocysteine) = U
 # LNT (N-((2S)-2-amino-1,1-dihydroxy-4-methylpentyl)-L-threonine)
 
+# Ambiguous amino acids
+#
+# ASX (asparagine or aspartic acid) = B
+# GLX (glutamine or glutamic acid = Z
 
 
-AMINO_ACIDS_3TO1 = {'CYS': 'C', 'ASP': 'D', 'GLN': 'Q', 'ILE': 'I',\
-                     'ALA': 'A', 'TYR': 'Y', 'TRP': 'W', 'HIS': 'H',\
-                     'LEU': 'L', 'ARG': 'R', 'VAL': 'V', 'GLU': 'E',\
-                     'PHE': 'F', 'GLY': 'G', 'MET': 'M', 'ASN': 'N',\
-                     'PRO': 'P', 'SER': 'S', 'LYS': 'K', 'THR': 'T',\
+
+AMINO_ACIDS_3TO1 = {'CYS': 'C', 'ASP': 'D', 'GLN': 'Q', 'ILE': 'I',
+                     'ALA': 'A', 'TYR': 'Y', 'TRP': 'W', 'HIS': 'H',
+                     'LEU': 'L', 'ARG': 'R', 'VAL': 'V', 'GLU': 'E',
+                     'PHE': 'F', 'GLY': 'G', 'MET': 'M', 'ASN': 'N',
+                     'PRO': 'P', 'SER': 'S', 'LYS': 'K', 'THR': 'T',
                      # extended set of amino acids:
-                     'MSE': 'M', 'CSE': 'U', 'LNT': 'X', 'GLH': 'E',\
-                     'HID': 'H', 'HIE': 'H', 'HIP': 'H', 'HYP': 'P'\
+                     'MSE': 'M', 'CSE': 'U', 'LNT': 'X', 'GLH': 'E',
+                     'HID': 'H', 'HIE': 'H', 'HIP': 'H', 'HYP': 'P',
+                     # ambigous amino acids:
+                     'ASX': 'B', 'GLX': 'Z'
                     }
 
-AMINO_ACIDS_1TO3 = {'A': 'ALA', 'C': 'CYS', 'D': 'ASP', 'E': 'GLU',\
-                     'F': 'PHE', 'G': 'GLY', 'H': 'HIS', 'I': 'ILE',\
-                     'K': 'LYS', 'L': 'LEU', 'M': 'MET', 'N': 'ASN',\
-                     'P': 'PRO', 'Q': 'GLN', 'R': 'ARG', 'S': 'SER',\
-                     'T': 'THR', 'V': 'VAL', 'W': 'TRP', 'Y': 'TYR',\
+AMINO_ACIDS_1TO3 = {'A': 'ALA', 'C': 'CYS', 'D': 'ASP', 'E': 'GLU',
+                     'F': 'PHE', 'G': 'GLY', 'H': 'HIS', 'I': 'ILE',
+                     'K': 'LYS', 'L': 'LEU', 'M': 'MET', 'N': 'ASN',
+                     'P': 'PRO', 'Q': 'GLN', 'R': 'ARG', 'S': 'SER',
+                     'T': 'THR', 'V': 'VAL', 'W': 'TRP', 'Y': 'TYR',
                      # extended set of amino acids:
-                     'U': 'CSE', 'X': 'LNT'
+                     'U': 'CSE', 'X': 'LNT',
+                     # ambigous amino acids:
+                     'B': 'ASX', 'Z': 'GLX'
                     }
 
