@@ -52,18 +52,17 @@ class PdbStats(object):
             coords1 = [row for row in coords1 if not row[77:].startswith('H')]
             coords2 = [row for row in coords2 if not row[77:].startswith('H')]
         elif atoms == "ca":
-            if self.atom and sec_molecule.atom:
-                coords1 = self.calpha()
-                coords2 = sec_molecule.calpha()
+            coords1 = self.calpha()
+            coords2 = sec_molecule.calpha()
 
-        if coords1 and len(coords1) == len(coords2):
+        if all((coords1, coords2, len(coords1) == len(coords2))):
             total = 0
             for (i, j) in zip(coords1, coords2):
                 total += ( float(i[30:38]) - float(j[30:38]) )**2 +\
                          ( float(i[38:46]) - float(j[38:46]) )**2 +\
-                         ( float(i[46:54]) - float(j[46:54]) )**2
-            rmsd = ( total / len(coords1) )**0.5
-        return round(rmsd, 4)
+                         ( float(i[46:54]) - float(j[46:54]) )**2      
+            rmsd = round(( total / len(coords1) )**0.5, 4)
+        return rmsd
 
 
 
