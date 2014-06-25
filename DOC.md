@@ -15,6 +15,7 @@ Calculates the center of mass for a protein and/or ligand structure in a PDB fil
 (**Tip**: you can can create a pseudo-atom at a given coordinate in PyMol via  
 `pseudoatom masscenter, b=40, color=red, pos=[8.979, 41.661, 12.495]`)
 
+**Usage**
 
 <pre>
 pdb_center_of_mass.py -h
@@ -71,6 +72,8 @@ RMSD between the carbon-atoms of 2 ligand conformations.
 
 ![](./images/ex_pdb_rmsd.png)
 
+**Usage**
+
 <pre>
 ./scripts/pdb_rmsd.py -h
 usage: pdb_rmsd.py [-h] [-l] [-c] [-ca] PDBfile1 PDBfile2
@@ -94,3 +97,56 @@ Example:
 pdb_rmsd.py ~/Desktop/pdb1.pdb ~/Desktop/pdb2.pdb
 0.7377
 </pre>
+
+# Working with MOL2 files
+
+### Transfer charges
+
+Transfers partial charges from one mol2 file to another mol2 file.
+
+![](./images/ex_mol2_transfer_charge.png)
+
+
+**Example**
+
+
+<pre>./mol2_transfer_charge.py ~/Desktop/mol1.mol2 ~/Desktop/mol2.mol2
+@<TRIPOS>MOLECULE
+mol2_file2
+   9    9     0     0     0
+SMALL
+USER_CHARGES  
+mmff94s_NoEstat = 44.88
+@<TRIPOS>ATOM
+      1 C1         -5.0187   -7.8208   -3.4745 C.ar      1 <0>        -0.0736
+      2 C2         -7.1625   -6.7138   -3.3495 C.ar      1 <0>        -0.0770
+      3 C3         -5.5821   -8.8226   -4.2649 C.ar      1 <0>        -0.1229
+      4 C4         -7.7259   -7.7155   -4.1400 C.ar      1 <0>        -0.1228
+...
+</pre>
+
+**Usage**
+
+<pre>./mol2_transfer_charge.py -h
+usage: mol2_transfer_charge.py [-h] [-o OUT] [-r REFERENCE_COLUMN]
+                               [-t TARGET_COLUMN]
+                               MOL2File1 MOL2File2
+
+Takes a reference mol2 file as input and applies its charges
+to a second mol2 file
+
+positional arguments:
+  MOL2File1
+  MOL2File2
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUT, --out OUT     Writes output to a new mol2 file.
+  -r REFERENCE_COLUMN, --reference_column REFERENCE_COLUMN
+                        Position of the chargecolumn in reference molecule.
+                        -1 by default for the last column.
+                        E.g., -2 if charge is in the second last column.
+  -t TARGET_COLUMN, --target_column TARGET_COLUMN
+                        Position of the chargecolumn in the to-be-fixed molecule.
+                        -1 by default for the last column.
+                        E.g., -2 if charge is in the second last column.</pre>
