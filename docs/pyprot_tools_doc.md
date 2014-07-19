@@ -1,11 +1,31 @@
+# PyProt Scripts and Tools
+
+<a class="mk-toclify" id="table-of-contents"></a>
+
+###Table of Contents
+- [Working with PDB files](#working-with-pdb-files)
+    - [Center of Mass](#center-of-mass)
+    - [Grab atoms within a radius](#grab-atoms-within-a-radius)
+    - [Root-mean-square deviation (RMSD)](#root-mean-square-deviation-rmsd)
+- [Working with MOL2 files](#working-with-mol2-files)
+    - [Transfer charges](#transfer-charges)
+
+<br>
+<br>
+<br>
+<br>
+
+<a class="mk-toclify" id="working-with-pdb-files"></a>
 # Working with PDB files
+[[back to top](#table-of-contents)]
+
 
 <br>
 <br>
-<br>
-<br>
 
+<a class="mk-toclify" id="center-of-mass"></a>
 ## Center of Mass
+[[back to top](#table-of-contents)]
 
 Calculates the center of mass for a protein and/or ligand structure in a PDB file weighted by atom types. By default, all atoms with valid ATOM and HETATM entries in the PDB file's coordinate section are included in the center of mass calculation.
 
@@ -52,7 +72,9 @@ http://en.wikipedia.org/wiki/List_of_elements
 <br>
 <br>
 <br>
+<a class="mk-toclify" id="grab-atoms-within-a-radius"></a>
 ## Grab atoms within a radius
+[[back to top](#table-of-contents)]
 
 The pdb_grab_atom_radius.py script extracts atoms within a radius from a coordinate center.
 
@@ -93,7 +115,9 @@ optional arguments:
 <br>
 <br>
 <br>
+<a class="mk-toclify" id="root-mean-square-deviation-rmsd"></a>
 ## Root-mean-square deviation (RMSD)
+[[back to top](#table-of-contents)]
 
 The RMSD measures the average distance between atoms of 2 protein or ligand structures via the equation
 
@@ -152,14 +176,18 @@ pdb_rmsd.py ~/Desktop/pdb1.pdb ~/Desktop/pdb2.pdb
 <br>
 <br>
 
+<a class="mk-toclify" id="working-with-mol2-files"></a>
 # Working with MOL2 files
+[[back to top](#table-of-contents)]
 
 <br>
 <br>
 <br>
 <br>
 
+<a class="mk-toclify" id="transfer-charges"></a>
 ## Transfer charges
+[[back to top](#table-of-contents)]
 
 Transfers partial charges from one mol2 file to another mol2 file.
 
@@ -209,3 +237,4 @@ optional arguments:
                         Position of the chargecolumn in the to-be-fixed molecule.
                         -1 by default for the last column.
                         E.g., -2 if charge is in the second last column.</pre>
+
