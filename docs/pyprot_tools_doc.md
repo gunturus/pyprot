@@ -1,16 +1,21 @@
 # Working with PDB files
 
-### Center of Mass
+<br>
+<br>
+<br>
+<br>
+
+## Center of Mass
 
 Calculates the center of mass for a protein and/or ligand structure in a PDB file weighted by atom types. By default, all atoms with valid ATOM and HETATM entries in the PDB file's coordinate section are included in the center of mass calculation.
 
 **Example:**
 
-<pre>.pdb_center_of_mass.py -p ./tests/data/pdbs/3EIY.pdb 
+<pre>./pdb_center_of_mass.py -p ./tests/data/pdbs/3EIY.pdb 
 [8.979, 41.661, 12.495]</pre>
 
 
-![](./images/ex_pdb_center_of_mass.png)
+![](../images/ex_pdb_center_of_mass.png)
 
 (**Tip**: you can can create a pseudo-atom at a given coordinate in PyMol via  
 `pseudoatom masscenter, b=40, color=red, pos=[8.979, 41.661, 12.495]`)
@@ -43,12 +48,56 @@ A list of the atomic weights can be found, e.g., at
 http://en.wikipedia.org/wiki/List_of_elements
 </pre>
 
+<br>
+<br>
+<br>
+<br>
+## Grab atoms within a radius
 
-### Root-mean-square deviation (RMSD)
+The pdb_grab_atom_radius.py script extracts atoms within a radius from a coordinate center.
+
+**Example**  
+
+<pre>./pdb_grab_atom_radius.py 3B7V.pdb -c 13.863,26.129,19.407 -r 7.0 -o 3B7V_rad7.pdb</pre>
+
+![](../images/ex_grab_radius.png)
+
+
+**Usage** 
+
+run `python pdb_grab_atom_radius.py --help` for the usage information:
+
+<pre>
+usage: pdb_grab_atom_radius.py [-h] [-r int/float] [-c X,Y,Z] [-i coordinate-ID]
+                           [-o out.fasta]
+                           PDBfile
+
+Extracts atoms within a radius from a PDB file.
+By default, all atoms in the PDB file are included in the calculation.
+
+positional arguments:
+  PDBfile
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -r int/float, --radius int/float
+                        radius in Angstrom for atoms to extract (default 10.0)
+  -c X,Y,Z, --coordinates X,Y,Z
+                        center for extracting atoms (default "0,0,0")
+  -i coordinate-ID, --include coordinate-ID
+                        Coordinate lines to include (default: "ATOM,HETATM")
+  -o out.fasta, --out out.fasta
+                        writes atoms to an output file instead of printing it to the screen</pre>
+
+<br>
+<br>
+<br>
+<br>
+## Root-mean-square deviation (RMSD)
 
 The RMSD measures the average distance between atoms of 2 protein or ligand structures via the equation
 
-![](./images/rmsd_equation.png)
+![](../images/rmsd_equation.png)
 
 where *a<sub>i</sub>* refers to the atoms of molecule 1, and *b<sub>i</sub>* to the atoms of molecule 2, respectively. The subscripts x, y, z are denoting the x-y-z coordinates for every atom.
 
@@ -61,7 +110,7 @@ RMSD between the alpha-carbon (main-chain) atoms of 2 closely aligned protein st
 <pre>./pdb_rmsd.py ~/Desktop/1T48_995.pdb ~/Desktop/1T49_995.pdb -ca
 0.4785</pre>
 
-![](./images/ex_pdb_rmsd_prot.png)
+![](../images/ex_pdb_rmsd_prot.png)
 
 **Example 2**  
 
@@ -70,7 +119,7 @@ RMSD between the carbon-atoms of 2 ligand conformations.
 1.7249</pre>
 
 
-![](./images/ex_pdb_rmsd.png)
+![](../images/ex_pdb_rmsd.png)
 
 **Usage**
 
@@ -98,13 +147,23 @@ pdb_rmsd.py ~/Desktop/pdb1.pdb ~/Desktop/pdb2.pdb
 0.7377
 </pre>
 
+<br>
+<br>
+<br>
+<br>
+
 # Working with MOL2 files
 
-### Transfer charges
+<br>
+<br>
+<br>
+<br>
+
+## Transfer charges
 
 Transfers partial charges from one mol2 file to another mol2 file.
 
-![](./images/ex_mol2_transfer_charge.png)
+![](../images/ex_mol2_transfer_charge.png)
 
 
 **Example**
