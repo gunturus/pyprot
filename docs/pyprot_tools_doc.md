@@ -25,20 +25,22 @@
 
 <a class="mk-toclify" id="center-of-mass"></a>
 ## Center of Mass
+
 [[back to top](#table-of-contents)]
 
 Calculates the center of mass for a protein and/or ligand structure in a PDB file weighted by atom types. By default, all atoms with valid ATOM and HETATM entries in the PDB file's coordinate section are included in the center of mass calculation.
 
 **Example:**
 
-<pre>./pdb_center_of_mass.py -p ./tests/data/pdbs/3EIY.pdb 
-[8.979, 41.661, 12.495]</pre>
-
+	./pdb_center_of_mass.py -p ./tests/data/pdbs/3EIY.pdb 
+	[8.979, 41.661, 12.495]
 
 ![](../images/ex_pdb_center_of_mass.png)
 
+
 (**Tip**: you can can create a pseudo-atom at a given coordinate in PyMol via  
 `pseudoatom masscenter, b=40, color=red, pos=[8.979, 41.661, 12.495]`)
+
 
 **Usage**
 
