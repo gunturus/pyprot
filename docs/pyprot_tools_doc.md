@@ -74,8 +74,11 @@ http://en.wikipedia.org/wiki/List_of_elements
 <br>
 <br>
 <br>
+
 <a class="mk-toclify" id="grab-atoms-within-a-radius"></a>
+
 ## Grab atoms within a radius
+
 [[back to top](#table-of-contents)]
 
 The pdb_grab_atom_radius.py script extracts atoms within a radius from a coordinate center.
@@ -117,13 +120,18 @@ optional arguments:
 <br>
 <br>
 <br>
+
 <a class="mk-toclify" id="root-mean-square-deviation-rmsd"></a>
+
 ## Root-mean-square deviation (RMSD)
+
 [[back to top](#table-of-contents)]
 
 The RMSD measures the average distance between atoms of 2 protein or ligand structures via the equation
 
+
 ![](../images/rmsd_equation.png)
+
 
 where *a<sub>i</sub>* refers to the atoms of molecule 1, and *b<sub>i</sub>* to the atoms of molecule 2, respectively. The subscripts x, y, z are denoting the x-y-z coordinates for every atom.
 
@@ -133,24 +141,30 @@ The RMSD is most commonly calculated without taking hydrogen-atoms into consider
 **Example 1**  
 
 RMSD between the alpha-carbon (main-chain) atoms of 2 closely aligned protein structures
-<pre>./pdb_rmsd.py ~/Desktop/1T48_995.pdb ~/Desktop/1T49_995.pdb -ca
-0.4785</pre>
+
+	./pdb_rmsd.py ~/Desktop/1T48_995.pdb ~/Desktop/1T49_995.pdb -ca
+	0.4785
+
 
 ![](../images/ex_pdb_rmsd_prot.png)
+
 
 **Example 2**  
 
 RMSD between the carbon-atoms of 2 ligand conformations.
-<pre>./pdb_rmsd.py ~/Desktop/lig1.pdb ~/Desktop/lig22.pdb -l -c
-1.7249</pre>
+	
+	./pdb_rmsd.py ~/Desktop/lig1.pdb ~/Desktop/lig22.pdb -l -c
+	1.7249
 
 
 ![](../images/ex_pdb_rmsd.png)
 
 **Usage**
 
+
+	./scripts/pdb_rmsd.py -h
+
 <pre>
-./scripts/pdb_rmsd.py -h
 usage: pdb_rmsd.py [-h] [-l] [-c] [-ca] PDBfile1 PDBfile2
 
 The RMSD measures the average distance between atoms 
@@ -170,8 +184,7 @@ optional arguments:
 
 Example:
 pdb_rmsd.py ~/Desktop/pdb1.pdb ~/Desktop/pdb2.pdb
-0.7377
-</pre>
+0.7377</pre>
 
 <br>
 <br>
@@ -192,6 +205,7 @@ pdb_rmsd.py ~/Desktop/pdb1.pdb ~/Desktop/pdb2.pdb
 [[back to top](#table-of-contents)]
 
 Transfers partial charges from one mol2 file to another mol2 file.
+
 
 ![](../images/ex_mol2_transfer_charge.png)
 
