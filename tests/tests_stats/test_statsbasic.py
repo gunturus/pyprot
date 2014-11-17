@@ -21,6 +21,7 @@ def test_mean():
     assert round(pyprot.statsbasic.mean(out), 5) == 47718
     out2 = [33219,36254,38801,46335,46840,47596,55130,56863,78070,88830]    
     assert pyprot.statsbasic.mean(out2) == 52793.8
+    assert pyprot.statsbasic.mean([]) == None
  
 def test_median():
     data1 = [1,2,3,4,5]
@@ -31,6 +32,10 @@ def test_median():
     assert pyprot.statsbasic.median([10]) == 10
     assert pyprot.statsbasic.median([48670,57320,38150,41290,53160]) == 48670
     assert pyprot.statsbasic.median([48670,57320,38150,41290,53160,500000]) == 50915.0
+    assert pyprot.statsbasic.median([1,2,3]) == 2
+    assert pyprot.statsbasic.median([10,10]) == 10
+    assert pyprot.statsbasic.median([1,2]) == 1.5
+    assert pyprot.statsbasic.median([]) == None
 
 def test_quartiles():
     data1 = [6,36,15,7,39,49,41,42,43,47,40]

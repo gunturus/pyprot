@@ -52,8 +52,8 @@ class PdbStats(object):
             coords1 = [row for row in coords1 if not row[77:].startswith('H')]
             coords2 = [row for row in coords2 if not row[77:].startswith('H')]
         elif atoms == "ca":
-            coords1 = self.calpha()
-            coords2 = sec_molecule.calpha()
+            coords1 = self.calpha
+            coords2 = sec_molecule.calpha
 
         if all((coords1, coords2, len(coords1) == len(coords2))):
             total = 0
@@ -117,7 +117,7 @@ class PdbStats(object):
         return center_rounded
 
 
-    def get_bfactors(self, protein=True, ligand=False, main_chain=""):
+    def get_bfactors(self, protein=True, ligand=False, atoms='all'):
         """
         Collects b-factors (temperature factors) from ATOM
            and/or HETATM entries in a list
@@ -125,19 +125,23 @@ class PdbStats(object):
         Keyword arguments:
             protein (bool): If True gets b-factors from ATOM entries
             ligand (bool): If True gets b-factors from HETATM entries
-            main_chain (string):
-                        if "on" considers only main chain atoms (N, CA, O, C)
-                        if "calpha" considers only c-alpha atoms
+            atoms (string):
+                        if 'all': considers all atoms
+                        if 'mainchain':  considers only main chain atoms (N, CA, O, C)
+                        if 'calpha': considers only c-alpha atoms
 
         Returns:
             B-factors as float in a list.
 
         """
+        if atoms not in ('all', 'mainchain', 'calpha'):
+            raise ValueError('Invalid argument. Argument not in ("all", "mainchain", "calpha"')
+        
         bfactors = []
-        if main_chain == "on":
-            bfactors += [float(line[60:66].strip()) for line in self.main_chain()]
-        elif main_chain == "calpha":
-           bfactors += [float(line[60:66].strip()) for line in self.calpha()]
+        if atoms == 'mainchain':
+            bfactors += [float(line[60:66].strip()) for line in self.mainchain]
+        elif atoms == 'calpha':
+           bfactors += [float(line[60:66].strip()) for line in self.calpha]
         else:
             if protein:
                 bfactors += [float(line[60:66].strip()) for line in self.atom]
@@ -146,64 +150,123 @@ class PdbStats(object):
         return bfactors
 
 
-    def median_bfactor(self, protein=True, ligand=False, main_chain=""):
+    def _bfactor_calc(self, func, protein=True, ligand=False, atoms="all"):
+        """
+        Calculates b-factor (temperature factor) value statistics given a function 'func'.
+
+        Keyword arguments:
+               func: statistic functions, e.g., statsbasic.mean
+               protein (bool): If True considers b-factors from ATOM entries
+               ligand (bool): If True considers b-factors from HETATM entries
+               atoms (string):
+                        if 'all': considers all atoms
+                        if 'mainchain':  considers only main chain atoms (N, CA, O, C)
+                        if 'calpha': considers only c-alpha atoms
+        Returns:
+            The median B-factor as a float.
+
+        """
+        if atoms not in ('all', 'mainchain', 'calpha'):
+            raise ValueError('Invalid argument. Argument not in ("all", "mainchain", "calpha"')
+        
+        if atoms != 'all':
+            bf = func(self.get_bfactors(protein=True, ligand=False, atoms=atoms))
+        else:
+            bf = func(self.get_bfactors(protein=protein, ligand=ligand, atoms=atoms))
+        return bf        
+        
+
+    def bfactor_stats(self, protein=True, ligand=False, atoms='all'):
+        """
+        Calculates the b-factor (temperature factor) value statistics
+
+        Keyword arguments:
+               protein (bool): If True considers b-factors from ATOM entries
+               ligand (bool): If True considers b-factors from HETATM entries
+               atoms (string):
+                    if 'all': considers all atoms
+                    if 'mainchain':  considers only main chain atoms (N, CA, O, C)
+                    if 'calpha': considers only c-alpha atoms
+        Returns:
+            Returns a tuple of mean, median, standard deviation and standard error of the b-factors.
+
+        """
+        bf_med = self.bfactor_median(protein=protein, ligand=ligand, atoms=atoms)   
+        bf_mean = self.bfactor_mean(protein=protein, ligand=ligand, atoms=atoms)
+        bf_std = self.bfactor_std_dev(protein=protein, ligand=ligand, atoms=atoms)
+        bf_ser = self.bfactor_std_err(protein=protein, ligand=ligand, atoms=atoms)
+        return bf_med, bf_mean, bf_std, bf_ser
+
+
+    def bfactor_median(self, protein=True, ligand=False, atoms='all'):
         """
         Calculates the median b-factor (temperature factor) value
 
         Keyword arguments:
                protein (bool): If True considers b-factors from ATOM entries
                ligand (bool): If True considers b-factors from HETATM entries
-               main_chain (string):
-                        if "on" considers only main chain atoms (N, CA, O, C)
-                        if "calpha" considers only c-alpha atoms
+               atoms (string):
+                    if 'all': considers all atoms
+                    if 'mainchain':  considers only main chain atoms (N, CA, O, C)
+                    if 'calpha': considers only c-alpha atoms
         Returns:
             The median B-factor as a float.
 
         """
-        if main_chain == "on":
-            median = statsbasic.median(self.get_bfactors(main_chain = "on"))
-        elif main_chain == "calpha":
-            median = statsbasic.median(self.get_bfactors(main_chain = "calpha"))
-        else:
-            if protein and not ligand:
-                median = statsbasic.median(self.get_bfactors())
-            elif protein and ligand:
-                median = statsbasic.median(self.get_bfactors(ligand = True))
-            elif ligand:
-                median = statsbasic.median(self.get_bfactors(protein = False,
-                                                ligand = True))
-            else:
-                median = None
-        return median
+        return self._bfactor_calc(func=statsbasic.median, protein=protein, ligand=ligand, atoms=atoms)
 
 
-    def mean_bfactor(self, protein=True, ligand=False, main_chain=""):
+    def bfactor_mean(self, protein=True, ligand=False, atoms='all'):
         """
         Calculates the mean b-factor (temperature factor) value.
 
         Keyword arguments:
             protein (bool): If True considers b-factors from ATOM entries
             ligand (bool): If True considers b-factors from HETATM entries
-            main_chain (string):
-                if "on" considers only main chain atoms (N, CA, O, C)
-                if "calpha" considers only c-alpha atoms.
-
+            atoms (string):
+                    if 'all': considers all atoms
+                    if 'mainchain':  considers only main chain atoms (N, CA, O, C)
+                    if 'calpha': considers only c-alpha atoms
         Returns:
             The average B-factor as a float.
 
         """
-        if main_chain == "on":
-            mean = statsbasic.mean(self.get_bfactors(main_chain="on"))
-        elif main_chain == "calpha":
-            mean = statsbasic.mean(self.get_bfactors(main_chain="calpha"))
-        else:
-            if protein and not ligand:
-                mean = statsbasic.mean(self.get_bfactors())
-            elif protein and ligand:
-                mean = statsbasic.mean(self.get_bfactors(ligand = True))
-            elif ligand:
-                mean = statsbasic.mean(self.get_bfactors(protein = False,
-                                                ligand = True))
-            else:
-                mean = None
-        return mean
+        return self._bfactor_calc(func=statsbasic.mean, protein=protein, ligand=ligand, atoms=atoms)
+
+
+    def bfactor_std_dev(self, protein=True, ligand=False, atoms='all'):
+        """
+        Calculates the standard deviation of the b-factor (temperature factor) values.
+
+        Keyword arguments:
+            protein (bool): If True considers b-factors from ATOM entries
+            ligand (bool): If True considers b-factors from HETATM entries
+            atoms (string):
+                    if 'all': considers all atoms
+                    if 'mainchain':  considers only main chain atoms (N, CA, O, C)
+                    if 'calpha': considers only c-alpha atoms
+
+        Returns:
+            The standard deviation of the B-factors as a float.
+
+        """
+        return self._bfactor_calc(func=statsbasic.std_dev, protein=protein, ligand=ligand, atoms=atoms)
+        
+    
+    def bfactor_std_err(self, protein=True, ligand=False, atoms='all'):
+        """
+        Calculates the standard error of the b-factor (temperature factor) values.
+
+        Keyword arguments:
+            protein (bool): If True considers b-factors from ATOM entries
+            ligand (bool): If True considers b-factors from HETATM entries
+            atoms (string):
+                    if 'all': considers all atoms
+                    if 'mainchain':  considers only main chain atoms (N, CA, O, C)
+                    if 'calpha': considers only c-alpha atoms
+
+        Returns:
+            The standard error of the B-factors as a float.
+
+        """
+        return self._bfactor_calc(func=statsbasic.std_err, protein=protein, ligand=ligand, atoms=atoms)

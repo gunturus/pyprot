@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Sebastian Raschka 2014
-# Python PyProt script to convert amino acid residues from a PDB file into a FASTA string.
+# Python pyprot script to convert amino acid residues from a PDB file into a FASTA string.
 #
 # run
 # ./pdb_to_fasta.py -h

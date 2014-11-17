@@ -19,6 +19,8 @@ class Pdb(PdbStats, PdbManip, PdbFormat, PdbConvert):
         self.atom = []
         self.atom_ter = []
         self.hetatm = []
+        self.mainchain = []
+        self.calpha = []
         self.conect = []
         self.chains = []
         self.fileloc = ""
@@ -35,6 +37,8 @@ class Pdb(PdbStats, PdbManip, PdbFormat, PdbConvert):
              self.atom = [row for row in self.cont if row.startswith('ATOM')]
              self.atom_ter = [row for row in self.cont if row.startswith(('ATOM', 'TER'))]
              self.hetatm = [row for row in self.cont if row.startswith('HETATM')]
+             self.mainchain = [row for row in self.atom if  row[13:15] in ('CA', 'N ', 'C ', 'O ')]
+             self.calpha = [row for row in self.mainchain if row[13:15] == 'CA']
              self.conect = [row for row in self.cont if row.startswith('CONECT')]
              self.chains = self._get_chains()
 

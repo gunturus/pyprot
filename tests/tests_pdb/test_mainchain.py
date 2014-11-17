@@ -33,4 +33,4 @@ def test_main_chain():
     'ATOM     33  CA  VAL A   6       9.636  51.959  -0.457  1.00 32.41           C'
     ]
 
-    assert(atom == pdb1.main_chain())
+    assert(atom == pdb1.mainchain)

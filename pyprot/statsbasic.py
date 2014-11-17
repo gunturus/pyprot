@@ -39,6 +39,8 @@ def mode(data_list, print_out=False):
 
 def mean(data_list):
     """ Returns the mean of numbers in a list. """
+    if not data_list:
+        return None
     total = 0
     for ele in data_list:
         total += ele
@@ -47,6 +49,8 @@ def mean(data_list):
 
 def median(data_list):
     """ Returns the median of a list of numbers. """
+    if not data_list:
+        return None
     sorted_data = sorted(data_list)
     length = len(sorted_data)
     med_val = 0

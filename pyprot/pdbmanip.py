@@ -29,19 +29,6 @@ class PdbManip(object):
         return chain_dict
 
 
-    def calpha(self):
-        """ Returns row of C-alpha atoms from PDB contents as list of strings."""
-        return [row for row in self.atom if row[13:].startswith('CA')]
-
-
-    def main_chain(self):
-        """
-        Returns lines of the entries that represent the protein's
-        main chain.
-
-        """
-        return [row for row in self.atom if row[13:].startswith(("O ", "CA", "C ", "N "))]
-
 
     def strip_h(self):
         """ Returns all entries of the PDB file except hydrogen atoms. """

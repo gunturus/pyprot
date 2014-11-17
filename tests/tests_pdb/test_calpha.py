@@ -19,4 +19,4 @@ def test_calpha():
     'ATOM     25  CA  ASN A   5       7.351  52.145  -3.480  1.00 41.42           C',
     'ATOM     33  CA  VAL A   6       9.636  51.959  -0.457  1.00 32.41           C'
     ]
-    assert(atom == pdb1.calpha())
+    assert(atom == pdb1.calpha)
