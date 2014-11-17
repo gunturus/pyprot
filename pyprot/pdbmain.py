@@ -9,13 +9,15 @@ from .pdbstats import PdbStats
 from .pdbmanip import PdbManip
 from .pdbformat import PdbFormat
 from .pdbconvert import PdbConvert
+import urllib.request
+import os
 
 class Pdb(PdbStats, PdbManip, PdbFormat, PdbConvert):
     """ Object that allows operations with protein files in PDB format. """
 
     def __init__(self, file_cont = [], pdb_code = ""):
         self.cont = []
-        self.code = pdb_code
+        self.code = pdb_code.lower()
         self.atom = []
         self.atom_ter = []
         self.hetatm = []
@@ -24,14 +26,27 @@ class Pdb(PdbStats, PdbManip, PdbFormat, PdbConvert):
         self.conect = []
         self.chains = []
         self.fileloc = ""
+        
+        # read in PDB from rcsb.org, a list, or a file
+
         if isinstance(file_cont, list):
             self.cont = file_cont[:]
-        elif isinstance(file_cont, str):
+        elif os.path.isfile(file_cont):
             try:
                 with open(file_cont, 'r') as pdb_file:
                     self.cont = [row.strip() for row in pdb_file.read().split('\n') if row.strip()]
             except FileNotFoundError as err:
                 print(err)
+        else:
+            try:
+                response = urllib.request.urlopen('http://www.rcsb.org/pdb/files/%s.pdb' %file_cont)
+                dat = response.read().decode('utf-8')
+                self.cont = [row.strip() for row in dat.split('\n') if row.strip()]
+            except urllib.request.HTTPError as e:
+                print('HTTP Error %s' %e.code)
+            except urllib.request.URLError as e:
+                print('URL Error %s' %e.args)
+            
 
         if self.cont:
              self.atom = [row for row in self.cont if row.startswith('ATOM')]
