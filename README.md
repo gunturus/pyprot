@@ -52,7 +52,9 @@ The scripts are located in the subdirectory `./scripts` and can be used after `p
 
 ## Installation
 
-The pyprot package can be installed like any other "normal" Python package via 
+PyProt was build and tested in Python 3.
+
+The `pyprot` package can be installed like any other "normal" Python package via 
 	
 	pip install pyprot
 	

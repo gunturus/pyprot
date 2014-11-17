@@ -13,12 +13,11 @@ setup(
     keywords='proteins PDB MOL2',
     platforms='any',
     classifiers=[
-        'Programming Language :: Python 3.x',
-        'Development Status :: Stable',
+        'Programming Language :: Python :: 3',
+        'Development Status :: 5 - Production/Stable',
         'Natural Language :: English',
-        'Environment :: Desktop Environment',
-        'Intended Audience :: Computational Biologists',
-        'License :: GPLv3',
+        'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Topic :: Software Development :: Libraries :: Python Modules',
         ],
     long_description="""
