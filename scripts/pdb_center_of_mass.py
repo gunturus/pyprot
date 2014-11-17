@@ -2,8 +2,12 @@
 
 # Sebastian Raschka 2014
 #
-# Center of Mass Calculation for proteins and/or ligands
+# Python PyProt script to calculate the Center of Mass Calculation of proteins and/or ligands
 # in PDB files.
+#
+# run
+# ./pdb_center_of_mass.py -h
+# for help
 #
 
 import argparse

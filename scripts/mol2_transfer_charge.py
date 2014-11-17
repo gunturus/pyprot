@@ -2,8 +2,12 @@
 
 # Sebastian Raschka 2014
 #
-# Takes a reference mol2 file as input and applies its charges
-# to a second mol2 file.
+# Python PyProt script that takes a reference MOL2 file as input and transfer its atom charges
+# to a second MOL2 file.
+#
+# run
+# ./mol2_transfer_charge.py -h
+# for help
 #
 
 import argparse

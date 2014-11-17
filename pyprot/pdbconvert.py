@@ -20,16 +20,12 @@ class PdbConvert(object):
         chain IDs and the items a list of 1-letter amino acid
         codes.
         E.g., {'H': ['K'], 'L': ['D', 'I', 'V', 'M']}
-
         Keyword arguments:
             hetatm (bool): If True, also HETATM lines are considered.
-
         Returns a dictionary with the protein chain letters A-Z as keys
             and the FASTA sequence as values (as list of characters).
             E.g.,
-
             {'A': ['P', 'Q', 'I', ...], 'B': ['P', 'Q', 'I', ...], ...}
-
         """
         prev_seq_num = 0
         fasta_dict = dict()

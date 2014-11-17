@@ -1,8 +1,13 @@
 #!/usr/bin/env python
 
 # Sebastian Raschka 2014
-# Script that extracts atoms within a radius from a PDB file
-
+#
+# Python PyProt script to extracts atoms within a radius from a PDB file.
+#
+# run
+# ./pdb_grab_atom_radius.py -h
+# for help
+#
 
 
 

@@ -2,8 +2,12 @@
 
 # Sebastian Raschka 2014
 #
-# Root-mean-square deviation (RMSD) for proteins and/or ligands
+# Python PyProt script to calculate the Root-mean-square deviation (RMSD) for proteins and/or ligands
 # in PDB files.
+#
+# run
+# ./pdb_rmsd.py -h
+# for help
 #
 
 import argparse
