@@ -22,7 +22,7 @@ For more details, please visit PyProt on [GitHub](https://github.com/rasbt/pypro
 
 ## Scripts and command line tools
 
-pyprot provides ready-to-use command line scripts that are using the underlying `pyprot` objects to work with PDB and Mol2 files.  
+PyProt provides ready-to-use command line scripts that are using the underlying `pyprot` objects to work with PDB and MOL2 files.  
 The scripts are located in the subdirectory `./scripts` and can be used after `pyprot` was successfully installed.   
 
 ### List of command line tools
@@ -38,7 +38,7 @@ The scripts are located in the subdirectory `./scripts` and can be used after `p
 - Working with MOL2 files
     - Transfer charges
     - Split multimol2 files
-
+	- MOL2 functional group filter
 
 
 <br>

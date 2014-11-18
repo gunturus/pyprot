@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Sebastian Raschka 2014
-# Python pyprot script to calculate B-factor statistics of PDB file.
+# Python PyProt script to calculate B-factor statistics of PDB file.
 #
 # run
 # ./pdb_bfactor_stats.py -h
@@ -20,8 +20,7 @@ parser = argparse.ArgumentParser(
     )
 
 
-parser.add_argument('PDBfile')
-
+parser.add_argument('-i', '--input', type=str, help='Input PDB file.')
 parser.add_argument('-p', '--protein', action='store_true', help='includes ATOM residues.')
 parser.add_argument('-l', '--ligand', action='store_true', help='includes HETATM residues.')
 parser.add_argument('-a', '--atoms', type=str, default='all', help='options: all, mainchain, calpha')
@@ -29,12 +28,16 @@ parser.add_argument('-a', '--atoms', type=str, default='all', help='options: all
 
 args = parser.parse_args()
 
+if not args.input:
+    print('{0}\nPlease provide an input file.\n{0}'.format(50* '-'))
+    parser.print_help()
+    quit()
 
 if args.atoms and args.atoms not in ('all', 'mainchain', 'calpha'):
     print('Please provide a valid option for --atoms, e.g., : all, mainchain, or calpha')
     quit()
     
-if not os.path.isfile(args.PDBfile):
+if not os.path.isfile(args.input):
     print('Error: File not found')
     quit()
     
@@ -48,7 +51,7 @@ if not args.protein and not args.ligand:
     protein=True
 
 
-in_pdb = pyprot.Pdb(args.PDBfile)
+in_pdb = pyprot.Pdb(args.input)
 
 
 b_stats = in_pdb.bfactor_stats(protein=protein, ligand=ligand, atoms=args.atoms)

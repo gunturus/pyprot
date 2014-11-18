@@ -24,7 +24,7 @@
 
 ## Scripts and command line tools
 
-pyprot provides ready-to-use command line scripts that are using the underlying `pyprot` objects to work with PDB and Mol2 files.  
+PyProt provides ready-to-use command line scripts that are using the underlying `pyprot` objects to work with PDB and MOL2 files.  
 The scripts are located in the subdirectory `./scripts` and can be used after `pyprot` was successfully installed.   
 
 ### List of command line tools
@@ -33,14 +33,14 @@ The scripts are located in the subdirectory `./scripts` and can be used after `p
     - [Center of Mass](./docs/tools/pdb_center_of_mass.md)
     - [Grab atoms within a radius](./docs/tools/pdb_grab_atom_radius.md)
     - [Root-mean-square deviation (RMSD)](./docs/tools/pdb_rmsd.md)
-    - [PDB to FASTA conversion](./docs/tools/pdb_to_fasta.md)
+    - [PDB to FASTA converter](./docs/tools/pdb_to_fasta.md)
     - [PDB atom and residue renumbering](./docs/tools/pdb_renumber.md)
     - [B-factor statistics](./docs/tools/pdb_bfactor_stats.md)
 
   
 - Working with MOL2 files
     - [Transfer charges](./docs/tools/mol2_transfer_charge.md)
-    - [Split multimol2 files](./docs/tools/mol2_split.md)
+    - [Split multi-MOL2 files](./docs/tools/mol2_split.md)
     - [MOL2 functional group filter](./docs/tools/mol2_filter_funcgroups.md)
 
 <br>

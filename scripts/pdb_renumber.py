@@ -26,7 +26,6 @@ parser.add_argument('-s', '--start', help='Number of the first residue in the re
 parser.add_argument('-a', '--atoms' ,action='store_true', help='Renumbers atoms')
 parser.add_argument('-r', '--residues', action='store_true', help='Renumbers residues')
 parser.add_argument('-c', '--chainreset', action='store_true', help='Resets the residue renumbering after encountering a new chain.')
-parser.add_argument('-v', '--version', action='version', version='v. 1.0')
 
 args = parser.parse_args()
 

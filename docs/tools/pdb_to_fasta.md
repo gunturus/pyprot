@@ -1,27 +1,26 @@
 [[back to overview](../../README.md)]
 
-# PDB to FASTA conversion
+# PDB to FASTA converter
 
 A script that converts amino acid residues from PDB files into a FASTA string.
 
 ### Usage
 
-run `python pdb_to_fasta.py --help` for the usage information:
+Run `python pdb_to_fasta.py --help` for usage information:
 
 <pre>
-usage: pdb_to_fasta.py [-h] [-l] [-o out.fasta] PDBfile
+usage: pdb_to_fasta.py [-h] [-i INPUT] [-l] [-o out.fasta]
 
 Converts amino acid residues from PDB file into a FASTA string
 
-positional arguments:
-  PDBfile
-
 optional arguments:
   -h, --help            show this help message and exit
+  -i INPUT, --input INPUT
+                        Input PDB file
   -l, --ligand          includes HETATM residues.
   -o out.fasta, --out out.fasta
                         writes FASTA strings to an output file instead of printing it to the screen
-
+(py34)~/github/pyprot
 </pre>
 
 <br>
@@ -29,11 +28,12 @@ optional arguments:
 
 ### Example
 
-command:
+**Input:**
 
-	python pdb_to_fasta.py 3B7V.pdb -o 3B7V.fasta
+	python pdb_to_fasta.py -i 3B7V.pdb -o 3B7V.fasta
 
 
+**Screenshot of File Output:**
 
 ![](../../images/tools/ex_pdb_to_fasta.png)
 

@@ -24,7 +24,7 @@ parser = argparse.ArgumentParser(
 
 
 # positional arguments
-parser.add_argument('PDBfile')
+parser.add_argument('-i', '--input', help='Input PDB file')
 parser.add_argument('-r', '--radius',
         type=float, 
         metavar='int/float',
@@ -38,7 +38,7 @@ parser.add_argument('-c', '--coordinates',
         help='center for extracting atoms (default "0,0,0")')
 
 # optional arguments
-parser.add_argument('-i', '--include', type=str, 
+parser.add_argument('-n', '--include', type=str, 
         default='ATOM,HETATM', 
         metavar='coordinate-ID',
         help='Coordinate lines to include (default: "ATOM,HETATM")')
@@ -47,7 +47,13 @@ parser.add_argument('-o', '--out', metavar='out.fasta', type=str,
              
              
 args = parser.parse_args()                      
-pdb = pyprot.Pdb(args.PDBfile)            
+
+if not args.input:
+    print('{0}\nPlease provide an input file.\n{0}'.format(50* '-'))
+    parser.print_help()
+    quit()
+
+pdb = pyprot.Pdb(args.input)            
 
 
 

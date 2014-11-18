@@ -27,15 +27,19 @@ parser = argparse.ArgumentParser(
     )
 
 
-parser.add_argument('PDBfile')
-
+parser.add_argument('-i', '--input', type=str, help='Input PDB file.')
 parser.add_argument('-p', '--protein', action='store_true', help='Center of mass for atoms in ATOM sections only')
 parser.add_argument('-l', '--ligand', action='store_true', help='Center of mass for atoms in HETATM sections only')
 
 
 args = parser.parse_args()
 
-pdb = pyprot.Pdb(args.PDBfile)
+if not args.input:
+    print('{0}\nPlease provide an input file.\n{0}'.format(50* '-'))
+    parser.print_help()
+    quit()
+
+pdb = pyprot.Pdb(args.input)
 
 
 if args.ligand and not args.protein:

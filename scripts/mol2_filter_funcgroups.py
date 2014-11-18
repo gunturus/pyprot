@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Sebastian Raschka 2014
-# Python pyprot script to filter for MOL2 molecules that contain certain functional groups.
+# Python PyProt script to filter for MOL2 molecules that contain certain functional groups.
 # Takes a singe-structure or multi-structure MOL2 file
 # filtered query molecules that have functional groups in a specified charge range.
 

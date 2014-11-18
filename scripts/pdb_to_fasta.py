@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Sebastian Raschka 2014
-# Python pyprot script to convert amino acid residues from a PDB file into a FASTA string.
+# Python PyProt script to convert amino acid residues from a PDB file into a FASTA string.
 #
 # run
 # ./pdb_to_fasta.py -h
@@ -59,7 +59,7 @@ AMINO_ACIDS_1TO3 = {'A': 'ALA', 'C': 'CYS', 'D': 'ASP', 'E': 'GLU',
 
 
 
-import argparse
+
 
 
 parser = argparse.ArgumentParser(
@@ -69,19 +69,22 @@ parser = argparse.ArgumentParser(
     )
 
 
-parser.add_argument('PDBfile')
 
+parser.add_argument('-i', '--input', help='Input PDB file')
 parser.add_argument('-l', '--ligand', action='store_true', help='includes HETATM residues.')
 parser.add_argument('-o', '--out', metavar='out.fasta', type=str, 
         help='writes FASTA strings to an output file instead of printing it to the screen')
-parser.add_argument('-v', '--version', action='version', version='pdb_to_fasta v. 1.0')
-
 
 
 args = parser.parse_args()
 
 
-in_pdb = pyprot.Pdb(args.PDBfile)
+if not args.input:
+    print('Please provide an input file via the -i flag. Use --help for more information.\n') 
+    quit()
+
+
+in_pdb = pyprot.Pdb(args.input)
 
 fastas = sorted(in_pdb.to_fasta(hetatm=args.ligand).items())
 

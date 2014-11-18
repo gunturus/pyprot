@@ -2,7 +2,7 @@
 
 # Sebastian Raschka 2014
 #
-# Python pyprot script to calculate the Root-mean-square deviation (RMSD) for proteins and/or ligands
+# Python PyProt script to calculate the Root-mean-square deviation (RMSD) for proteins and/or ligands
 # in PDB files.
 #
 # run
@@ -19,15 +19,14 @@ parser = argparse.ArgumentParser(
         'By default, all atoms but hydrogen atoms of the protein are included in the RMSD calculation.\n'\
         'NOTE: Both structures must contain the same number of atoms in similar order.',
     epilog='Example:\n'\
-            'pdb_rmsd.py ~/Desktop/pdb1.pdb ~/Desktop/pdb2.pdb\n'\
+            'pdb_rmsd.py -r ~/Desktop/pdb1.pdb -t ~/Desktop/pdb2.pdb\n'\
             '0.7377',
     formatter_class=argparse.RawTextHelpFormatter
     )
 
 
-parser.add_argument('PDBfile1')
-parser.add_argument('PDBfile2')
-
+parser.add_argument('-r', '--reference', type=str, help='Reference PDB file.')
+parser.add_argument('-t', '--target', type=str, help='Target PDB file.')
 
 parser.add_argument('-l', '--ligand', action='store_true', help='Calculates RMSD between ligand (HETATM) atoms.')
 parser.add_argument('-c', '--carbon', action='store_true', help='Calculates the RMSD between carbon atoms only.')
@@ -36,8 +35,20 @@ parser.add_argument('-ca', '--calpha', action='store_true', help='Calculates the
 
 args = parser.parse_args()
 
-pdb1 = pyprot.Pdb(args.PDBfile1)
-pdb2 = pyprot.Pdb(args.PDBfile2)
+
+    
+if not args.reference:
+    print('{0}\nPlease provide a reference input PDB file.\n{0}'.format(50* '-'))
+    parser.print_help()
+    quit()    
+    
+if not args.target:
+    print('{0}\nPlease provide a target input PDB file.\n{0}'.format(50* '-'))
+    parser.print_help()
+    quit()
+
+pdb1 = pyprot.Pdb(args.reference)
+pdb2 = pyprot.Pdb(args.target)
 
 if args.carbon and args.calpha:
     print('\nERROR: Please provide EITHER -c OR -ca, not both.\n')

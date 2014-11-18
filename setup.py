@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name='PyProt',
     description='Tools for Protein structure file manipulation',
-    version='1.0.0',
+    version='1.0.1',
     author='Sebastian Raschka',
     author_email='se.raschka@gmail.com',
     url='https://github.com/rasbt/pyprot',

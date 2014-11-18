@@ -2,11 +2,13 @@
 
 # PDB atom and residue renumbering
 
-### Usage
-
 The `renumber_pdb.py` script renumbers atoms and/or residues in a PDB file.
 
-run `./renumber_pdb.py --help` for the usage information:
+### Usage
+
+
+
+Run `./renumber_pdb.py --help` for usage information:
 
 <pre>
 usage: renumber_pdb.py [-h] [-i INPUT] [-s START] [-a] [-r] [-c]
@@ -22,7 +24,7 @@ optional arguments:
   -a, --atoms           Renumbers atoms
   -r, --residues        Renumbers residues
   -c, --chainreset      Resets the residue renumbering after encountering a new chain.
-  -v, --version         show program's version number and exit
+
 </pre>
 
 <br>
@@ -34,7 +36,7 @@ optional arguments:
 
 	./renumber_pdb.py -i examples/example_1.pdb -a -r  > examples/out_1.pdb
 
-**Input:**
+**File Input:**
 <pre>
 ATOM    774  N   LYS A 105      10.079  34.838  11.847  1.00 29.57           N  
 ATOM    775  CA  LYS A 105      10.147  36.293  12.036  1.00 28.05           C  
@@ -56,7 +58,7 @@ ATOM    790  CD2 LEU A 106      14.567  39.332   8.388  1.00 26.61           C
 [...]
 </pre>
 
-**Output:**
+**File Output:**
 <pre>
 ATOM      1  N   LYS A   1      10.079  34.838  11.847  1.00 29.57           N
 ATOM      2  CA  LYS A   1      10.147  36.293  12.036  1.00 28.05           C
