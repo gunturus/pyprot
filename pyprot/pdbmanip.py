@@ -75,15 +75,15 @@ class PdbManip(object):
 
     def select_residues(self, pos, protein=True, ligand=False):
         """
-        Returns all protein ATOM within a certain residue range
+        Returns PDB contents within a certain residue range.
 
         Keyword arguments:
-            pos (list): the number of the first and last residue to return, e.g., [1, 10]
-                 returns residues 1-10.
+            pos (list): the number of the first and last residue to return, 
+                e.g., [1, 10] returns residues 1-10.
             protein: Inlcudes ligand if True.
             ligand: Inlcudes ligand if True.
         Returns:
-            List of the pdb contents that match the residue range.
+            List of the pdb rows that match the residue range.
 
         """
         rng = range(pos[0], pos[1]+1)
@@ -95,6 +95,30 @@ class PdbManip(object):
         if ligand:
             res += [row for row in self.hetatm if int(row[22:26].strip()) in rng]
         return res
+
+        
+    def select_atoms(self, pos, protein=True, ligand=False):
+        """
+        Returns PDB contents within a certain atom range.
+
+        Keyword arguments:
+            pos (list): the number of the first and last atom to return, 
+                e.g., [1, 10] returns atoms 1-10.
+            protein: Inlcudes ligand if True.
+            ligand: Inlcudes ligand if True.
+        Returns:
+            List of the pdb rows that match the atom range.
+
+        """
+        rng = range(pos[0], pos[1]+1)
+        
+        atoms = []
+        
+        if protein:
+            atoms += [row for row in self.atom if int(row[6:11].strip()) in rng]
+        if ligand:
+            atoms += [row for row in self.hetatm if int(row[6:11].strip()) in rng]
+        return atoms
 
 
     def save_pdb(self, dest):
