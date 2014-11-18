@@ -1,12 +1,12 @@
 """
 Sebastian Raschka 2014
 
-Unit tests for contains_atom function in mol2filter.py
+Unit tests for count_matches function in mol2filter.py
 
 """
 
 
-from pyprot.mol2filter import contains_atom
+from pyprot.mol2filter import count_matches
 
 MOL2_STR1 = """@<TRIPOS>MOLECULE
 ZINC00000016
@@ -95,12 +95,12 @@ USER_CHARGES
 
 MOL2_CONT1 = MOL2_STR1.split('\n')
 
-def test_contains_atom():
-    assert(contains_atom(MOL2_CONT1, [['O.3']]) == True)
-    assert(contains_atom(MOL2_CONT1, [['O.3', -0.595, -0.315]]) == True)
-    assert(contains_atom(MOL2_CONT1, [['O.2',-0.05, -0.03]]) == True)
-    assert(contains_atom(MOL2_CONT1, [['O.2',-0.05, -0.03], ['O.3', -0.595, -0.315]]) == True)
-    assert(contains_atom(MOL2_CONT1, [['O.5',-0.595, -0.315]]) == False)
-    assert(contains_atom(MOL2_CONT1, [['O.3',-0.001, -0.002]]) == False)
-    assert(contains_atom(MOL2_CONT1, [['O.2',-0.002, -0.001], ['O.3',-0.002, -0.001]]) == False)
-    assert(contains_atom(MOL2_CONT1, [['O.2',-1.120, -0.711], ['O.3',-1.120, -0.711]]) == True)
+def test_count_matches():  
+    assert(count_matches(MOL2_CONT1, [['O.3']]) == 1)
+    assert(count_matches(MOL2_CONT1, [['O.3', -0.595, -0.315]]) == 1)
+    assert(count_matches(MOL2_CONT1, [['O.2',-0.05, -0.03]]) == 1)
+    assert(count_matches(MOL2_CONT1, [['O.2',-0.05, -0.03], ['O.3', -0.595, -0.315]]) == 2)
+    assert(count_matches(MOL2_CONT1, [['O.5',-0.595, -0.315]]) == 0)
+    assert(count_matches(MOL2_CONT1, [['O.3',-0.001, -0.002]]) == 0)
+    assert(count_matches(MOL2_CONT1, [['O.2',-0.002, -0.001], ['O.3',-0.002, -0.001]]) == 0)
+    assert(count_matches(MOL2_CONT1, [['O.2',-1.120, -0.711], ['O.3',-1.120, -0.711]]) == 1)

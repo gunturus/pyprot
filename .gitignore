@@ -1,4 +1,6 @@
 .ipynb_checkpoints/
+.MANIFEST
+.MANIFEST.in
 gmon.out
 *.pyc
 *.o

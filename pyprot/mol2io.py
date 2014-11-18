@@ -1,6 +1,6 @@
 import os
 
-def split_multimol2(multimol2, generator=False):
+def split_multimol2(multimol2):
     """
     Splits a multi-mol2 file (a mol2 file consisting of multiple mol2 entries)
         into individual mol2-file contents.

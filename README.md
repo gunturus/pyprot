@@ -36,10 +36,12 @@ The scripts are located in the subdirectory `./scripts` and can be used after `p
     - [PDB to FASTA conversion](./docs/tools/pdb_to_fasta.md)
     - [PDB atom and residue renumbering](./docs/tools/pdb_renumber.md)
     - [B-factor statistics](./docs/tools/pdb_bfactor_stats.md)
+
   
 - Working with MOL2 files
     - [Transfer charges](./docs/tools/mol2_transfer_charge.md)
     - [Split multimol2 files](./docs/tools/mol2_split.md)
+    - [MOL2 functional group filter](./docs/tools/mol2_filter_funcgroups.md)
 
 <br>
 <br>
