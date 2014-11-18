@@ -33,7 +33,7 @@ The original project is hosted and developed at: https://github.com/rasbt/pyprot
  Contact
 =============
 
-If you have any questions or comments about PyPrind, please feel free to contact me via
+If you have any questions or comments about PyProt, please feel free to contact me via
 email: se.raschka@gmail.com
 or twitter: https://twitter.com/rasbt
 

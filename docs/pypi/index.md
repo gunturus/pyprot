@@ -3,7 +3,7 @@
 **PyProt is a Python package for working with protein structure files formats. It comes with a collection of ready-to-use scripts for the most common file operations and protein analyses.**
 
 
-For more details, please visit PyProt on [GitHub](http://htmlpreview.github.io/?https://github.com/rasbt/pyprot/blob/master/README.html).
+For more details, please visit PyProt on [GitHub](https://github.com/rasbt/pyprot).
 
 <hr>
 ## ReadMe Contents
