@@ -34,7 +34,7 @@ optional arguments:
 - B-factor statistics of all protein atoms
 
 <pre>
-/pdb_bfactor_stats.py ~/Desktop/1RX1.pdb --protein
+./pdb_bfactor_stats.py ~/Desktop/1RX1.pdb --protein
 Median B-factor: 14.58
 Average B-factor: 19.951
 Standard Deviation: 16.577
@@ -44,6 +44,7 @@ Number of B-factors: 1268
 
 
 - B-factor of main-chain atoms only.
+
 <pre>
 ./pdb_bfactor_stats.py ~/Desktop/1RX1.pdb --protein --atoms mainchain
 Median B-factor: 12.975
