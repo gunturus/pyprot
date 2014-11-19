@@ -1,3 +1,6 @@
+## 1.0.4
+- Added pdb_download script and fixed urllib import bug
+
 ## 1.0.3
 - New `PdbIO` class for `Pdb` base class.
 

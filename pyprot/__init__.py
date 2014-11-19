@@ -7,7 +7,7 @@ file operations and protein analyses.
 
 """
 
-__version__ = '1.0.3'
+__version__ = '1.0.4'
 
 from pyprot.pdbmain import Pdb
 
