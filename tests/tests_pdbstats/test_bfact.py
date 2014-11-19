@@ -29,13 +29,13 @@ def test_get_bfactor():
 
 def test_bfactor_mean():
     mean_atom_bf = pdb1.bfactor_mean(protein=True, ligand=False, atoms='all')
-    assert(round(mean_atom_bf, 5) == 46.56017)
+    assert(mean_atom_bf == 46.56)
 
     mean_hetatm_bf = pdb1.bfactor_mean(protein=False, ligand=True, atoms='all')
-    assert(round(mean_hetatm_bf, 5) == 27.35667)
+    assert(mean_hetatm_bf == 27.357)
 
     mean_both_bf = pdb1.bfactor_mean(protein=True, ligand=True, atoms='all')
-    assert(round(mean_both_bf, 5) == 45.61574)
+    assert(mean_both_bf == 45.616)
 
 
 def test_bfactor_median():
@@ -51,18 +51,18 @@ def test_bfactor_median():
     
 def test_bfactor_std_dev():
     std_dev_atom_bf = pdb1.bfactor_std_dev(protein=True, ligand=False, atoms='all')
-    assert(round(std_dev_atom_bf,3) == 4.579), print(std_dev_atom_bf)
+    assert(round(std_dev_atom_bf,3) == 4.619), print(std_dev_atom_bf)
 
     std_dev_hetatm_bf = pdb1.bfactor_std_dev(protein=False, ligand=True, atoms='all')
-    assert(round(std_dev_hetatm_bf,3) == 2.666), print(std_dev_hetatm_bf)
+    assert(round(std_dev_hetatm_bf,3) == 3.265), print(std_dev_hetatm_bf)
 
     std_dev_both_bf = pdb1.bfactor_std_dev(protein=True, ligand=True, atoms='all')
-    assert(round(std_dev_both_bf,3) == 6.126), print(std_dev_both_bf)
+    assert(round(std_dev_both_bf,3) == 6.177), print(std_dev_both_bf)
 
 
 def test_bfactor_std_err():
     std_err_atom_bf = pdb1.bfactor_std_err(protein=True, ligand=False, atoms='all')
-    assert(round(std_err_atom_bf,3) == 0.607), print(std_err_atom_bf)
+    assert(round(std_err_atom_bf,3) == 0.606), print(std_err_atom_bf)
 
     std_err_hetatm_bf = pdb1.bfactor_std_err(protein=False, ligand=True, atoms='all')
     assert(round(std_err_hetatm_bf,3) == 1.885), print(std_err_hetatm_bf)
@@ -73,4 +73,4 @@ def test_bfactor_std_err():
 
 def test_bfactor_stats():
     stats_atom_bf = pdb1.bfactor_stats(protein=True, ligand=False, atoms='all')
-    assert([round(i,3) for i in stats_atom_bf] == [47.350, 46.560, 4.579, 0.607]), print(stats_atom_bf)
+    assert([round(i,3) for i in stats_atom_bf] == [47.35, 46.56, 4.619, 0.606]), print(stats_atom_bf)

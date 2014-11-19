@@ -10,7 +10,7 @@ from .pdbconvert import PdbConvert
 import urllib.request
 import os
 
-class Pdb(PdbStats, PdbManip, PdbFormat, PdbConvert):
+class Pdb(PdbIO, PdbStats, PdbManip, PdbFormat, PdbConvert):
     """ Object that allows operations with protein files in PDB format. """
 
     def __init__(self, file_cont = [], pdb_code = ""):
@@ -36,14 +36,7 @@ class Pdb(PdbStats, PdbManip, PdbFormat, PdbConvert):
             except FileNotFoundError as err:
                 print(err)
         else:
-            try:
-                response = urllib.request.urlopen('http://www.rcsb.org/pdb/files/%s.pdb' %file_cont)
-                dat = response.read().decode('utf-8')
-                self.cont = [row.strip() for row in dat.split('\n') if row.strip()]
-            except urllib.request.HTTPError as e:
-                print('HTTP Error %s' %e.code)
-            except urllib.request.URLError as e:
-                print('URL Error %s' %e.args)
+            self.cont = self.fetch_rcsb(self.code)
             
 
         if self.cont:

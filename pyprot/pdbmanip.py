@@ -97,7 +97,7 @@ class PdbManip(object):
         chain_cont = []
         for row in self.cont:
             if row.startswith(('ATOM', 'HETATM', 'TER')) and row[21:22].strip() in chain_ids:
-                res.append(row)
+                chain_cont.append(row)
         return chain_cont
 
 
@@ -170,18 +170,26 @@ class PdbManip(object):
             atom_cont += [row for row in self.hetatm if int(row[6:11].strip()) in rng]
         return atom_cont
 
+
     def grab_radius(self, radius, coordinates):
         """
         Grabs those atoms that are within a specified
-        radius of a provided 3d-coordinate.
+        radius given a 3D-coordinate.
 
-        Keyword arguments:
-            radius: radius in angstrom (float or integer)
-            coordinates: a list of x, y, z coordinates , e.g., [1.0, 2.4, 4.0]
+        Parameters
+        ----------
+        
+        radius : `int` or `float`.
+          Radius in Angstroms.
+          
+        Coordinates : `list` 
+          A list of x, y, z coordinates , e.g., `[1.0, 2.4, 4.0]`
 
-        Returns:
-            A list that contains the pdb contents that are within the specified
-            radius.
+        Returns
+        ----------
+
+        atom_cont : `list`.
+          List of PDB file contents that are within the specified radius.
 
         """
         in_radius = []
@@ -194,3 +202,5 @@ class PdbManip(object):
                 if distance <= radius:
                     in_radius.append(line)
         return in_radius
+        
+    

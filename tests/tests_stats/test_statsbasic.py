@@ -57,10 +57,9 @@ def test_interquartile_range():
 
 def test_var_std_dev():
     data1 = [33219,36254,38801,46335,46840,47596,55130,56863,78070,88830] 
-    assert round(pyprot.statsbasic.variance(data1)) == 291622740
-    assert round(pyprot.statsbasic.std_dev(data1)) == 17077
+    assert round(pyprot.statsbasic.variance(data1)) == 324025267
     data2 = [38946,43420,49191,50430,50557,52580,53595,54135,60181,62076]
-    assert round(pyprot.statsbasic.std_dev(data2), 8) == 6557.16326547
+    assert round(pyprot.statsbasic.std_dev(data2), 8) == 6911.85696949
     data3 = [59147.29, 61379.14, 55683.19, 56272.76, 52055.88, 47696.74,
              60577.53, 49793.44, 35562.29, 58586.76, 47091.37, 36906.96,
              53479.66, 67834.74, 53018.8, 60375.11, 36566.91, 52905.58, 
@@ -78,8 +77,7 @@ def test_var_std_dev():
              64330.23, 48922.74, 27211.96, 62409.65, 28981.92, 64913.67,
              55766.0, 50748.04, 43990.34, 61828.33, 45434.02, 45369.16,
              54710.71, 62222.43, 44764.32, 50973.48]
-    assert round(pyprot.statsbasic.std_dev(data3), 5) == 10656.95267
-    assert round(pyprot.statsbasic.std_dev(data3, population = False), 5) == 10710.64043
+    assert round(pyprot.statsbasic.std_dev(data3), 5) == 10710.64043
     assert pyprot.statsbasic.std_dev([0]) == 0.0
     assert pyprot.statsbasic.std_dev([4]) == 0.0
     assert pyprot.statsbasic.std_dev([1,2]) == 0.5
@@ -87,11 +85,10 @@ def test_var_std_dev():
     assert pyprot.statsbasic.variance([0]) == 0.0
     assert pyprot.statsbasic.variance([4]) == 0.0
     data4 = [5, 2, 1, 0, 7]
-    assert round(pyprot.statsbasic.std_dev(data4), 5) == 2.60768
-    assert round(pyprot.statsbasic.std_dev(data4, population = False), 5) == 2.91548
+    assert round(pyprot.statsbasic.std_dev(data4), 5) == 2.91548
 
 def test_std_err():
-    pyprot.statsbasic.std_err([5,20,40,80,100],population = True) == 17.9165
+    pyprot.statsbasic.std_err([5,20,40,80,100], population=True) == 17.9165
     pyprot.statsbasic.std_err([150.5, 170, 160, 161, 170.5]) == 3.6926
 
     

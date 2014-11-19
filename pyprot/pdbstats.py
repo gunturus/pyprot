@@ -1,12 +1,7 @@
 """
-Sebastian Raschka 2014
-
-Parent class with methods specialized for statistics on PDB file contents.
-Imported into PdbObj class.
-
+Class inhereted by the `Pdb` base class in `pdbmain`.
+Contains methods specialized for statistics on PDB file contents.
 """
-
-
 
 from . import statsbasic
 from .datamolecular import ATOMIC_WEIGHTS
@@ -23,20 +18,30 @@ class PdbStats(object):
         Requires that both molecules have the same number of atoms in the
         same numerical order.
 
-        Keyword arguments:
-            sec_molecule (PdbObj): the second molecule as PdbObj object.
-            ligand (bool): If true, calculates the RMSD between two
-                ligand molecules (based on HETATM entries), else RMSD
-                between two protein molecules (ATOM entries) is calculated.
-            hydrogen (bool): If True, hydrogen atoms will be included in the
-                    RMSD calculation.
-            atoms (string) [all/c/no_h/ca]: "all" includes all atoms in the RMSD calculation,
-                "c" only considers carbon atoms, "no_h" considers all but hydrogen atoms,
-                and "ca" compares only C-alpha protein atoms.
+        Parameters
+        ----------
+        
+        sec_molecule : `Pdb` object.
+          The second molecule as `PdbObj` object.
+          
+        ligand : `bool` (default: `False`).
+          If True, calculates the RMSD between two
+          ligand molecules (based on HETATM entries), else RMSD
+          between two protein molecules (ATOM entries) is calculated.
+          
+        atoms : `str` (default: `'no_h'`)
+          A string `'all'`, `'c'`, `'no_h'`, or `'ca'`.
+          `"all"`: Includes all atoms in the RMSD calculation.
+          `"c"`: Only considers carbon atoms.
+          `"no_h"`: Considers all atoms but hydrogen atoms.
+          `"ca"`: Compares only C-alpha protein atoms.
+        
+        Returns
+        ----------
 
-        Returns:
-            Calculated RMSD value as float or None if RMSD not be
-            calculated.
+        rmsd : `float` or `None`.
+          Calculated RMSD value as `float` or `None` if RMSD not be
+          calculated.
 
         """
         rmsd = None
@@ -70,13 +75,21 @@ class PdbStats(object):
         """
         Calculates center of mass of a protein and/or ligand structure.
 
-        Keyword arguments:
-            protein (bool): If true, includes ATOM entries in calculation
-            ligand (bool): If true, includes HETATM entries in calculation
+        Parameters
+        ----------
+        
+        protein : `bool`.
+          If `True`, includes ATOM entries in calculation.
+        
+        ligand : `bool`.
+          If `True`, includes HETATM entries in calculation.
 
-        Returns:
-            center (list): List of float coordinates [x,y,z] that represent the
-            center of mass (precision 3).
+        Returns
+        ----------
+        
+        center `list` = `[x,y,z]`.
+          List of float coordinates [x,y,z] that represent the
+          center of mass (precision: 3).
 
         """
         center = [None, None, None]
@@ -120,18 +133,29 @@ class PdbStats(object):
     def get_bfactors(self, protein=True, ligand=False, atoms='all'):
         """
         Collects b-factors (temperature factors) from ATOM
-           and/or HETATM entries in a list
+        and/or HETATM entries in a list.
 
-        Keyword arguments:
-            protein (bool): If True gets b-factors from ATOM entries
-            ligand (bool): If True gets b-factors from HETATM entries
-            atoms (string):
-                        if 'all': considers all atoms
-                        if 'mainchain':  considers only main chain atoms (N, CA, O, C)
-                        if 'calpha': considers only c-alpha atoms
 
-        Returns:
-            B-factors as float in a list.
+        Parameters
+        ----------
+
+        protein : `bool`.
+          If `True`, includes ATOM entries in calculation.
+        
+        ligand : `bool`.
+          If `True`, includes HETATM entries in calculation.
+          
+        atoms : `str` (default: `'all'`)
+          A string `'all'`, `'mainchain'`, `'calpha'`
+          `"all"`: Includes all atoms in the RMSD calculation.
+          `"mainchain"`: Only considers protein mainchain atoms (N, CA, O, C).
+          `"calpha"`: Compares only C-alpha protein atoms.  
+
+        Returns
+        ----------
+        
+        bfactors : `list`
+          B-factors as floats in a list.
 
         """
         if atoms not in ('all', 'mainchain', 'calpha'):
@@ -154,119 +178,188 @@ class PdbStats(object):
         """
         Calculates b-factor (temperature factor) value statistics given a function 'func'.
 
-        Keyword arguments:
-               func: statistic functions, e.g., statsbasic.mean
-               protein (bool): If True considers b-factors from ATOM entries
-               ligand (bool): If True considers b-factors from HETATM entries
-               atoms (string):
-                        if 'all': considers all atoms
-                        if 'mainchain':  considers only main chain atoms (N, CA, O, C)
-                        if 'calpha': considers only c-alpha atoms
-        Returns:
-            The median B-factor as a float.
+        Parameters
+        ----------
+
+        protein : `bool`.
+          If `True`, includes ATOM entries in calculation.
+        
+        ligand : `bool`.
+          If `True`, includes HETATM entries in calculation.
+          
+        atoms : `str` (default: `'all'`)
+          A string `'all'`, `'mainchain'`, `'calpha'`
+          `"all"`: Includes all atoms in the RMSD calculation.
+          `"mainchain"`: Only considers protein mainchain atoms (N, CA, O, C).
+          `"calpha"`: Compares only C-alpha protein atoms.  
+          
+        Returns
+        ----------
+    
+        bf_stat : `float`.
+          B-factor statistics as a `float`. 
 
         """
         if atoms not in ('all', 'mainchain', 'calpha'):
             raise ValueError('Invalid argument. Argument not in ("all", "mainchain", "calpha"')
         
         if atoms != 'all':
-            bf = func(self.get_bfactors(protein=True, ligand=False, atoms=atoms))
+            bf_stat = func(self.get_bfactors(protein=True, ligand=False, atoms=atoms))
         else:
-            bf = func(self.get_bfactors(protein=protein, ligand=ligand, atoms=atoms))
-        return bf        
+            bf_stat = func(self.get_bfactors(protein=protein, ligand=ligand, atoms=atoms))
+        bf_stat = round(bf_stat,3)
+        return bf_stat        
         
 
     def bfactor_stats(self, protein=True, ligand=False, atoms='all'):
         """
         Calculates the b-factor (temperature factor) value statistics
 
-        Keyword arguments:
-               protein (bool): If True considers b-factors from ATOM entries
-               ligand (bool): If True considers b-factors from HETATM entries
-               atoms (string):
-                    if 'all': considers all atoms
-                    if 'mainchain':  considers only main chain atoms (N, CA, O, C)
-                    if 'calpha': considers only c-alpha atoms
-        Returns:
-            Returns a tuple of mean, median, standard deviation and standard error of the b-factors.
+        Parameters
+        ----------
+
+        protein : `bool`.
+          If `True`, includes ATOM entries in calculation.
+        
+        ligand : `bool`.
+          If `True`, includes HETATM entries in calculation.
+          
+        atoms : `str` (default: `'all'`)
+          A string `'all'`, `'mainchain'`, `'calpha'`
+          `"all"`: Includes all atoms in the RMSD calculation.
+          `"mainchain"`: Only considers protein mainchain atoms (N, CA, O, C).
+          `"calpha"`: Compares only C-alpha protein atoms.  
+        
+        Returns
+        ----------
+    
+        bf_stats : `tuple` = `[median, mean, std_dev, std_err]`.
+          A list of median, mean, standard deviation, and standard error of the B-factors.
 
         """
         bf_med = self.bfactor_median(protein=protein, ligand=ligand, atoms=atoms)   
         bf_mean = self.bfactor_mean(protein=protein, ligand=ligand, atoms=atoms)
         bf_std = self.bfactor_std_dev(protein=protein, ligand=ligand, atoms=atoms)
         bf_ser = self.bfactor_std_err(protein=protein, ligand=ligand, atoms=atoms)
-        return bf_med, bf_mean, bf_std, bf_ser
+        bf_stats = (bf_med, bf_mean, bf_std, bf_ser)
+        return bf_stats
 
 
     def bfactor_median(self, protein=True, ligand=False, atoms='all'):
         """
         Calculates the median b-factor (temperature factor) value
 
-        Keyword arguments:
-               protein (bool): If True considers b-factors from ATOM entries
-               ligand (bool): If True considers b-factors from HETATM entries
-               atoms (string):
-                    if 'all': considers all atoms
-                    if 'mainchain':  considers only main chain atoms (N, CA, O, C)
-                    if 'calpha': considers only c-alpha atoms
-        Returns:
-            The median B-factor as a float.
+        Parameters
+        ----------
+
+        protein : `bool`.
+          If `True`, includes ATOM entries in calculation.
+        
+        ligand : `bool`.
+          If `True`, includes HETATM entries in calculation.
+          
+        atoms : `str` (default: `'all'`)
+          A string `'all'`, `'mainchain'`, `'calpha'`
+          `"all"`: Includes all atoms in the RMSD calculation.
+          `"mainchain"`: Only considers protein mainchain atoms (N, CA, O, C).
+          `"calpha"`: Compares only C-alpha protein atoms.  
+          
+        Returns
+        ----------
+    
+        bf_med : `float`.
+          B-factor median as a `float`. 
 
         """
-        return self._bfactor_calc(func=statsbasic.median, protein=protein, ligand=ligand, atoms=atoms)
+        bf_med = self._bfactor_calc(func=statsbasic.median, protein=protein, ligand=ligand, atoms=atoms)
+        return bf_med
 
 
     def bfactor_mean(self, protein=True, ligand=False, atoms='all'):
         """
         Calculates the mean b-factor (temperature factor) value.
 
-        Keyword arguments:
-            protein (bool): If True considers b-factors from ATOM entries
-            ligand (bool): If True considers b-factors from HETATM entries
-            atoms (string):
-                    if 'all': considers all atoms
-                    if 'mainchain':  considers only main chain atoms (N, CA, O, C)
-                    if 'calpha': considers only c-alpha atoms
-        Returns:
-            The average B-factor as a float.
+        Parameters
+        ----------
+
+        protein : `bool`.
+          If `True`, includes ATOM entries in calculation.
+        
+        ligand : `bool`.
+          If `True`, includes HETATM entries in calculation.
+          
+        atoms : `str` (default: `'all'`)
+          A string `'all'`, `'mainchain'`, `'calpha'`
+          `"all"`: Includes all atoms in the RMSD calculation.
+          `"mainchain"`: Only considers protein mainchain atoms (N, CA, O, C).
+          `"calpha"`: Compares only C-alpha protein atoms.  
+          
+        Returns
+        ----------
+    
+        bf_mean : `float`.
+          B-factor mean (average) as a `float`. 
 
         """
-        return self._bfactor_calc(func=statsbasic.mean, protein=protein, ligand=ligand, atoms=atoms)
+        bf_mean = self._bfactor_calc(func=statsbasic.mean, protein=protein, ligand=ligand, atoms=atoms)
+        return bf_mean
 
 
     def bfactor_std_dev(self, protein=True, ligand=False, atoms='all'):
         """
         Calculates the standard deviation of the b-factor (temperature factor) values.
 
-        Keyword arguments:
-            protein (bool): If True considers b-factors from ATOM entries
-            ligand (bool): If True considers b-factors from HETATM entries
-            atoms (string):
-                    if 'all': considers all atoms
-                    if 'mainchain':  considers only main chain atoms (N, CA, O, C)
-                    if 'calpha': considers only c-alpha atoms
+        Parameters
+        ----------
 
-        Returns:
-            The standard deviation of the B-factors as a float.
+        protein : `bool`.
+          If `True`, includes ATOM entries in calculation.
+        
+        ligand : `bool`.
+          If `True`, includes HETATM entries in calculation.
+          
+        atoms : `str` (default: `'all'`)
+          A string `'all'`, `'mainchain'`, `'calpha'`
+          `"all"`: Includes all atoms in the RMSD calculation.
+          `"mainchain"`: Only considers protein mainchain atoms (N, CA, O, C).
+          `"calpha"`: Compares only C-alpha protein atoms.  
+
+        Returns
+        ----------
+    
+        bf_stdev : `float`.
+          B-factor standard deviation as a `float`. 
 
         """
-        return self._bfactor_calc(func=statsbasic.std_dev, protein=protein, ligand=ligand, atoms=atoms)
+        bf_stdev = self._bfactor_calc(func=statsbasic.std_dev, protein=protein, ligand=ligand, atoms=atoms)
+        return bf_stdev
         
     
     def bfactor_std_err(self, protein=True, ligand=False, atoms='all'):
         """
         Calculates the standard error of the b-factor (temperature factor) values.
 
-        Keyword arguments:
-            protein (bool): If True considers b-factors from ATOM entries
-            ligand (bool): If True considers b-factors from HETATM entries
-            atoms (string):
-                    if 'all': considers all atoms
-                    if 'mainchain':  considers only main chain atoms (N, CA, O, C)
-                    if 'calpha': considers only c-alpha atoms
+        Parameters
+        ----------
 
-        Returns:
-            The standard error of the B-factors as a float.
+        protein : `bool`.
+          If `True`, includes ATOM entries in calculation.
+        
+        ligand : `bool`.
+          If `True`, includes HETATM entries in calculation.
+          
+        atoms : `str` (default: `'all'`)
+          A string `'all'`, `'mainchain'`, `'calpha'`
+          `"all"`: Includes all atoms in the RMSD calculation.
+          `"mainchain"`: Only considers protein mainchain atoms (N, CA, O, C).
+          `"calpha"`: Compares only C-alpha protein atoms.  
+
+        Returns
+        ----------
+    
+        bf_stderr : `float`.
+          B-factor standard error as a `float`. 
 
         """
-        return self._bfactor_calc(func=statsbasic.std_err, protein=protein, ligand=ligand, atoms=atoms)
+        bf_stderr = self._bfactor_calc(func=statsbasic.std_err, protein=protein, ligand=ligand, atoms=atoms)
+        return bf_stderr
