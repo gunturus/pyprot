@@ -97,7 +97,7 @@ def _filter_atoms(mol2_cont, chargetype_list):
     mol2_cont : `list`.
       MOL2 file content as where each `list` item represents a line.
       
-    chargetype_list : `list` 
+    chargetype_list : `list`. 
       `list` of sub`list`s that consists of atom types as first sublist item, 
       and the allowed charge range is given as 2nd and 3rd sublist items.
       E.g., `[['O.2', -1.12, -0.792], ['O.2', -0.595, -0.315]]`
@@ -106,7 +106,7 @@ def _filter_atoms(mol2_cont, chargetype_list):
     Returns
     ---------- 
 
-    matched_lines : `list`
+    matched_lines : `list`.
       The mol2 lines that contains matches as a `list`.
 
     """
@@ -133,41 +133,57 @@ def _filter_atoms(mol2_cont, chargetype_list):
 
 def count_matches(mol2_cont, chargetype_list):
     """
-    Returns number of atom type and charge matches.
+    Checks of MOL2 structure contains atom types in a charge range.
 
-    Keyword arguments:
-        mol2_cont (list): mol2 file content as where each list item represents
-                     a line
-        chargetype_list (list): List of sublists that consists of atom types as
-                first sublist item, and the allowed charge range is given
-                as 2nd and 3rd sublist items.
-                Example: [['O.2', -1.12, -0.792], ['O.2', -0.595, -0.315]]
+    Parameters
+    ----------   
 
-    Returns number of matches as integer.
+    mol2_cont : `list`.
+      MOL2 file content as where each `list` item represents a line.
+      
+    chargetype_list : `list`. 
+      `list` of sub`list`s that consists of atom types as first sublist item, 
+      and the allowed charge range is given as 2nd and 3rd sublist items.
+      E.g., `[['O.2', -1.12, -0.792], ['O.2', -0.595, -0.315]]`
+
+    Returns
+    ---------- 
+
+    cnt : `int`.
+      Number of how many atoms the MOL2 structure contains that match the
+      atom-charge pairs in the `chargetype_list`.
 
     """
-    return len(_filter_atoms(mol2_cont, chargetype_list))
+    cnt = len(_filter_atoms(mol2_cont, chargetype_list))
+    return cnt
 
 
 def match_all(mol2_cont, chargetype_list):
     """
     Checks if molecule matches all criteria (all atoms or atoms and charge ranges
-            in the chargetype_list).
+            in the `chargetype_list`).
 
-    Keyword arguments:
-       mol2_cont (list): mol2 file content as where each list item represents
-                     a line
-        chargetype_list (list): List of sublists that consists of atom types as
-                first sublist item, and the allowed charge range is given
-                as 2nd and 3rd sublist items.
-                Example: [['O.2', -1.12, -0.792], ['O.2', -0.595, -0.315]]
+    Parameters
+    ----------   
 
-    Returns True if all atoms are matched.
+    mol2_cont : `list`.
+      MOL2 file content as where each `list` item represents a line.
+      
+    chargetype_list : `list`.
+      `list` of sub`list`s that consists of atom types as first sublist item, 
+      and the allowed charge range is given as 2nd and 3rd sublist items.
+      E.g., `[['O.2', -1.12, -0.792], ['O.2', -0.595, -0.315]]`
+
+    Returns
+    ----------
+    
+    matched : `bool`.
+      True if all atoms are matched.
 
     """
     prefilter = _filter_atoms(mol2_cont, chargetype_list)
-    
     check_dict = {idx:0 for idx in range(len(chargetype_list))}
+    matched = False
     
     for line in prefilter:
         fields = line.split()
@@ -187,32 +203,42 @@ def match_all(mol2_cont, chargetype_list):
             break
     for i in check_dict.values():
         if i < 1:
-            return False
-    return True
+            return matched
+    
+    matched = True
+    return matched
 
 
 def intermol_distance_match(mol2_ref, mol2_query, chargetype_list, distance):
     """
-    Searches for atom types in mol2 file(s). Returns True if
+    Searches for atom types in MOL2 file(s). Returns True if
     2 atoms of the defined types are within a certain distance range.
 
-    Keyword arguments:
-        mol2_ref (list): mol2 file content of the reference molecule where each list item represents
-                     a single line in the mol2 file.
+    Parameters
+    ----------   
+    
+    mol2_ref (list) : `list`.
+        MOL2 file content of the reference molecule where each list item represents
+        a single line in the mol2 file.
         mol2_query (list): mol2 file content of a query molecule where each list item represents
                      a single line in the mol2 file.
-        chargetype_list (list): List of sublists that consists of atom types as
-                first sublist item, and the allowed charge range is given
-                as 2nd and 3rd sublist items.
-                Example: [['O.2', -1.12, -0.792], ['O.2', -0.595, -0.315]]
-                Max number of sublists is 2!
-        distance (list): List of 2 numbers that specify the allowed distance
-                between the 2 atoms in Angstrom. E.g., [4, 12.5]
+    chargetype_list : `list`.
+      `list` of sub`list`s that consists of atom types as first sublist item, 
+      and the allowed charge range is given as 2nd and 3rd sublist items.
+      E.g., `[['O.2', -1.12, -0.792], ['O.2', -0.595, -0.315]]`
+      
+    distance : `list`. 
+      List of 2 numbers that specify the allowed distance
+      between the 2 atoms in Angstrom. E.g., `[4, 12.5]`
 
-    Returns a dictionary with the count of chargetypes matched.
-        E.g., { 0: [['O.2', -1.0, 0.0], 3],         # 3 matches
-                1: [['N.am', -0.8181, -0.2181], 1]  # 1 match
-              }
+    Returns
+    ----------
+
+    match_dict : `dict`.
+      A dictionary with the count of chargetypes matched.
+      E.g., `{ 0: [['O.2', -1.0, 0.0], 3],         # 3 matches
+              1: [['N.am', -0.8181, -0.2181], 1]  # 1 match
+            }`
 
     """
     match_dict = {i:[chargetype_list[i], 0] for i in range(len(chargetype_list))}

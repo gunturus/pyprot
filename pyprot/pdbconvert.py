@@ -1,9 +1,6 @@
 """
-Sebastian Raschka 2014
-
-Parent class that is inhereted by Pdb class in pdbmain.
-Contains methods specialized for PDB file format conversion.
-
+Class inhereted by the `Pdb` base class in `pdbmain`.
+`PdbConvert` contains methods specialized for PDB file format conversion.
 """
 
 from pyprot.datamolecular import AMINO_ACIDS_3TO1
@@ -19,13 +16,22 @@ class PdbConvert(object):
         returns the results as a dictionary, where the keys are
         chain IDs and the items a list of 1-letter amino acid
         codes.
-        E.g., {'H': ['K'], 'L': ['D', 'I', 'V', 'M']}
-        Keyword arguments:
-            hetatm (bool): If True, also HETATM lines are considered.
-        Returns a dictionary with the protein chain letters A-Z as keys
-            and the FASTA sequence as values (as list of characters).
-            E.g.,
-            {'A': ['P', 'Q', 'I', ...], 'B': ['P', 'Q', 'I', ...], ...}
+        
+        Parameters
+        ----------
+        
+        hetatm : `bool` (default: `False`). 
+          If `True` HETATM lines (e.g., DNA) are included in the conversion.
+        
+        Returns
+        ----------
+
+        fasta_dict : `dict`.
+          A dictionary with the protein chain letters A-Z as keys
+          and the FASTA sequence as values (as list of characters).
+          E.g.,
+            `{'A': ['P', 'Q', 'I', ...], 'B': ['P', 'Q', 'I', ...], ...}`
+            
         """
         prev_seq_num = 0
         fasta_dict = dict()

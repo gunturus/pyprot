@@ -1,19 +1,28 @@
+"""
+Sub-package for MOL2 file processing.
+"""
+
 import os
 
 def split_multimol2(multimol2):
     """
     Splits a multi-mol2 file (a mol2 file consisting of multiple mol2 entries)
-        into individual mol2-file contents.
+    into individual mol2-file contents.
 
     Parameters
     ----------
-    multimol2 : string
-        path to the multi-mol2 file
+    
+    multimol2 : `str`.
+      Path to the multi-mol2 file.
         
-
     Returns:
     ----------
-    mol2 : generator of lists = [molecule_name, mol2_content]
+    
+    mol2 : generator of lists = `[molecule_id, mol2_cont]`.
+      `molecule_ide` is the name of the molecule specified after 
+       in the line following `@<TRIPOS>MOLECULE`. `mol2_cont` is 
+       the MOL2 file content in `str` format where each line is
+       separated by a newline (`\n`) character.
         
     """
     with open(multimol2, 'r') as mol2file:
@@ -35,5 +44,6 @@ def split_multimol2(multimol2):
                     if mol2file.tell() == os.fstat(mol2file.fileno()).st_size:
                         mol2cont += line
                         break
-
-                yield [molecule_id, mol2cont]
+                
+                mol2 = [molecule_id, mol2cont]
+                yield mol2

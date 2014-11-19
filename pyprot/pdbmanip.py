@@ -1,9 +1,6 @@
 """
-Sebastian Raschka 2014
-
-Parent class that is inhereted by Pdb class in pdbmain.
-Contains methods specialized for PDB file content manipulation
-
+Class inhereted by the `Pdb` base class in `pdbmain`.
+Contains methods specialized for PDB file content manipulation.
 """
 
 
@@ -13,13 +10,19 @@ class PdbManip(object):
 
     def _get_chains(self):
         """
-        Splits a PDB file into individual chains.
-        Returns a dictionary with the respective chains, where
-        the Chain IDs are the keys, and the lines of the chain
-        are the dictionary values as lists:
-        {'A':[chain A lines], 'B':[...], ...}
+        Splits a PDB file into individual chains. 
+        
+        
+        Returns
+        ----------
 
-        """
+        chain_dict : `list`.
+          A dictionary with the respective chains, where
+          the Chain IDs are the keys, and the lines of the chain
+          are the dictionary values as lists:
+          `{'A':[chain A lines], 'B':[...], ...}`
+          
+        """        
         chain_dict = dict()
         for line in self.cont:
             if line.startswith(('ATOM', 'HETATM', 'TER')):
@@ -31,108 +34,141 @@ class PdbManip(object):
 
 
     def strip_h(self):
-        """ Returns all entries of the PDB file except hydrogen atoms. """
-        res = []
+        """ Removes hydrogen atoms from a PDB file.
+        
+        Returns
+        ----------
+
+        stripped : `list`.
+          List of PDB file contents after stripping. Every list item is a `str` of
+          PDB file contents.
+                  
+        """
+        stripped = []
         for line in self.cont:
             line_len = len(line)
             if line_len > 13 and line[12] != "H" and line[13] != "H":
                 if line_len < 78:
-                    res.append(line)
+                    stripped.append(line)
                 elif line[77] != "H":
-                    res.append(line)
-        return res
+                    stripped.append(line)
+        return stripped
 
 
     def strip_water(self):
-        """ Returns all contents of the PDB file except water molecules. """
-        res = []
+        """ 
+        Removes water molecules from a PDB file.
+        
+        Returns
+        ----------
+
+        stripped : `list`.
+          List of PDB file contents after stripping. Every list item is a `str` of
+          PDB file contents.
+                  
+        """
+        stripped = []
         for line in self.cont:
             try:
                 if not (line.startswith("HETATM") and line[17:20] == "HOH"):
-                    res.append(line)
+                    stripped.append(line)
             except:
                 pass
-        return res
+        return stripped
 
 
     def extract_chains(self, chain_ids):
         """
-        Returns all ATOM and HETATM entries of the PDB file for the
-        specified chains
+        Extracts all ATOM and HETATM entries of the PDB file for specified chains.
 
-        Keyword arguments:
-            chain_ids (list): List that contains the chain IDs, e.g., ["A", "B"]
-        Returns:
-            list of the pdb contents that have specified a chain ID.
+        Parameters
+        ----------
+
+        chain_ids : `list` 
+          A list that contains the chain IDs, e.g., ``["A", "B"]`.`
+        
+        Returns
+        ----------
+
+        chain_cont : `list`.
+          List of PDB file contents that belong to the specified chains.
 
         """
-        res = []
+        chain_cont = []
         for row in self.cont:
             if row.startswith(('ATOM', 'HETATM', 'TER')) and row[21:22].strip() in chain_ids:
                 res.append(row)
-        return res
+        return chain_cont
 
 
     def select_residues(self, pos, protein=True, ligand=False):
         """
-        Returns PDB contents within a certain residue range.
+        Extracts PDB contents within a certain residue number range.
 
-        Keyword arguments:
-            pos (list): the number of the first and last residue to return, 
-                e.g., [1, 10] returns residues 1-10.
-            protein: Inlcudes ligand if True.
-            ligand: Inlcudes ligand if True.
-        Returns:
-            List of the pdb rows that match the residue range.
+        Parameters
+        ----------
+        
+        pos : `list` = `[min, max]`.
+          The number of the first and last residue to return. 
+          E.g., `[1, 10]` returns residues 1-10 (including 10).
+        
+        protein : `bool` (default: `True`)
+          Inlcudes protein atoms (ATOM lines) if `True`.
+        
+        ligand : `bool` (default: `False`)
+          Inlcudes ligand atoms (HETATM lines) if `True`.
+        
+        Returns
+        ----------
+
+        res_cont : `list`.
+          List of PDB file contents that match the specified residue number range.
 
         """
         rng = range(pos[0], pos[1]+1)
         
-        res = []
+        res_cont = []
         
         if protein:
-            res += [row for row in self.atom if int(row[22:26].strip()) in rng]
+            res_cont += [row for row in self.atom if int(row[22:26].strip()) in rng]
         if ligand:
-            res += [row for row in self.hetatm if int(row[22:26].strip()) in rng]
-        return res
+            res_cont += [row for row in self.hetatm if int(row[22:26].strip()) in rng]
+        return res_cont
 
         
     def select_atoms(self, pos, protein=True, ligand=False):
         """
-        Returns PDB contents within a certain atom range.
+        Extracts PDB contents within a certain atom number range.
 
-        Keyword arguments:
-            pos (list): the number of the first and last atom to return, 
-                e.g., [1, 10] returns atoms 1-10.
-            protein: Inlcudes ligand if True.
-            ligand: Inlcudes ligand if True.
-        Returns:
-            List of the pdb rows that match the atom range.
+        Parameters
+        ----------
+        
+        pos : `list` = `[min, max]`.
+          The number of the first and last atom to return. 
+          E.g., `[1, 10]` returns atoms 1-10 (including 10).
+        
+        protein : `bool` (default: `True`)
+          Inlcudes protein atoms (ATOM lines) if `True`.
+        
+        ligand : `bool` (default: `False`)
+          Inlcudes ligand atoms (HETATM lines) if `True`.
+        
+        Returns
+        ----------
+
+        atom_cont : `list`.
+          List of PDB file contents that match the specified atom number range.
 
         """
         rng = range(pos[0], pos[1]+1)
         
-        atoms = []
+        atom_cont = []
         
         if protein:
-            atoms += [row for row in self.atom if int(row[6:11].strip()) in rng]
+            atom_cont += [row for row in self.atom if int(row[6:11].strip()) in rng]
         if ligand:
-            atoms += [row for row in self.hetatm if int(row[6:11].strip()) in rng]
-        return atoms
-
-
-    def save_pdb(self, dest):
-        """
-        Writes out the contents of the pdb object (pdb.cont) as .pdb file.
-
-        Keyword arguments:
-            dest = path+filename of the pdb file (e.g., /home/.../desktop/my_pdb.pdb)
-
-        """
-        with open(dest, 'w') as out:
-            for line in self.cont:
-                out.write(line + '\n')
-
+            atom_cont += [row for row in self.hetatm if int(row[6:11].strip()) in rng]
+        return atom_cont
 
     def grab_radius(self, radius, coordinates):
         """

@@ -1,31 +1,44 @@
-# Sebastian Raschka
+"""
+Sub-package for manipulating MOL2 files.
+"""
 
 import re
 
 def swap_charge(template_mol2, target_mol2, template_col=-1, target_col=-1):
     """
-    Applies charges from 1 mol2 file to the other. Assumes that
+    Transfers atom charges from one MOL2 file to a second MOL2 file. Assumes that
     both molecules have the same number and order of atoms.
+    Example of a typical MOL2 atom line: "1 CA -0.149 0.299 0.000 C.3 1 ALA1 0.000".
+    If the MOL2 file is formatted as follows "1 CA -0.149 0.299 0.000 C.3", the 
+    `template_col` and/or `target_col` parameters have to be set to `-2`.
 
-    Keyword arguments:
-        template_mol2(list): List of mol2 contents for reference molecule.
-        target_mol2(list): List of mol2 contents for mol2 to fix.
-        template_col(int): Column of the charge information in the reference
-                      molecule, last column by default.
-        target_col(int): Column of the charge information in the to-be-fixed
-                      molecule, last column by default.
+    Parameters
+    ----------
+    
+    template_mol2 : `list`.
+      Template MOL2 file that contains the charges to be transfered. Every
+      list item in the `template_mol2` list represents one line of the MOL2
+      file.
+      
+    target_mol2 : `list`.
+      Target MOL2 file that contains the charges to be received. Every
+      list item in the `template_mol2` list represents one line of the MOL2
+      file.      
 
-    Supports the following formating style by default.
-    @<TRIPOS>ATOM entries:
+    template_col : `int`. 
+      Column position of the charge information in the template
+      molecule, last column by default. Column index starts at 0.
 
-    1 CA -0.149 0.299 0.000 C.3 1 ALA1 0.000
-
-    If one of both files are formatted as follows:
-    1 CA -0.149 0.299 0.000 C.3
-    the parameters template_col and/or target_col have to be set to -2
+    target_col : `int`. 
+      Column position of the charge information in the target
+      molecule, last column by default. Column index starts at 0.
 
     Returns:
-         A list of mol2 contents for the fixed molecule.
+    ----------
+
+    out_mol2 : `list`     
+      A new list of MOL2 contents for after the charge transfer. Every list item
+      in the list constitutes a single MOL2 line.
 
     """
     assert len(template_mol2) == len(target_mol2), 'Both Mol2 must be of same length.'

@@ -1,10 +1,8 @@
 """
-Sebastian Raschka 2014
-
-Main class for PDB file operations.
-
+Base class for PDB files.
 """
 
+from .pdbio import PdbIO
 from .pdbstats import PdbStats
 from .pdbmanip import PdbManip
 from .pdbformat import PdbFormat
