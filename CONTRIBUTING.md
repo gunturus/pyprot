@@ -18,3 +18,8 @@ I would be very happy about any kind of contributions that help to improve and e
 - Add tests to the `pyprot/tests` directory.
 - Run all tests (e.g., via `nosetests`  or `pytest`).
 - Push your changes to a topic branch and submit a `pull request`.
+
+
+## Documentation
+
+- The API documentation was generated via [`pdoc`](#https://pypi.python.org/pypi/pdoc) and can be updated from the main `pyprot` location via `pdoc ./pyprot --html --html-dir ./docs/api --overwrite`

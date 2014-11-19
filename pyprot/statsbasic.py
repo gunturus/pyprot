@@ -1,8 +1,5 @@
 """
-Sebastian Raschka 2014
-
 Functions for basic statistics.
-
 """
 
 
