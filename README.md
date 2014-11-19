@@ -1,4 +1,4 @@
-![pyprot Logo](./images//logos/molecule_logo.png)
+![pyprot Logo](./images/logos/molecule_logo.png)
 
 **PyProt is a Python package for working with protein structure files. It comes with a collection of ready-to-use scripts for the most common file operations and protein analyses.**
 
