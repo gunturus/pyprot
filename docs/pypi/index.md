@@ -39,6 +39,7 @@ The scripts are located in the subdirectory `./scripts` and can be used after `p
     - Transfer charges
     - Split multimol2 files
 	- MOL2 functional group filter
+	- MOL2 intermolecular functional group screening
 
 
 <br>

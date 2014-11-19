@@ -42,6 +42,7 @@ The scripts are located in the subdirectory `./scripts` and can be used after `p
     - [Transfer charges](./docs/tools/mol2_transfer_charge.md)
     - [Split multi-MOL2 files](./docs/tools/mol2_split.md)
     - [MOL2 functional group filter](./docs/tools/mol2_filter_funcgroups.md)
+    - [MOL2 intermolecular functional group screening](./docs/tools/mol2_screening_intermol_funcgroup.md)
 
 <br>
 <br>
