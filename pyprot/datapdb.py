@@ -1,7 +1,5 @@
 """
-Sebastian Raschka 2014
-
-Data about PDB files, codes, and structures
+Data about PDB files, codes, and structures.
 
 """
 

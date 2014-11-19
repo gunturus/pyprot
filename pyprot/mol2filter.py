@@ -1,7 +1,24 @@
+"""
+Sub-package for filtering MOL2 files by different criteria.
+"""
+
 import os
 
 def mol2_to_coords(line):
-    """ Extracts XYZ coordinates from mol2 atom entry line. """
+    """ 
+    Extracts XYZ coordinates from MOL2 atom entry line. 
+    
+    Parameters
+    ----------
+    line : `string`.
+      One MOL2-file line with coordinate content.
+        
+    Returns
+    ----------
+    C : `list` = `[float_x, float_y, float_z]`.
+      List of the x, y, and z coordinates of the atom.
+    
+    """
     line = line.strip().split()
     return [float(i) for i in line[2:5]]
 
@@ -9,13 +26,22 @@ def mol2_to_coords(line):
 def create_atom_dict(group_charge_pairs, atom_dict=None):
     """ 
     Creates a dictionary mapping charge ranges to functional groups.
-    Keyword arguments:
-        group_charge_pairs: List of names of functional groups and charge ranges.
-                E.g., ['O.2,-1.12,-0.792', 'O.3,-0.595,-0.315']
-        atom_dict: Existing atom dictionary to update or None to
-                create a new atom dictionary.
     
-    Returns a dictionary mapping of the input:
+    Parameters
+    ----------    
+    
+    group_charge_pairs : `list` = `[pair_1, pair2, ...]`.
+      Pair of names of functional groups and charge ranges.
+      E.g., `['O.2,-1.12,-0.792', 'O.3,-0.595,-0.315']`
+        
+    atom_dict : `dict`
+        Existing atom dictionary to update or `None` to create a new atom dictionary.
+    
+    Returns
+    ----------     
+    
+    atom_dict : dict = `{atom:[min_charge, maxcharge], ...}`.
+        A dictionary mapping of `group_charge_pairs` input.
         E.g., {'O.2':[-1.12, -0.792], 'O.3':[-0.595, -0.315]}
 
     """
@@ -31,15 +57,23 @@ def create_atom_dict(group_charge_pairs, atom_dict=None):
 def create_chargetype_list(group_charge_pairs, atom_list=None):
     """ 
     Creates a list mapping charge ranges to functional groups.
-    Keyword arguments:
-        group_charge_pairs: Semicolon-separated string 
-                of names of functional groups and charge ranges.
-                E.g., 'O.2,-1.12,-0.792;O.3,-0.595,-0.315'
-        atom_list: Existing atom list to update or None to
-                create a new atom list.
     
-    Returns a dictionary mapping of the input:
-        E.g., [['O.2', -1.2, 2.0], ['O.3', -20.0, 100.0]]
+    Parameters
+    ----------      
+    
+    group_charge_pairs : `string`.
+      Semi-colon separated `string` of names of functional groups and charge ranges.
+      E.g., `'O.2,-1.12,-0.792;O.3,-0.595,-0.315'`
+    
+    atom_list : `list`.
+      Existing atom list to update or `None` to create a new atom `list`.
+
+    Returns
+    ----------  
+    
+    atom_list : `list`.
+      A list mapping of the input.
+      E.g., `[['O.2', -1.2, 2.0], ['O.3', -20.0, 100.0]]`.
 
     """
     if not atom_list:
@@ -57,16 +91,23 @@ def _filter_atoms(mol2_cont, chargetype_list):
     Searches for atom types in a mol2 file.
     Returns the mol2 lines that contains matches as a list.
 
-    Keyword arguments:
-        mol2_cont (list): mol2 file content as where each list item represents
-                     a line
-        chargetype_list (list): List of sublists that consists of atom types as
-                first sublist item, and the allowed charge range is given
-                as 2nd and 3rd sublist items.
-                Example: [['O.2', -1.12, -0.792], ['O.2', -0.595, -0.315]]
+    Parameters
+    ----------    
 
-    Returns:
-         The mol2 lines that contains matches as a list.
+    mol2_cont : `list`.
+      MOL2 file content as where each `list` item represents a line.
+      
+    chargetype_list : `list` 
+      `list` of sub`list`s that consists of atom types as first sublist item, 
+      and the allowed charge range is given as 2nd and 3rd sublist items.
+      E.g., `[['O.2', -1.12, -0.792], ['O.2', -0.595, -0.315]]`
+
+
+    Returns
+    ---------- 
+
+    matched_lines : `list`
+      The mol2 lines that contains matches as a `list`.
 
     """
     matched_lines = []

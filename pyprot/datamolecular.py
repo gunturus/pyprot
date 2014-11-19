@@ -1,6 +1,4 @@
 """
-Sebastian Raschka 2014
-
 Supporting molecular data for pyprot.
 
 """
