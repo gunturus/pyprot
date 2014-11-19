@@ -9,7 +9,7 @@ For more info about the particular SYBYL atom types that are used in the MOL2 fi
 
 ### Usage
 
-run `./mol2_filter_funcgroups.py --help` for the usage information:
+Run `./mol2_filter_funcgroups.py --help` for usage information:
 
 <pre>
 usage: mol2_filter_funcgroups.py [-h] [-i INPUT] [-o OUTPUT] [-c CRITERIA]
@@ -46,7 +46,7 @@ Input: A file that contains multiple MOL2 structures.
 
 	./mol2_filter_funcgroups.py -i ../../tests/examples/ex1.mol2 "O.2,-2.0,-0.1" -o ~/Desktop/neg_oxy.mol2
 
-**Screen Output**: Names of the molecules that match the criteria. Here:
+**Screen Output:** Names of the molecules that match the criteria. Here:
 
 <pre>
 MOLECULE1
@@ -57,10 +57,10 @@ MOLECULE5
 </pre>
 
 
-**File Output** : A multi-MOL2 file with the structures that match the criterion.
+**File Output:** A multi-MOL2 file with the structures that match the criterion.
 
 
-![](../../images/tools/mol2_filter_funcgroups_1.png)
+![](../../images/tools/ex_mol2_filter_funcgroups_1.png)
 
 <br>
 <br>
@@ -75,7 +75,7 @@ Input: A file that contains multiple MOL2 structures.
 
 	./mol2_filter_funcgroups.py -i ../../tests/examples/ex1.mol2 "O.2,-2.0,-0.1;S.o2,0.1,2.9" -o ~/Desktop/neg_oxy.mol2
 
-**Screen Output**: Names of the molecules that match the criteria. Here:
+**Screen Output:** Names of the molecules that match the criteria. Here:
 
 <pre>
 MOLECULE1
@@ -86,7 +86,7 @@ MOLECULE5
 </pre>
 
 
-**File Output** : A multi-MOL2 file with the structures that match the criterion.
+**File Output:** A multi-MOL2 file with the structures that match the criterion.
 
 <br>
 <br>
@@ -110,4 +110,4 @@ MOLECULE1
 
 **File Output** : A multi-MOL2 file with the structures that match the criterion.
 
-![](../../images/tools/mol2_filter_funcgroups_2.png)
+![](../../images/tools/ex_mol2_filter_funcgroups_2.png)
