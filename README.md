@@ -37,6 +37,7 @@ The scripts are located in the subdirectory `./scripts` and can be used after `p
     - [PDB to FASTA converter](./docs/tools/pdb_to_fasta.md)
     - [PDB atom and residue renumbering](./docs/tools/pdb_renumber.md)
     - [B-factor statistics](./docs/tools/pdb_bfactor_stats.md)
+    - [PDB downloader](./docs/tools/pdb_download.md)
 
   
 - Working with MOL2 files

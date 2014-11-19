@@ -3,6 +3,8 @@ Class inhereted by the `Pdb` base class in `pdbmain`.
 Contains methods specialized for PDB file processing.
 """
 
+import urllib
+
 class PdbIO(object):
     def __init__():
         pass

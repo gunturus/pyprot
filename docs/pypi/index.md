@@ -38,6 +38,7 @@ The scripts are located in the subdirectory `./scripts` and can be used after `p
     - PDB to FASTA conversion
     - PDB atom and residue renumbering
     - B-factor statistics
+    - PDB downloader
   
 - Working with MOL2 files
     - Transfer charges

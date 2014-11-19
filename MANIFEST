@@ -8,6 +8,7 @@ pyprot/mol2io.py
 pyprot/mol2manip.py
 pyprot/pdbconvert.py
 pyprot/pdbformat.py
+pyprot/pdbio.py
 pyprot/pdbmain.py
 pyprot/pdbmanip.py
 pyprot/pdbstats.py

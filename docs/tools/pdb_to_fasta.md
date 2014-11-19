@@ -6,7 +6,7 @@ A script that converts amino acid residues from PDB files into a FASTA string.
 
 ### Usage
 
-Run `python pdb_to_fasta.py --help` for usage information:
+Run `./python pdb_to_fasta.py --help` for usage information:
 
 <pre>
 usage: pdb_to_fasta.py [-h] [-i INPUT] [-l] [-o out.fasta]
@@ -30,7 +30,7 @@ optional arguments:
 
 **Input:**
 
-	python pdb_to_fasta.py -i 3B7V.pdb -o 3B7V.fasta
+	./pdb_to_fasta.py -i 3B7V.pdb -o 3B7V.fasta
 
 
 **Screenshot of File Output:**
