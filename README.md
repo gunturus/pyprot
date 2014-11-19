@@ -10,6 +10,7 @@
 ## ReadMe Contents
 - [Scripts and command line tools](#scripts-and-command-line-tools)
 - [Tutorials](#tutorials)
+- [API documentation](#api-documentation)
 - [Installation](#installation)
 
 <hr>
@@ -47,8 +48,20 @@ The scripts are located in the subdirectory `./scripts` and can be used after `p
 <br>
 <br>
 
+
+## API documentation
+
+Please find the API documentation at [http://rasbt.github.io/pyprot/](http://rasbt.github.io/pyprot/).
+
+
+<br>
+<br>
+
+
+
 ## Tutorials
 
+In progress ...
 
 <br>
 <br>
