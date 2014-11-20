@@ -8,6 +8,7 @@
 
 <hr>
 ## ReadMe Contents
+
 - [Scripts and command line tools](#scripts-and-command-line-tools)
 - [Tutorials](#tutorials)
 - [API documentation](#api-documentation)
@@ -81,5 +82,12 @@ or
 
 	python setup.py install
 	
-after downloading it from this repository. Once the pyprot package is installed, the scripts and tools from the `./scripts` subdirectory are ready to use.   
+after downloading it from this repository. 
+
+In order to make use of the the scripts and tools in the [`pyprot/scripts/`](./scripts) directory, please download the `pyprot-scripts` bundle.
+
+a) If you downloaded `pyprot` from GitHub, you can use the scripts from the [`pyprot/scripts/`](./scripts) directory.  
+b) If  you installed `pyprot` via pip, you can download the the scripts bundle separately ([pyprot-scripts.zip]())
+
+
 For more details, please see the separate **["Installation Documentation"](./docs/pyprot_installation.md)**
