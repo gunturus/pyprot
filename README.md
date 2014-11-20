@@ -74,20 +74,23 @@ In progress ...
 
 PyProt was build and tested in Python 3.
 
-The `pyprot` package can be installed like any other "normal" Python package via 
+The `pyprot` package can be installed  via 
 	
 	pip install pyprot
 	
-or 
+Alternatively, you can download `pyprot` directly from GitHub ([pyprot-master.zip](https://github.com/rasbt/pyprot/archive/master.zip)), unzip the archive, and install it via
 
 	python setup.py install
+
+After successful installation, the `pyprot` API is ready to use.
+
+<hr>
 	
-after downloading it from this repository. 
+If you are also interested in using the available scripts and tools you have two options:
 
-In order to make use of the the scripts and tools in the [`pyprot/scripts/`](./scripts) directory, please download the `pyprot-scripts` bundle.
+**a)** If you downloaded `pyprot` from GitHub, you can use the scripts from the [`pyprot/scripts/`](./scripts) subdirectory.  
 
-a) If you downloaded `pyprot` from GitHub, you can use the scripts from the [`pyprot/scripts/`](./scripts) directory.  
-b) If  you installed `pyprot` via pip, you can download the the scripts bundle separately ([pyprot-scripts.zip]())
+**b)** If  you installed `pyprot` via pip, you can download the the scripts bundle separately ([pyprot-scripts.zip](https://github.com/rasbt/pyprot/blob/master/scripts/pyprot-scripts.zip?raw=true)).
 
 
-For more details, please see the separate **["Installation Documentation"](./docs/pyprot_installation.md)**
+For more details, please see the separate [**Installation Documentation**](./docs/pyprot_installation.md).
