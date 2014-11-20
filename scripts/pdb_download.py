@@ -3,6 +3,7 @@
 # Sebastian Raschka 2014
 #
 # Python PyProt script to autmatically download PDB files.
+# from the Protein Data Bank (rcsb.org).
 #
 # run
 # ./pdb_download.py -h
@@ -15,10 +16,7 @@ import os
 import pyprind
 
 parser = argparse.ArgumentParser(
-    description='The RMSD measures the average distance between atoms \n'\
-        'of 2 protein or ligand structures.\n'\
-        'By default, all atoms but hydrogen atoms of the protein are included in the RMSD calculation.\n'\
-        'NOTE: Both structures must contain the same number of atoms in similar order.',
+    description='Autmatically downloads PDB files from the Protein Data Bank (rcsb.org).',
     epilog='The input file should contain 1 4-letter PDB code per line. E.g.,\n'\
             '3EIY\n1HTG\n1RX1\n[...]',
     formatter_class=argparse.RawTextHelpFormatter

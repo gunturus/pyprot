@@ -38,6 +38,8 @@ The scripts are located in the subdirectory `./scripts` and can be used after `p
     - [PDB atom and residue renumbering](./docs/tools/pdb_renumber.md)
     - [B-factor statistics](./docs/tools/pdb_bfactor_stats.md)
     - [PDB downloader](./docs/tools/pdb_download.md)
+    - [Separating ATOM and HETATM sections](./docs/tools/pdb_split_atom_hetatm.md)
+    - [Extracting Ligands from PDB files](./docs/tools/pdb_extract_ligands.md)
 
   
 - Working with MOL2 files
